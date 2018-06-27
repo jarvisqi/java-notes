@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "mybatis.config-locations",
+      "type": "java.lang.String",
+      "description": "Description for mybatis.config-locations."
+  }
+] }
