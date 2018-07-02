@@ -30,11 +30,10 @@ public class AuthUserServiceImpl implements UserDetailsService {
     private AuthMapper authUserMapper;
     @Autowired
     private AuthenticationManager authenticationManager;
+
     private JwtTokenUtil jwtTokenUtil;
 
-    public AuthUserServiceImpl(AuthMapper authUserMapper, AuthenticationManager authenticationManager) {
-        this.authUserMapper = authUserMapper;
-        this.authenticationManager = authenticationManager;
+    public AuthUserServiceImpl() {
         this.jwtTokenUtil = new JwtTokenUtil();
     }
 
@@ -44,7 +43,7 @@ public class AuthUserServiceImpl implements UserDetailsService {
      *
      * @param username name
      * @return org.springframework.security.core.userdetails.UserDetails
-     * @throws UsernameNotFoundException  NotFoundException
+     * @throws UsernameNotFoundException NotFoundException
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
