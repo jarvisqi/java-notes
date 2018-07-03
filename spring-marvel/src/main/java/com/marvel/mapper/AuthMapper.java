@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
  * @author : Jarvis
  * @date :  2018/5/12
  */
-
-@Component(value = "authUserMapper")
 public interface AuthMapper extends BaseMapper<AuthUser> {
 
     /**
