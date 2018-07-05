@@ -1,5 +1,6 @@
 import com.springbase.config.BeanConfiguration;
 import com.springbase.service.AccountService;
+import com.springbase.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -11,15 +12,30 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class TestConfigurationAnnotation {
     /**
      * 测试Spring IOC
+     *
      * @throws Exception
      */
     @Test
-    public void testByConfigurationAnnotation() throws Exception {
+    public void testAccountByConfigurationAnnotation() throws Exception {
         AnnotationConfigApplicationContext config = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 
         //名称必须BeanConfiguration中工程方法名称一致
         AccountService accountService = (AccountService) config.getBean("accountService");
         accountService.doSomething();
+    }
+
+    /**
+     * 测试Spring IOC
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUserByConfigurationAnnotation() throws Exception {
+        AnnotationConfigApplicationContext config = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
+        //名称必须BeanConfiguration中工程方法名称一致
+        UserService userService = (UserService) config.getBean("userService");
+        userService.done();
     }
 
 }
