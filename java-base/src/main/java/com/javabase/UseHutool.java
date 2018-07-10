@@ -2,6 +2,10 @@ package com.javabase;
 
 import cn.hutool.core.date.DateUtil;
 
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -11,6 +15,10 @@ import java.util.Date;
  * @date : Created in 2018/5/25
  */
 public class UseHutool {
+
+//    public static void main(String[] args) {
+//        dateTest();
+//    }
 
     /**
      * hutool 时间格式化
@@ -32,4 +40,57 @@ public class UseHutool {
         System.out.println(formatDateTime);
         System.out.println(formatTime);
     }
+
+    /**
+     * 时间日期操作
+     */
+    private static void dateTest() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(String.format("当前年月：%d-%d-%d", localDateTime.getYear(),
+                localDateTime.getMonthValue(), localDateTime.getDayOfMonth()));
+
+        System.out.println(String.format("当前时间：%d:%d:%d:%s", localDateTime.getHour(),
+                localDateTime.getSecond(), localDateTime.getMinute(), Clock.systemDefaultZone().millis()));
+
+        // 时间日期格式化
+        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate localDate = LocalDate.now();
+        System.out.println(localDate.format(dtFormatter));
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime ldTime = LocalDateTime.now();
+        System.out.println(ldTime.format(timeFormatter));
+    }
+
+    /**
+     * 1,Caught Annoyance
+     * 2,Caught Sneeze
+     * 3,Hello World!
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+
+        try {
+            try {
+                throw new Sneeze();
+            } catch (Annoyance a) {
+                System.out.println("Caught Annoyance");
+                throw a;
+            }
+        } catch (Sneeze s) {
+            System.out.println("Caught Sneeze");
+            return;
+        } finally {
+            System.out.println("Hello World!");
+        }
+    }
 }
+
+class Annoyance extends Exception {
+}
+
+class Sneeze extends Annoyance {
+}
+
