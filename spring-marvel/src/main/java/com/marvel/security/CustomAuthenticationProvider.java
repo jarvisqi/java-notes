@@ -1,14 +1,14 @@
 package com.marvel.security;
 
 
+import cn.hutool.http.HttpStatus;
+import com.framework.common.BusinessException;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static java.util.Collections.emptyList;
@@ -44,10 +44,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 Authentication auth = new UsernamePasswordAuthenticationToken(name, password, emptyList());
                 return auth;
             } else {
-                throw new BadCredentialsException("密码错误");
+                throw new BusinessException("密码错误");
             }
         } else {
-            throw new UsernameNotFoundException("用户不存在");
+            throw new BusinessException("用户不存在");
         }
     }
 

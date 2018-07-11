@@ -1,5 +1,6 @@
 package com.marvel.security;
 
+import com.framework.common.BusinessException;
 import com.marvel.entity.AuthUser;
 import com.marvel.mapper.AuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class AuthUserServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails user = findByUserName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("用户名不存在");
+            throw new BusinessException("用户名不存在");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 emptyList());

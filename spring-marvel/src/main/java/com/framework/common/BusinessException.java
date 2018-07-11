@@ -1,5 +1,7 @@
 package com.framework.common;
 
+import cn.hutool.http.HttpStatus;
+
 /**
  * 自定义异常处理类
  *
