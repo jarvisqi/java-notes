@@ -1,4 +1,4 @@
-package com.javabase.algorithmdemo;
+package com.javabase.datastructure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -243,7 +243,7 @@ public class SortPractice {
         }
         return arr;
     }
-    
+
 
     private static void sort(int[] arr, int left, int right) {
         if (left < right) {
