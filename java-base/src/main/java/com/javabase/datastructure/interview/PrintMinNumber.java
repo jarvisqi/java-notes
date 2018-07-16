@@ -19,9 +19,11 @@ public class PrintMinNumber {
 //        int[] nubmers = {0, 6, 3, 4, 2, 1, 6, 3, 11, 33, 223, 12, 232, 223, 33, 10};
 //        findDuplicate(nubmers);
 
-        String sentence = "student. a am I ";
-        reverseSentence(sentence);
+//        String sentence = "student. a am I ";
+//        reverseSentence(sentence);
 
+        String s = "abcXYZdef";
+        leftRotateString(s, 3);
     }
 
     /**
@@ -118,5 +120,30 @@ public class PrintMinNumber {
         }
         System.out.println(stringBuilder.toString());
 
+    }
+
+    /**
+     * 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。
+     * 对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。
+     * 例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。
+     *
+     * @param strc
+     * @param k
+     */
+    public static void leftRotateString(String strc, int k) {
+        //先判断长度
+        if (strc.trim().length() == 0) {
+            System.out.println(strc);
+        }
+        if (strc.trim().length() < 1) {
+            System.out.println("");
+        }
+        if (strc.trim().length() < k) {
+            System.out.println(strc);
+        }
+        System.out.println("原字符串：" + strc);
+        var left = strc.substring(0, k);
+        var right = strc.substring(k);
+        System.out.println("新字符串：" + right + left);
     }
 }
