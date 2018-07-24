@@ -1,19 +1,19 @@
-package com.javabase.algorithmdemo;
+package com.javabase.datastructure;
 
 import java.util.LinkedList;
 
 /**
  * 反转二叉树
- *       4
- *    /   \
- *   2     7
- *  / \   / \
+ * 4
+ * /   \
+ * 2     7
+ * / \   / \
  * 1   3 6   9
  * 反转后的二叉树：
- *      4
- *    /   \
- *   7     2
- *  / \   / \
+ * 4
+ * /   \
+ * 7     2
+ * / \   / \
  * 9   6 3   1
  *
  * @author : Jarvis
@@ -52,6 +52,7 @@ class TreeNode {
 
     /**
      * 反转二叉树
+     *
      * @param root
      * @return
      */

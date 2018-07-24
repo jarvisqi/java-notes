@@ -3,7 +3,6 @@ package com.javabase;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.UUID;
 
 /**
  * @author : Jarvis
@@ -48,7 +47,7 @@ public class Base64Test {
         System.out.println(yesterday);
 
         var originStr = "ABCD";
-        var newStr=reverse(originStr);
+        var newStr = reverse(originStr);
         System.out.println(newStr);
 
     }

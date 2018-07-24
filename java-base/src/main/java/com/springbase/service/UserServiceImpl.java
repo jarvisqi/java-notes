@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 标注构造方法
      *
-     * @param userDao
+     * @param -userDao
      */
 //    @Autowired
 //    public UserServiceImpl(UserDao userDao) {
@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
 //    public void setUserDao(UserDao userDao) {
 //        this.userDao = userDao;
 //    }
-
     @Override
     public void done() {
         System.out.println("UserServiceImpl:done()......");

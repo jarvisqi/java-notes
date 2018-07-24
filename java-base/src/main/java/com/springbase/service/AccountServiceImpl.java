@@ -16,14 +16,12 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Setter注入方式
-     * @param accountDao
+     *
+     * @param -accountDao
      */
 //    public void setAccountDao(AccountDao accountDao) {
 //        this.accountDao = accountDao;
 //    }
-
-
-
     @Override
     public void doSomething() {
         System.out.println("AccountServiceImpl#doSomething......");
