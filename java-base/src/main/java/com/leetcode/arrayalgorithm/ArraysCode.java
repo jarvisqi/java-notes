@@ -1,7 +1,6 @@
 package com.leetcode.arrayalgorithm;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * @author Jarvis
@@ -10,11 +9,14 @@ import java.util.Comparator;
 public class ArraysCode {
 
     public static void main(String[] args) {
-        int[] nums = {1, 1, 2};
+//        int[] nums = {1, 1, 2};
 //        removeDuplicates(nums);
 
-        int[] prices = {7, 1, 5, 3, 6, 4};
-        maxProfit(prices);
+//        int[] prices = {7, 1, 5, 3, 6, 4};
+//        maxProfit(prices);
+
+        int[] arrs = {1, 2};
+        rotate(arrs, 3);
     }
 
     /**
@@ -45,6 +47,12 @@ public class ArraysCode {
         return size;
     }
 
+    /**
+     * 最大利润
+     *
+     * @param prices
+     * @return
+     */
     public static int maxProfit(int[] prices) {
         if (0 == prices.length || null == prices) {
             return 0;
@@ -59,6 +67,45 @@ public class ArraysCode {
 
         System.out.println(result);
         return result;
+    }
+
+    /**
+     * 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+     *
+     * @param nums
+     * @param k
+     */
+    public static void rotate(int[] nums, int k) {
+        int len = nums.length;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            list.add(nums[i]);
+        }
+        System.out.println(list);
+        if (len == 0 || len == 1 || k == 0) {
+            return;
+        }
+
+        for (int i = 0; i < k; i++) {
+            //最后一位提到最前面
+            int index = list.get(len - 1);
+            List<Integer> newList = new ArrayList<>();
+            newList.add(index);
+            //后面的顺序排列
+            for (Integer item : list) {
+                if (item != index) {
+                    newList.add(item);
+                }
+            }
+            list.clear();
+            list = newList;
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            nums[i] = list.get(i);
+        }
+
+        System.out.println(list);
     }
 }
 
