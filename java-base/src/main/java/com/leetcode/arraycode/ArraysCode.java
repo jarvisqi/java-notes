@@ -1,7 +1,6 @@
-package com.leetcode.arrayalgorithm;
+package com.leetcode.arraycode;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Jarvis
