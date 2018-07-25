@@ -1,6 +1,7 @@
 package com.leetcode.arrayalgorithm;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Jarvis
@@ -15,8 +16,10 @@ public class ArraysCode {
 //        int[] prices = {7, 1, 5, 3, 6, 4};
 //        maxProfit(prices);
 
-        int[] arrs = {1, 2};
+        int[] arrs = {1, 2, 3, 4, 5, 6, 7};
         rotate(arrs, 3);
+
+
     }
 
     /**
@@ -76,28 +79,42 @@ public class ArraysCode {
      * @param k
      */
     public static void rotate(int[] nums, int k) {
+
+        int length = nums.length;
+        if (length <= 0) {
+            return;
+        }
+        int[] newArrs = new int[length];
+        for (int i = 0; i < length; i++) {
+            newArrs[i] = nums[i];
+        }
+        k = k % length;
+        int t;
+        for (int i = 0; i < length; i++) {
+            t = (i + k) % length;
+            nums[t] = newArrs[i];
+        }
+        /*
+         *以上是最佳方案
+         *以下方案会在数据很多超时
+         */
+
         int len = nums.length;
+        if (len == 0 || len == 1 || k == 0) {
+            return;
+        }
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < len; i++) {
             list.add(nums[i]);
         }
         System.out.println(list);
-        if (len == 0 || len == 1 || k == 0) {
-            return;
-        }
 
         for (int i = 0; i < k; i++) {
-            //最后一位提到最前面
+            //最后一个值
             int index = list.get(len - 1);
-            List<Integer> newList = new ArrayList<>();
-            newList.add(index);
             //后面的顺序排列
-            for (Integer item : list) {
-                if (item != index) {
-                    newList.add(item);
-                }
-            }
-            list.clear();
+            List<Integer> newList = list.stream().filter(x -> x != index).collect(Collectors.toList());
+            newList.add(0, index);
             list = newList;
         }
 
