@@ -1,4 +1,4 @@
-package com.javabase.jvmdemo;
+package com.basecode.jvmdemo;
 
 
 class Grandpa1 {

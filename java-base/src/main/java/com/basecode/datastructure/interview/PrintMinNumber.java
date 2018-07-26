@@ -1,4 +1,4 @@
-package com.javabase.datastructure.interview;
+package com.basecode.datastructure.interview;
 
 import java.util.*;
 

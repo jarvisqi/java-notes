@@ -1,6 +1,6 @@
-package com.javabase.threaddemo;
+package com.basecode.threaddemo;
 
-import com.javabase.synchronizationdemo.SynchronizationLocks;
+import com.basecode.synchronizationdemo.SynchronizationLocks;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;

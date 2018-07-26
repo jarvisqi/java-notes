@@ -1,4 +1,4 @@
-package com.javabase.datastructure;
+package com.basecode.datastructure;
 
 import java.util.ArrayList;
 import java.util.List;

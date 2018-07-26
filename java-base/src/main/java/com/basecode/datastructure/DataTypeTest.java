@@ -1,4 +1,4 @@
-package com.javabase.datastructure;
+package com.basecode.datastructure;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.javabase.genericsdemo;
+package com.basecode.genericsdemo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

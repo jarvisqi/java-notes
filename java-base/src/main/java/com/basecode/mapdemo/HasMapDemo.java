@@ -1,4 +1,4 @@
-package com.javabase.mapdemo;
+package com.basecode.mapdemo;
 
 
 import cn.hutool.core.util.RandomUtil;

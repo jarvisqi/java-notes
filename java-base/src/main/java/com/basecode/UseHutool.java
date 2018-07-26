@@ -1,4 +1,4 @@
-package com.javabase;
+package com.basecode;
 
 import cn.hutool.core.date.DateUtil;
 
