@@ -74,6 +74,17 @@ public class DataTypeTest {
         System.out.println(listArr);
         Collections.sort(listArr, Comparator.naturalOrder());
         System.out.println(listArr);
+
+        System.out.println("\n使用parallelStream");
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        //并行无序输出
+        numbers.parallelStream().forEach(x -> System.out.print(x + " "));
+        //并行有序输出
+        System.out.println();
+        numbers.parallelStream().forEachOrdered(x -> System.out.print(x + " "));
+
+        int[] nums = {1, 2, 3, 4, 5, 6, 7, 8};
+        nums = Arrays.stream(nums).distinct().toArray();
     }
 
 

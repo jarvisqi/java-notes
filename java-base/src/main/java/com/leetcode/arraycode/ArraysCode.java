@@ -1,6 +1,7 @@
 package com.leetcode.arraycode;
 
 import java.util.*;
+import java.util.function.IntConsumer;
 
 /**
  * @author Jarvis
@@ -9,14 +10,14 @@ import java.util.*;
 public class ArraysCode {
 
     public static void main(String[] args) {
-//        int[] nums = {1, 1, 2};
-//        removeDuplicates(nums);
+        int[] nums = {1, 1, 2};
+        removeDuplicates(nums);
 
 //        int[] prices = {7, 1, 5, 3, 6, 4};
 //        maxProfit(prices);
-
-        int[] arrs = {1, 2, 3, 4, 5, 6, 7};
-        rotate(arrs, 3);
+//
+//        int[] arrs = {1, 2, 3, 4, 5, 6, 7};
+//        rotate(arrs, 3);
 
     }
 
@@ -33,18 +34,32 @@ public class ArraysCode {
             return len;
         }
 
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int item : nums) {
-            if (!list.contains(item)) {
-                list.add(item);
+//        ArrayList<Integer> list = new ArrayList<>();
+//        for (int item : nums) {
+//            if (!list.contains(item)) {
+//                list.add(item);
+//            }
+//        }
+//        int size = list.size();
+//        for (int i = 0; i < size; i++) {
+//            nums[i] = list.get(i);
+//        }
+
+        //去重
+//        nums = Arrays.stream(nums).distinct().toArray();
+//        int size = nums.length;
+
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != nums[i]) {
+                i++;
+                nums[i] = nums[j];
             }
         }
+        int size = i + 1;
 
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            nums[i] = list.get(i);
-        }
-        System.out.println("新的长度：" + list.size());
+
+        System.out.println("新的长度：" + size);
         return size;
     }
 
@@ -78,72 +93,51 @@ public class ArraysCode {
      */
     public static void rotate(int[] nums, int k) {
 
-//        int length = nums.length;
-//        if (length <= 0) {
-//            return;
-//        }
-//        int[] newArrs = new int[length];
-//        for (int i = 0; i < length; i++) {
-//            newArrs[i] = nums[i];
-//        }
-//        k = k % length;
-//        int t;
-//        for (int i = 0; i < length; i++) {
-//            t = (i + k) % length;
-//            nums[t] = newArrs[i];
-//        }
+        int length = nums.length;
+        if (length <= 0) {
+            return;
+        }
+        int[] newArrs = new int[length];
+        for (int i = 0; i < length; i++) {
+            newArrs[i] = nums[i];
+        }
+        k = k % length;
+        int t;
+        for (int i = 0; i < length; i++) {
+            t = (i + k) % length;
+            nums[t] = newArrs[i];
+        }
         /*
          *以上是最佳方案
-         *以下方案会在数据很多超时
          */
-//
+
+        //以下方法在本地对，leetcode 上不正确
 //        int len = nums.length;
 //        if (len <= 0) {
 //            return;
 //        }
-//        List<Integer> list = new ArrayList<>();
-//        for (int i = 0; i < len; i++) {
-//            list.add(nums[i]);
-//        }
-//        System.out.println(list);
 //
-//        for (int i = 0; i < k; i++) {
-//            //最后一个值
-//            int index = list.get(len - 1);
-//            //后面的顺序排列
-//            List<Integer> newList = list.stream().filter(x -> x != index).collect(Collectors.toList());
-//            newList.add(0, index);
-//            list = newList;
+//        int arrLen = nums.length;
+//        if (arrLen <= 0) {
+//            return;
 //        }
-
-
-        //以下方法在本地对，leetcode 上不正确
-        int len = nums.length;
-        if (len <= 0) {
-            return;
-        }
-
-        int arrLen = nums.length;
-        if (arrLen <= 0) {
-            return;
-        }
-        for (int i = 0; i < k; i++) {
-            int[] newArr = new int[arrLen];
-            newArr[0] = nums[arrLen - 1];
-            for (int j = 0; j < arrLen; j++) {
-                if ((j + 1) < arrLen) {
-                    newArr[j + 1] = nums[j];
-                }
-            }
-            nums = newArr;
-        }
+//        for (int i = 0; i < k; i++) {
+//            int[] newArr = new int[arrLen];
+//            newArr[0] = nums[arrLen - 1];
+//            for (int j = 0; j < arrLen; j++) {
+//                if ((j + 1) < arrLen) {
+//                    newArr[j + 1] = nums[j];
+//                }
+//            }
+//            nums = newArr;
+//        }
 
 //        for (int i = 0; i < list.size(); i++) {
 //            nums[i] = list.get(i);
 //        }
 
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < length; i++) {
             list.add(nums[i]);
         }
         System.out.println(list);
