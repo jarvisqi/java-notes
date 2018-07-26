@@ -11,16 +11,28 @@ public class AbstractFactory {
 
     public static void main(String[] args) {
         // step 1,选定一个“大厂”
-        ComputerFactory computerFactory = new IntelFactory();
+        ComputerFactory intelFactory = new IntelFactory();
         // step 2,造cpu
-        var cpu = computerFactory.createCPU();
+        var intelCpu = intelFactory.createCPU();
         // step 2,造MainBoard
-        var mainBoard = computerFactory.createMainBoard();
+        var intelMainBoard = intelFactory.createMainBoard();
         // step 3,组装电脑
-        var computer = new Computer(cpu, mainBoard);
-        var computerInfo = computer.toString();
+        var intelComputer = new Computer(intelCpu, intelMainBoard);
+        var intelComputerInfo = intelComputer.toString();
         // step 4,输出信息
-        System.out.println(computerInfo);
+        System.out.println(intelComputerInfo);
+
+        // step 1,选定一个“大厂”
+        ComputerFactory amdFactory = new AmdFactory();
+        // step 2,造cpu
+        var amdcpu = amdFactory.createCPU();
+        // step 2,造MainBoard
+        var amdMainBoard = amdFactory.createMainBoard();
+        // step 3,组装电脑
+        var amdComputer = new Computer(amdcpu, amdMainBoard);
+        var amdComputerInfo = amdComputer.toString();
+        // step 4,输出信息
+        System.out.println(amdComputerInfo);
 
     }
 }
