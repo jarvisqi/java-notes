@@ -1,5 +1,7 @@
 package com.designpatterns.factory;
 
+import com.designpatterns.common.Food;
+
 /**
  * 工厂模式
  *

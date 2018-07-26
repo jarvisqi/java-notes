@@ -1,5 +1,7 @@
 package com.designpatterns.factory;
 
+import com.designpatterns.common.Food;
+
 /**
  * 简单工厂
  *
@@ -19,22 +21,6 @@ public class SimpleFactory {
     }
 }
 
-
-class Food {
-    public Food() {
-
-    }
-
-    public Food(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    private String name;
-}
 
 class LanZhouNoodle extends Food {
     LanZhouNoodle(String name) {
