@@ -1,7 +1,9 @@
 package com.basecode.datastructure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntConsumer;
 
 /**
  * 排序算法
@@ -284,4 +286,18 @@ public class SortPractice {
     }
 
 
+}
+
+class AppClient {
+    public static void main(String[] args) {
+        int[] nums = {1, 34, 9, 45, 676, 23, 11111, 1002, 2333, 33, 77, 73, 78, 90, 92, 102, 553, 450, 5578, 1024, 30154};
+        SortPractice sortPractice = new SortPractice();
+        //基本排序
+        var result = sortPractice.baseSort(nums);
+        Arrays.stream(result).forEach(value -> System.out.print(value + " "));
+        //直接插入排序
+        System.out.println();
+        result = sortPractice.insertSort(nums);
+        Arrays.stream(result).forEach(value -> System.out.print(value + " "));
+    }
 }
