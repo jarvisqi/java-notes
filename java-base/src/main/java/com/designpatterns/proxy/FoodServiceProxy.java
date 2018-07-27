@@ -1,6 +1,8 @@
 package com.designpatterns.proxy;
 
+import com.designpatterns.common.Chicken;
 import com.designpatterns.common.Food;
+import com.designpatterns.common.Noodle;
 
 /**
  * 结构型模式 - 代理模式
@@ -44,40 +46,16 @@ interface FoodService {
     /**
      * 鸡肉饭
      *
-     * @return
+     * @return food
      */
     Food createChicken();
 
     /**
      * 面条
      *
-     * @return
+     * @return food
      */
     Food createNoodle();
-}
-
-class Chicken extends Food {
-
-    public Chicken(String name) {
-        super(name);
-    }
-
-    @Override
-    public String toString() {
-        return "名字：" + getName() + " 辣椒：" + getSpicy() + " 盐：" + getSalt();
-    }
-}
-
-class Noodle extends Food {
-    public Noodle(String name) {
-        super(name);
-    }
-
-    @Override
-    public String toString() {
-        return "名字：" + getName() + " 辣椒：" + getSpicy() + " 盐：" + getSalt();
-    }
-
 }
 
 /**
