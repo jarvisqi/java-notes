@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marvel.mapper.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.marvel.entity.Article">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="subhead" jdbcType="VARCHAR" property="subhead" />
-    <result column="author" jdbcType="VARCHAR" property="author" />
-    <result column="in_date" jdbcType="TIMESTAMP" property="inDate" />
-    <result column="in_userid" jdbcType="INTEGER" property="inUserid" />
-    <result column="edit_date" jdbcType="TIMESTAMP" property="editDate" />
-    <result column="edit_userid" jdbcType="INTEGER" property="editUserid" />
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.marvel.entity.Article">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="subhead" jdbcType="VARCHAR" property="subhead"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="in_date" jdbcType="TIMESTAMP" property="inDate"/>
+        <result column="in_userid" jdbcType="INTEGER" property="inUserid"/>
+        <result column="edit_date" jdbcType="TIMESTAMP" property="editDate"/>
+        <result column="edit_userid" jdbcType="INTEGER" property="editUserid"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
 </mapper>

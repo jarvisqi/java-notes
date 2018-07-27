@@ -33,7 +33,7 @@
     <!--<logger name="com.marvelcontroller"/>-->
     <!--带有多个logger的配置，指定级别，指定appender  LogbackDemo-->
     <!--<logger name="com.marvelcontroller.ArticleController" level="WARN" additivity="false">-->
-        <!--<appender-ref ref="file"/>-->
+    <!--<appender-ref ref="file"/>-->
     <!--</logger>-->
 
     <!-- 测试环境+开发环境. 多个使用逗号隔开. -->

@@ -5,6 +5,7 @@ import com.framework.common.BaseEnum;
 
 /**
  * 性别
+ *
  * @author : Jarvis
  * @date : 2018/5/12
  */

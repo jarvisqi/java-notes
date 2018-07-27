@@ -26,14 +26,14 @@
     </select>
 
     <insert id="addUser" keyProperty="id">
-    INSERT user_info (user_name, password, user_sex, nick_name,user_status)
-    VALUES (
+        INSERT user_info (user_name, password, user_sex, nick_name,user_status)
+        VALUES (
         #{userName},
         #{passWord},
         #{userSex,typeHandler=com.framework.handler.BaseEnumTypeHandler},
         #{nickName},
         #{userStatus,typeHandler=com.framework.handler.BaseEnumTypeHandler}
-    )
+        )
     </insert>
 
     <update id="updateUser">
