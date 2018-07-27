@@ -4,6 +4,26 @@ import com.designpatterns.common.Chicken;
 import com.designpatterns.common.Food;
 import com.designpatterns.common.Noodle;
 
+
+/**
+ * 接口
+ */
+interface FoodService {
+    /**
+     * 鸡肉饭
+     *
+     * @return food
+     */
+    Food createChicken();
+
+    /**
+     * 面条
+     *
+     * @return food
+     */
+    Food createNoodle();
+}
+
 /**
  * 结构型模式 - 代理模式
  * 用一个代理来隐藏具体实现类的实现细节，通常还用于在真实的实现的前后添加一部分逻辑。
@@ -16,7 +36,17 @@ public class FoodServiceProxy implements FoodService {
     /**
      * step 1, 内部一定要有一个真实的实现类，当然也可以通过构造方法注入
      */
-    private FoodService foodService = new FoodServiceImpl();
+    private FoodService foodService;
+
+    /**
+     * 构造函数注入
+     * 或者 private FoodService foodService=new FoodServiceImpl()
+     *
+     * @param foodService 接口
+     */
+    FoodServiceProxy(FoodService foodService) {
+        this.foodService = foodService;
+    }
 
     @Override
     public Food createChicken() {
@@ -39,24 +69,6 @@ public class FoodServiceProxy implements FoodService {
     }
 }
 
-/**
- * 接口
- */
-interface FoodService {
-    /**
-     * 鸡肉饭
-     *
-     * @return food
-     */
-    Food createChicken();
-
-    /**
-     * 面条
-     *
-     * @return food
-     */
-    Food createNoodle();
-}
 
 /**
  *
@@ -96,13 +108,13 @@ class FoodServiceImpl implements FoodService {
 class ProxyApp {
     public static void main(String[] args) {
         //创建代理对象
-        FoodService serviceProxy = new FoodServiceProxy();
+        FoodService serviceProxy = new FoodServiceProxy(new FoodServiceImpl());
         //使用代理对象 制作鸡肉饭
         var chicken = serviceProxy.createChicken();
         System.out.println(chicken.toString());
         //使用代理对象 制作牛肉面
-        var noodel = serviceProxy.createNoodle();
-        System.out.println(noodel.toString());
+        var noodle = serviceProxy.createNoodle();
+        System.out.println(noodle.toString());
     }
 }
 
