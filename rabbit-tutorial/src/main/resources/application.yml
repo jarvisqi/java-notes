@@ -10,6 +10,11 @@ spring:
     username: tutorial
     password: 12345
     virtual-host: vhtutl
+#    listener:
+#      simple:
+#        #  prefetchCount 来限制 Queue 每次发送给每个消费者的消息数，比如我们设置 prefetchCount=1，
+#        # 则 Queue 每次给每个消费者发送一条消息；消费者处理完这条消息后 Queue 会再给该消费者发送一条消息。
+#        prefetch: 1
 
 tutorial:
   client:

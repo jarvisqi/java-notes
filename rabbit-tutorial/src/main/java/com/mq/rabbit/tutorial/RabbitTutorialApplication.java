@@ -1,6 +1,6 @@
 package com.mq.rabbit.tutorial;
 
-import com.mq.rabbit.tutorial.tut1.RabbitTutorialRunner;
+import com.mq.rabbit.tutorial.tutorial01.RabbitTutorialRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

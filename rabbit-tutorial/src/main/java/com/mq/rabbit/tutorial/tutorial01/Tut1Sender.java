@@ -1,4 +1,4 @@
-package com.mq.rabbit.tutorial.tut1;
+package com.mq.rabbit.tutorial.tutorial01;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
