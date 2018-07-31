@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.util.StopWatch;
 
 /**
+ * 发布订阅 - 消费者
+ *
  * @author Jarvis
  * @date 2018/7/31
  */
@@ -37,15 +39,15 @@ public class Tut2Receiver {
             }
         }
     }
-
-    /**
-     * 更改 特定消费者
-     * 然后在特定的消费者上指定 containerFactory 为自定义的bean, prefetchTenRabbitListenerContainerFactory
-     *
-     * @param in
-     */
-    @RabbitListener(queues = "hello", containerFactory = "prefetchTenRabbitListenerContainerFactory")
-    public void receive(String in) {
-        System.out.println(" [x] Received '" + in + "'");
-    }
+//
+//    /**
+//     * 更改 特定消费者
+//     * 然后在特定的消费者上指定 containerFactory 为自定义的bean, prefetchTenRabbitListenerContainerFactory
+//     *
+//     * @param in
+//     */
+//    @RabbitListener(queues = "hello", containerFactory = "prefetchTenRabbitListenerContainerFactory")
+//    public void receive(String in) {
+//        System.out.println(" [x] Received '" + in + "'");
+//    }
 }

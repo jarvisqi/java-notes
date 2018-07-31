@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
+ * 工作队列 -生产者
+ *
  * @author Jarvis
  * @date 2018/7/31
  */

@@ -44,18 +44,18 @@ public class Tut2Config {
         return new Tut2Sender();
     }
 
-    /**
-     * 更改 特定消费者
-     * 然后在特定的消费者上指定containerFactory
-     *
-     * @param rabbitConnectionFactory
-     * @return
-     */
-    @Bean
-    public RabbitListenerContainerFactory<SimpleMessageListenerContainer> prefetchOneRabbitListenerContainerFactory(ConnectionFactory rabbitConnectionFactory) {
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(rabbitConnectionFactory);
-        factory.setPrefetchCount(1);
-        return factory;
-    }
+//    /**
+//     * 更改 特定消费者
+//     * 然后在特定的消费者上指定containerFactory
+//     *
+//     * @param rabbitConnectionFactory
+//     * @return
+//     */
+//    @Bean
+//    public RabbitListenerContainerFactory<SimpleMessageListenerContainer> prefetchOneRabbitListenerContainerFactory(ConnectionFactory rabbitConnectionFactory) {
+//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+//        factory.setConnectionFactory(rabbitConnectionFactory);
+//        factory.setPrefetchCount(1);
+//        return factory;
+//    }
 }
