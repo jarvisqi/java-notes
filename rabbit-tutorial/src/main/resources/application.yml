@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: usage_msg
+  application:
+    name: rabbit-tutorial
+
+  rabbitmq:
+    host: 192.168.10.100
+    port: 5672
+    username: tutorial
+    password: 12345
+    virtual-host: vhtutl
+
+tutorial:
+  client:
+    duration: 10000
+
