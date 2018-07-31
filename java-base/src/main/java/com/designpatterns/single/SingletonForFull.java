@@ -1,5 +1,8 @@
 package com.designpatterns.single;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 单例 - 饱汉模式
  *
@@ -24,6 +27,7 @@ public class SingletonForFull {
      */
     public static SingletonForFull getInstance() {
 
+        // 使用 synchronized
         if (instance == null) {
             // 加锁
             synchronized (SingletonForFull.class) {
@@ -33,6 +37,20 @@ public class SingletonForFull {
                 }
             }
         }
+        // 使用 Lock 和 ReentrantLock
+        Lock lock = new ReentrantLock();
+        if (instance == null) {
+            lock.lock();
+            try {
+                if (instance == null) {
+                    instance = new SingletonForFull();
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+
+
         return instance;
     }
 
