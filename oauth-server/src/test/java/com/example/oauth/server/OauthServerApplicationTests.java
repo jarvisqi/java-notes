@@ -1,4 +1,4 @@
-package com.example.oauth.oauthserver;
+package com.example.oauth.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,10 +1,10 @@
-package com.example.oauth.oauthserver;
+package com.example.oauth.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Oauth2.0 Server
+ * OAuth2.0 Server
  *
  * @author Jarvis
  * @date 2018/07/30
