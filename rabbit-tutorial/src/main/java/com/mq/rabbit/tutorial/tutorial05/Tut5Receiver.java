@@ -1,4 +1,4 @@
-package com.mq.rabbit.tutorial.tutorial06;
+package com.mq.rabbit.tutorial.tutorial05;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.util.StopWatch;

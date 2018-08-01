@@ -1,4 +1,4 @@
-package com.mq.rabbit.tutorial.tutorial06;
+package com.mq.rabbit.tutorial.tutorial05;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.TopicExchange;
