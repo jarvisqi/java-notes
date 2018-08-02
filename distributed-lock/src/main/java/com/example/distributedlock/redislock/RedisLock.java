@@ -2,11 +2,11 @@ package com.example.distributedlock.redislock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.stereotype.Component;
 
 /**
  * redis 分布式锁
@@ -17,11 +17,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisLock {
 
     private static Logger logger = LoggerFactory.getLogger(RedisLock.class);
-
     private RedisTemplate<String, Object> redisTemplate;
-
     private static final int DEFAULT_ACQUIRY_RESOLUTION_MILLIS = 100;
-
     private String lockKey;
 
     /**
@@ -50,9 +47,6 @@ public class RedisLock {
         this.expireMsecs = expireMsecs;
     }
 
-    public String getLockKey() {
-        return lockKey;
-    }
 
     /**
      * get 取值
@@ -63,17 +57,16 @@ public class RedisLock {
     public String get(final String key) {
         Object object = null;
         try {
-            object = redisTemplate.execute(new RedisCallback<Object>() {
-                @Override
-                public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
-                    StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                    byte[] data = redisConnection.get(redisSerializer.serialize(key));
-                    redisConnection.close();
-                    if (data == null) {
-                        return null;
-                    }
-                    return redisSerializer.deserialize(data);
+            object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
+                StringRedisSerializer redisSerializer = new StringRedisSerializer();
+                byte[] data = redisConnection.get(redisSerializer.serialize(key));
+
+
+                redisConnection.close();
+                if (data == null) {
+                    return null;
                 }
+                return redisSerializer.deserialize(data);
             });
         } catch (Exception ex) {
             logger.error("get redis error, key : {}", key);
@@ -92,13 +85,10 @@ public class RedisLock {
     public String set(final String key, final String value) {
         Object object = null;
         try {
-            object = redisTemplate.execute(new RedisCallback<Object>() {
-                @Override
-                public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
-                    StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                    redisConnection.set(redisSerializer.serialize(key), redisSerializer.serialize(value));
-                    return redisSerializer;
-                }
+            object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
+                StringRedisSerializer redisSerializer = new StringRedisSerializer();
+                redisConnection.set(redisSerializer.serialize(key), redisSerializer.serialize(value));
+                return redisSerializer;
             });
         } catch (Exception e) {
             logger.error("get redis error, key : {}", key);
@@ -116,14 +106,11 @@ public class RedisLock {
     public boolean setNX(final String key, final String value) {
         Object object = null;
         try {
-            object = redisTemplate.execute(new RedisCallback<Object>() {
-                @Override
-                public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
-                    StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                    Boolean success = redisConnection.setNX(redisSerializer.serialize(key), redisSerializer.serialize(value));
-                    redisConnection.close();
-                    return success;
-                }
+            object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
+                StringRedisSerializer redisSerializer = new StringRedisSerializer();
+                Boolean success = redisConnection.setNX(redisSerializer.serialize(key), redisSerializer.serialize(value));
+                redisConnection.close();
+                return success;
             });
         } catch (Exception e) {
             logger.error("setNX redis error, key : {}", key);
@@ -134,15 +121,12 @@ public class RedisLock {
     private String getSet(final String key, final String value) {
         Object object = null;
         try {
-            object = redisTemplate.execute(new RedisCallback<Object>() {
-                @Override
-                public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
-                    StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                    byte[] data = redisConnection.getSet(redisSerializer.serialize(key), redisSerializer.serialize(value));
-                    redisConnection.close();
+            object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
+                StringRedisSerializer redisSerializer = new StringRedisSerializer();
+                byte[] data = redisConnection.getSet(redisSerializer.serialize(key), redisSerializer.serialize(value));
+                redisConnection.close();
 
-                    return redisSerializer.deserialize(data);
-                }
+                return redisSerializer.deserialize(data);
             });
         } catch (Exception e) {
             logger.error("getSet redis error, key : {}", key);
