@@ -1,5 +1,5 @@
-# java-learning: Java 实践代码        
-#### java-base: Java 基础（Java8+），并发编程，同步和锁，线程线程池,泛型,数据结构和算法...
+# java-tutorial: Java 实践代码        
+#### base-code: Java 基础（Java8,Java10），并发编程，同步和锁，线程线程池,泛型,数据结构,算法...
 >designpatterns：设计模式  
 >basecode: Java 各种实践代码  
 >leetcode：Leetcode 刷题  
