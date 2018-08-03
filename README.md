@@ -4,7 +4,8 @@
 >basecode: Java 各种实践代码  
 >leetcode：Leetcode 刷题  
 >springbase：spring 各种原理及实践代码 
-#### rabbit-tutorial: rabbitMQ 实践
+#### rabbit-tutorial: spring boot2.0 + rabbitMQ 实践
+#### kafka-tutorial: spring boot2.0 + kafka 实践
 #### distributed-lock: 分布式锁 实践
 #### mvc-app: Spring MVC 实践
 #### spring-marvel: Spring Boot2.0 实践
