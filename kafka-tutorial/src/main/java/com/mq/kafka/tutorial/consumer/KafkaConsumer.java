@@ -23,16 +23,18 @@ public class KafkaConsumer {
     private Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
     /**
-     * 监听kafka 开头的topic，不做其他业务
+     * 监听kafka.tut 的 topic
      *
      * @param record
      * @param topic  topic
      */
     @KafkaListener(id = "tut", topics = "kafka.tut")
     public void listen(ConsumerRecord<?, ?> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
+        //判断是否NULL
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
 
         if (kafkaMessage.isPresent()) {
+            //获取消息
             Object message = kafkaMessage.get();
 
             logger.info("Receive： +++++++++++++++ Topic:" + topic);
