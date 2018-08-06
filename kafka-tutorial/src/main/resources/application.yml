@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: kafka-tutorial
+  kafka:
+    # 指定kafka 代理地址，可以多个
+    bootstrap-servers: 192.168.10.100:9092
+    producer:
+      retries: 0
+      # 每次批量发送消息的数量
+      batch-size: 16384
+      # 缓存容量
+      buffer-memory: 33554432
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      # 指定默认消费者group id
+      group-id: consumer-tutorial
+      auto-commit-interval: 100
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      # 指定消息key和消息体的编解码方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # 指定listener 容器中的线程数，用于提高并发量
+    listener:
+      concurrency: 3
