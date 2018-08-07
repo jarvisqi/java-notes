@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Spring-mvc Maven Webapp</name>
+    <name>spring mvc app</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
