@@ -10,7 +10,7 @@ import java.util.List;
  * @author : Jarvis
  * @date : 2018/6/1
  */
-public class GridData<T> {
+public class ResultData<T> {
     /**
      * 当前页
      */
@@ -36,11 +36,11 @@ public class GridData<T> {
      */
     private List<T> items;
 
-    public GridData() {
+    public ResultData() {
         super();
     }
 
-    public GridData(PageInfo info) {
+    public ResultData(PageInfo info) {
         this.totalNum = (int) info.getTotal();
         this.pageNum = info.getPageNum();
         this.totalPage = info.getPages();

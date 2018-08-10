@@ -22,10 +22,6 @@ public class ArticleController {
     @Autowired
     public ArticleServiceImpl articleService;
 
-    public ArticleController(ArticleServiceImpl articleService) {
-        this.articleService = articleService;
-    }
-
     /**
      * 查询所有的信息
      *

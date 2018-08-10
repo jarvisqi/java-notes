@@ -1,7 +1,7 @@
 package com.marvel.handler;
 
 import cn.hutool.http.HttpStatus;
-import com.framework.common.AjaxObject;
+import com.framework.common.AjaxResult;
 import com.framework.common.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,16 +52,16 @@ public class BusinessExceptionHandler {
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public Object handlerException(Exception e) {
-        AjaxObject object = new AjaxObject();
+        AjaxResult object = new AjaxResult();
         if (e instanceof BusinessException) {
-            object.put("code", ((BusinessException) e).getCode());
-            object.put("message", ((BusinessException) e).getMsg());
+            object.setCode(((BusinessException) e).getCode());
+            object.setMessage(((BusinessException) e).getMsg());
         } else {
             logger.error("系统异常", e);
-            object.put("code", HttpStatus.HTTP_INTERNAL_ERROR);
-            object.put("message", "系统异常，请联系管理员");
+            object.setCode(HttpStatus.HTTP_INTERNAL_ERROR);
+            object.setMessage("系统异常，请联系管理员");
         }
-        object.data(null);
+        object.setData(null);
         return object;
     }
 }

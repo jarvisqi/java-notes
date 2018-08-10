@@ -1,8 +1,9 @@
 package com.marvel.controller;
 
+import com.framework.common.AjaxResult;
 import com.marvel.entity.UserInfo;
 import com.marvel.service.impl.UserServiceImpl;
-import com.framework.common.GridData;
+import com.framework.common.ResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -31,10 +32,6 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    public UserController(UserServiceImpl userService) {
-        this.userService = userService;
-    }
-
     /**
      * 查询所有用户信息
      *
@@ -44,10 +41,11 @@ public class UserController {
      */
     @ApiOperation(value = "查询所有用户信息")
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public ResponseEntity<?> getUsers(int pageNum, int pageSize) {
+    public AjaxResult<?> getUsers(int pageNum, int pageSize) {
         logger.info("查询所有用户");
-        GridData<?> users = userService.getUsers(pageNum, pageSize);
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        ResultData<?> users = userService.getUsers(pageNum, pageSize);
+        AjaxResult<ResultData<?>> result = new AjaxResult<>(users);
+        return result;
     }
 
     /**

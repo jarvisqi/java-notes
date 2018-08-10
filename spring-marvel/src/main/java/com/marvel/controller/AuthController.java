@@ -20,10 +20,6 @@ public class AuthController {
     @Autowired
     private AuthUserServiceImpl authUserService;
 
-    public AuthController(AuthUserServiceImpl authUserService) {
-        this.authUserService = authUserService;
-    }
-
     /**
      * 用户登录获取token
      *

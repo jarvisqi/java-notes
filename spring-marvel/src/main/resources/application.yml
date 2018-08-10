@@ -1,12 +1,10 @@
-#驱动可以省略，spring 会自动推断
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.252:3306/spring?useSSL=false
+    url: jdbc:mysql://192.168.10.100:3306/spring?useSSL=false
     username: test
     password: 123456
 #mapper
-#mappers 多个接口时逗号隔开
 mapper:
   mappers: com.marvel.mapper.BaseMapper
   not-empty: false

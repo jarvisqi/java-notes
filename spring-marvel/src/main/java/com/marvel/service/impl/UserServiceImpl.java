@@ -2,7 +2,7 @@ package com.marvel.service.impl;
 
 import com.marvel.entity.UserInfo;
 import com.marvel.mapper.UserMapper;
-import com.framework.common.GridData;
+import com.framework.common.ResultData;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +31,12 @@ public class UserServiceImpl {
      * @param pageSize 每页显示的条数
      * @return List<users>
      */
-    public GridData<?> getUsers(int pageNum, int pageSize) {
+    public ResultData<?> getUsers(int pageNum, int pageSize) {
         //设置分页
         PageHelper.startPage(pageNum, pageSize);
         List<UserInfo> list = userMapper.getAll();
         PageInfo<UserInfo> pageInfo = new PageInfo<>(list);
-        GridData<?> result = new GridData<>(pageInfo);
+        ResultData<?> result = new ResultData<>(pageInfo);
 
         return result;
     }
