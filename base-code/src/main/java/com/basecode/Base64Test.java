@@ -10,12 +10,11 @@ import java.util.Base64;
  */
 public class Base64Test {
 
-    public static void main(String[] args) {
-        stringTest();
-
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        base64Test();
     }
 
-    private void base64Test() throws UnsupportedEncodingException {
+    private static void base64Test() throws UnsupportedEncodingException {
         String base64encodedString = Base64.getEncoder().encodeToString("Java Test".getBytes("utf-8"));
         System.out.println("基本编码：" + base64encodedString);
 
@@ -29,39 +28,5 @@ public class Base64Test {
         System.out.println("URL解码：" + new String(base64UrlBytes, "utf-8"));
     }
 
-    private static void stringTest() {
-        String str0 = "123";
-        String str1 = "123";
-
-        System.out.println(str0 == str1);
-
-        String str2 = new String("234");
-        String str3 = new String("234");
-        //Java虚拟机的解释器每遇到一个new关键字，都会在堆内存中开辟一块内存来存放一个String对象,不同的引用 false
-        System.out.println(str2 == str3);
-        //
-        System.out.println(str2.equals(str3));
-        //昨天的当前时刻
-        LocalDateTime today = LocalDateTime.now();
-        var yesterday = today.minusDays(1);
-        System.out.println(yesterday);
-
-        var originStr = "ABCD";
-        var newStr = reverse(originStr);
-        System.out.println(newStr);
-
-    }
-
-    /**
-     * 字符串反转
-     *
-     * @param originStr
-     */
-    private static String reverse(String originStr) {
-        if (originStr == null || originStr.length() <= 1) {
-            return originStr;
-        }
-        return reverse(originStr.substring(1)) + originStr.charAt(0);
-    }
 
 }
