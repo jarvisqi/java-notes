@@ -1,4 +1,4 @@
-package com.basecode.threaddemo;
+package com.basecode.threadcode;
 
 /**
  * @author Jarvis

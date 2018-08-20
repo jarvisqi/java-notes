@@ -1,4 +1,4 @@
-package com.basecode.synchronizationdemo;
+package com.basecode.synccode;
 
 import java.util.HashMap;
 import java.util.Map;

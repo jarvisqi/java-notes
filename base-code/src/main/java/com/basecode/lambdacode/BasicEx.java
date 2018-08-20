@@ -1,4 +1,4 @@
-package com.basecode.lambdademo;
+package com.basecode.lambdacode;
 
 
 import java.io.BufferedReader;

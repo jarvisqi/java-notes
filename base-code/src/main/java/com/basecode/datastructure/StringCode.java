@@ -14,13 +14,18 @@ public class StringCode {
         System.out.println(newStr);
 
         changeLen(1, 2, 3, 4, 5, 6);
-
+        //Byte、Short、Integer、Long、Char这几个装箱类的valueOf()方法是以128位分界线做了缓存的，
+        // 假如是128以下且-128以上的值是会取缓存里面的引用的
         Integer a = Integer.valueOf(300);
         Integer b = Integer.valueOf(300);
         //true
         System.out.println(a.equals(b));
         //false
         System.out.println(a == b);
+
+        //左侧补0
+        String str = String.format("%5d", 3).replace(" ", "0");
+        System.out.println(str);
     }
 
     /**
@@ -65,7 +70,7 @@ public class StringCode {
     private static void stringTest() {
         String str0 = "123";
         String str1 = "123";
-        //对比值相等
+        //"=="在Java比较的不是两个对象的值，而是比较两个对象的引用是否相等
         System.out.println(str0 == str1);
 
         String str2 = new String("234");
