@@ -59,6 +59,9 @@ public class MyClassLoader extends ClassLoader {
 
     /**
      * 读入.class的字节，因此要使用字节流
+     * * 一个Buffer对象是固定数量的数据的容器。其作用是一个存储器,或者分段运输区,在这里数据可被存储并在之后用于检索。
+     * * 尽管缓冲区作用于它们存储的原始数据类型,但缓冲区十分倾向于处理字节。
+     * NIO里，一个通道（channel）可以表示任何可以读写的对象。它的作用是为文件和套接口提供抽象
      *
      * @param file
      * @return
@@ -66,8 +69,11 @@ public class MyClassLoader extends ClassLoader {
      */
     private byte[] getClassBytes(File file) throws IOException {
         FileInputStream inputStream = new FileInputStream(file);
+        //通道(Channel)是一种途径,借助该途径,可以用最小的总开销来访问操作系统本身的 I/O 服务。
+        //缓冲区(Buffer)则是通道内部用来发送和接收数据的端点。通道channel充当连接I/O服务的导管
         FileChannel channel = inputStream.getChannel();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        // WritableByteChannel 接口以提供 write( )方法
         WritableByteChannel byteChannel = Channels.newChannel(outputStream);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
 
@@ -76,7 +82,8 @@ public class MyClassLoader extends ClassLoader {
             if (i == 0 || i == -1) {
                 break;
             }
-            buffer.flip();
+            buffer.flip();  //写模式转换成读模式
+
             byteChannel.write(buffer);
             buffer.clear();
         }
