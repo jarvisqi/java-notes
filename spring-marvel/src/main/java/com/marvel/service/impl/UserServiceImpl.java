@@ -1,10 +1,12 @@
 package com.marvel.service.impl;
 
 import com.marvel.entity.UserInfo;
-import com.marvel.mapper.UserMapper;
+import com.marvel.mapper.BaseMapper;
+import com.marvel.mapper.master.UserMapper;
 import com.framework.common.ResultData;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.marvel.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,10 @@ import java.util.List;
  * @date : 2018/6/1
  */
 @Service
-public class UserServiceImpl {
-
-    private final UserMapper userMapper;
+public class UserServiceImpl extends BaseService<UserInfo> {
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    private UserMapper userMapper;
 
     /**
      * 查询所有用户信息

@@ -1,6 +1,7 @@
-package com.marvel.mapper;
+package com.marvel.mapper.master;
 
 import com.marvel.entity.Article;
+import com.marvel.mapper.BaseMapper;
 
 /**
  * @author Jarvis

@@ -2,7 +2,7 @@ package com.marvel.security;
 
 import com.framework.common.BusinessException;
 import com.marvel.entity.AuthUser;
-import com.marvel.mapper.AuthMapper;
+import com.marvel.mapper.master.AuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +27,7 @@ import static java.util.Collections.emptyList;
  */
 @Service
 public class AuthUserServiceImpl implements UserDetailsService {
-    @Autowired
+
     private AuthMapper authUserMapper;
     @Autowired
     private AuthenticationManager authenticationManager;

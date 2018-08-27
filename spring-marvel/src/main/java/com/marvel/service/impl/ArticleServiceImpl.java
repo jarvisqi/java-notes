@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
  * @date : 2018/6/2
  */
 @Service
-public class ArticleServiceImpl extends BaseService<Article> {
+public  class ArticleServiceImpl extends BaseService<Article> {
 
 }

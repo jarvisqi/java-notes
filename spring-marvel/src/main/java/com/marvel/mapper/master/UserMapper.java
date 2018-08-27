@@ -1,7 +1,7 @@
-package com.marvel.mapper;
+package com.marvel.mapper.master;
 
 import com.marvel.entity.UserInfo;
-import org.springframework.stereotype.Component;
+import com.marvel.mapper.BaseMapper;
 
 import java.util.List;
 
@@ -9,8 +9,6 @@ import java.util.List;
  * @author : Jarvis
  * @date : 2018/5/13
  */
-
-@Component(value = "userMapper")
 public interface UserMapper extends BaseMapper<UserInfo> {
 
     /***
