@@ -2,7 +2,7 @@ package com.marvel.handler;
 
 import cn.hutool.http.HttpStatus;
 import com.framework.common.AjaxResult;
-import com.framework.common.BusinessException;
+import com.framework.common.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -53,9 +53,9 @@ public class BusinessExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Object handlerException(Exception e) {
         AjaxResult object = new AjaxResult();
-        if (e instanceof BusinessException) {
-            object.setCode(((BusinessException) e).getCode());
-            object.setMessage(((BusinessException) e).getMsg());
+        if (e instanceof BizException) {
+            object.setCode(((BizException) e).getCode());
+            object.setMessage(((BizException) e).getMsg());
         } else {
             logger.error("系统异常", e);
             object.setCode(HttpStatus.HTTP_INTERNAL_ERROR);

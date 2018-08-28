@@ -1,8 +1,7 @@
 package com.marvel.security;
 
 
-import cn.hutool.http.HttpStatus;
-import com.framework.common.BusinessException;
+import com.framework.common.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,10 +44,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 Authentication auth = new UsernamePasswordAuthenticationToken(name, password, emptyList());
                 return auth;
             } else {
-                throw new BusinessException("密码错误");
+                throw new BizException("密码错误");
             }
         } else {
-            throw new BusinessException("用户不存在");
+            throw new BizException("用户不存在");
         }
     }
 

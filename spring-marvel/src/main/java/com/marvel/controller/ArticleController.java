@@ -2,7 +2,7 @@ package com.marvel.controller;
 
 import cn.hutool.http.HttpStatus;
 import com.marvel.service.impl.ArticleServiceImpl;
-import com.framework.common.BusinessException;
+import com.framework.common.BizException;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,7 +50,7 @@ public class ArticleController {
     @ResponseBody
     public int exTest(int param) {
         if (param == 0) {
-            throw new BusinessException(HttpStatus.HTTP_OK, "参数不正确");
+            throw new BizException(HttpStatus.HTTP_OK, "参数不正确");
         }
         // 除 0异常
         return 0;
