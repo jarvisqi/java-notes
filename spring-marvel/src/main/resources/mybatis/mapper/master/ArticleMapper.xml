@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.marvel.mapper.ArticleMapper">
+<mapper namespace="com.marvel.mapper.master.ArticleMapper">
     <resultMap id="BaseResultMap" type="com.marvel.entity.Article">
         <!--
           WARNING - @mbg.generated

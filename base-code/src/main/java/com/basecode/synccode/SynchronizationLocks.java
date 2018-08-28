@@ -227,7 +227,7 @@ public class SynchronizationLocks {
                     stamp = lock.tryConvertToWriteLock(stamp);
                     System.out.println("tryConvert : " + stamp);
                     if (stamp == 0L) {
-                        System.out.println("Could not convert to write lock");
+                        System.out.println("Could not convert to master lock");
                         stamp = lock.writeLock();
                     }
                     count = 23;

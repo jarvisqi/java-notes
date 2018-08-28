@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.marvel.mapper.UserMapper">
+<mapper namespace="com.marvel.mapper.master.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.marvel.entity.UserInfo">
         <id column="id" property="id" jdbcType="BIGINT"/>
@@ -15,13 +15,13 @@
                 typeHandler="com.framework.handler.BaseEnumTypeHandler"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
+    <sql id="Base_Columns">
         id, user_name, password, user_sex, nick_name,user_status,user_level
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Columns"/>
         FROM user_info
     </select>
 

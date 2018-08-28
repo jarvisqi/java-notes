@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: oauth-server
-  redis:
-    database: 0
-    host: 127.0.0.1
-    password:
-    port: 6379

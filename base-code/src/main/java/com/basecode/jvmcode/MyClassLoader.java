@@ -73,7 +73,7 @@ public class MyClassLoader extends ClassLoader {
         //缓冲区(Buffer)则是通道内部用来发送和接收数据的端点。通道channel充当连接I/O服务的导管
         FileChannel channel = inputStream.getChannel();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        // WritableByteChannel 接口以提供 write( )方法
+        // WritableByteChannel 接口以提供 master( )方法
         WritableByteChannel byteChannel = Channels.newChannel(outputStream);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
 
