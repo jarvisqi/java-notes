@@ -1,8 +1,7 @@
 package com.marvel.service.impl;
 
 import com.marvel.entity.UserInfo;
-import com.marvel.mapper.BaseMapper;
-import com.marvel.mapper.master.UserMapper;
+import com.marvel.mapper.UserMapper;
 import com.framework.common.ResultData;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

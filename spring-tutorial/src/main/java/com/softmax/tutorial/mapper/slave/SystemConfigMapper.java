@@ -1,6 +1,6 @@
-package com.marvel.mapper.read;
+package com.softmax.tutorial.mapper.slave;
 
-import com.marvel.entity.SystemConfig;
+import com.softmax.tutorial.entity.SystemConfig;
 
 import java.util.List;
 

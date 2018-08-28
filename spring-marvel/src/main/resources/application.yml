@@ -10,18 +10,6 @@ spring:
     username: test
     password: 123456
 
-#  datasource:
-#    master:
-#      driver-class-name: com.mysql.jdbc.Driver
-#      url: jdbc:mysql://192.168.10.100:3306/spring?useSSL=false
-#      username: test
-#      password: 123456
-#    read:
-#      driver-class-name: com.mysql.jdbc.Driver
-#      url: jdbc:mysql://192.168.10.100:3306/common?useSSL=false
-#      username: test
-#      password: 123456
-
 #mapper
 mapper:
   mappers: com.marvel.mapper.BaseMapper

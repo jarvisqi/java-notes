@@ -3,6 +3,8 @@ package com.marvel.security;
 
 import com.framework.common.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,12 +21,13 @@ import static java.util.Collections.emptyList;
  * @author : Jarvis
  * @date : 2018/5/14
  */
-public class CustomAuthenticationProvider implements AuthenticationProvider {
-    @Autowired
+public class UserAuthenticationProvider implements AuthenticationProvider {
+
     private UserDetailsService authUserService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public CustomAuthenticationProvider() {
+    public UserAuthenticationProvider(UserDetailsService authUserService) {
+        this.authUserService = authUserService;
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 

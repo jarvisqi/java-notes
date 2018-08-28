@@ -1,6 +1,7 @@
-package com.marvel.entity;
+package com.softmax.tutorial.entity;
 
-import com.marvel.entity.enums.FileType;
+
+import com.softmax.tutorial.entity.enums.FileType;
 
 /**
  * 系统配置

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @date : 2018/6/7
  */
 @RestControllerAdvice
-public class BusinessExceptionHandler {
+public class BizExceptionHandler {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

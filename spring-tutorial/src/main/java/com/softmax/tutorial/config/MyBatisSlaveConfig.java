@@ -1,7 +1,8 @@
-package com.marvel.config;
+package com.softmax.tutorial.config;
 
-import com.framework.common.BaseEnum;
-import com.framework.handler.EnumValueTypeHandler;
+
+import com.softmax.framework.common.BaseEnum;
+import com.softmax.framework.handler.EnumValueTypeHandler;
 import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -27,11 +28,11 @@ import java.util.Set;
  * @author Jarvis
  * @date 2018/8/24
  */
-//@Configuration
-//@EnableConfigurationProperties
-//@ConfigurationProperties(prefix = "mysql.datasource.read")
-//@MapperScan(basePackages = "com.marvel.mapper.read", sqlSessionTemplateRef = "readSqlSessionTemplate")
-public class MyBatisReadConfig {
+@Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "mysql.datasource.slave")
+@MapperScan(basePackages = "com.softmax.tutorial.mapper.slave", sqlSessionTemplateRef = "readSqlSessionTemplate")
+public class MyBatisSlaveConfig {
 
     @Bean(name = "readDataSource")
     public DataSource readDataSource() {
@@ -48,7 +49,7 @@ public class MyBatisReadConfig {
                     .getResource("classpath:mybatis/mybatis-config.xml"));
             // 扫描mapper配置文件
             Resource[] mapperResources = new PathMatchingResourcePatternResolver()
-                    .getResources("classpath*:/mybatis/mapper/read/*.xml");
+                    .getResources("classpath*:/mybatis/mapper/slave/*.xml");
             factoryBean.setMapperLocations(mapperResources);
             factoryBean.setTypeAliasesPackage("classpath*:/com/marvel/entity/*");
 

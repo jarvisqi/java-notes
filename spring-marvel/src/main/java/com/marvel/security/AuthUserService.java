@@ -2,8 +2,9 @@ package com.marvel.security;
 
 import com.framework.common.BizException;
 import com.marvel.entity.AuthUser;
-import com.marvel.mapper.master.AuthMapper;
+import com.marvel.mapper.AuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,15 +27,15 @@ import static java.util.Collections.emptyList;
  * @date :  2018/5/12
  */
 @Service
-public class AuthUserServiceImpl implements UserDetailsService {
-
-    private AuthMapper authUserMapper;
+public class AuthUserService implements UserDetailsService {
+    @Autowired
+    private AuthMapper authMapper;
     @Autowired
     private AuthenticationManager authenticationManager;
 
     private JwtTokenUtil jwtTokenUtil;
 
-    public AuthUserServiceImpl() {
+    public AuthUserService() {
         this.jwtTokenUtil = new JwtTokenUtil();
     }
 
@@ -63,7 +64,7 @@ public class AuthUserServiceImpl implements UserDetailsService {
      * @return AuthUser
      */
     public AuthUser findByUserName(String username) {
-        return authUserMapper.findByUserName(username);
+        return authMapper.findByUserName(username);
     }
 
     /**
@@ -82,7 +83,7 @@ public class AuthUserServiceImpl implements UserDetailsService {
         user.setPassword(encoder.encode(rawPassword));
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_USER");
-        authUserMapper.register(user);
+        authMapper.register(user);
         return "注册成功";
     }
 

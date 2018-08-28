@@ -1,7 +1,7 @@
-package com.marvel.config;
+package com.softmax.tutorial.config;
 
-import com.framework.common.BaseEnum;
-import com.framework.handler.EnumValueTypeHandler;
+import com.softmax.framework.common.BaseEnum;
+import com.softmax.framework.handler.EnumValueTypeHandler;
 import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -28,10 +28,10 @@ import java.util.Set;
  * @author Jarvis
  * @date 2018/8/24
  */
-//@Configuration
-//@EnableConfigurationProperties
-//@ConfigurationProperties(prefix = "mysql.datasource.master")
-//@MapperScan(basePackages = "com.marvel.mapper.master", sqlSessionTemplateRef = "masterSqlSessionFactory")
+@Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "mysql.datasource.master")
+@MapperScan(basePackages = "com.softmax.tutorial.mapper.master", sqlSessionTemplateRef = "masterSqlSessionFactory")
 public class MyBatisMasterConfig {
 
     @Primary

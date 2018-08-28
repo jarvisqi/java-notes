@@ -1,11 +1,12 @@
-package com.marvel.mapper.master;
+package com.marvel.mapper;
 
 import com.marvel.entity.Article;
-import com.marvel.mapper.BaseMapper;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Jarvis
  * @date 2018/07/03
  */
+@Component(value = "articleMapper")
 public interface ArticleMapper extends BaseMapper<Article> {
 }

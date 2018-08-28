@@ -1,9 +1,8 @@
 package com.marvel.config;
 
-import com.marvel.security.CustomAuthenticationProvider;
+import com.marvel.security.UserAuthenticationProvider;
 import com.marvel.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -31,6 +30,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsService authUserService;
     /**
      * 设置 HTTP 验证规则
      *
@@ -77,7 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(new CustomAuthenticationProvider());
+        auth.authenticationProvider(new UserAuthenticationProvider(authUserService));
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

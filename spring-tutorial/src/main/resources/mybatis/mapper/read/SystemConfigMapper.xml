@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.marvel.mapper.read.SystemConfigMapper">
+<mapper namespace="com.softmax.tutorial.mapper.slave.SystemConfigMapper">
 
-    <resultMap id="BaseResultMap" type="com.marvel.entity.SystemConfig">
+    <resultMap id="BaseResultMap" type="com.softmax.tutorial.entity.SystemConfig">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="key" property="key" jdbcType="VARCHAR"/>
         <result column="value" property="value" jdbcType="VARCHAR"/>
-        <result column="file_type" property="fileType" jdbcType="com.marvel.entity.enums.FileType"
-                typeHandler="com.framework.handler.BaseEnumTypeHandler"/>
+        <result column="file_type" property="fileType" jdbcType="com.marvel.entity.enums.FileFormat"
+                typeHandler="com.softmax.tutorial.framework.handler.BaseEnumTypeHandler"/>
     </resultMap>
 
     <sql id="Base_Columns">

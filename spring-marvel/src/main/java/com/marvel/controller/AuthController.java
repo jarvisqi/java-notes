@@ -1,7 +1,7 @@
 package com.marvel.controller;
 
 import com.marvel.entity.AuthUser;
-import com.marvel.security.AuthUserServiceImpl;
+import com.marvel.security.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 public class AuthController {
     @Autowired
-    private AuthUserServiceImpl authUserService;
+    private AuthUserService authUserService;
 
     /**
      * 用户登录获取token

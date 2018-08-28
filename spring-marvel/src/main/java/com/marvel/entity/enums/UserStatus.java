@@ -1,12 +1,5 @@
 package com.marvel.entity.enums;
 
-/**
- * 枚举基类
- *
- * @author : Jarvis
- * @date : 2018/5/31
- */
-
 import com.framework.common.BaseEnum;
 
 /**

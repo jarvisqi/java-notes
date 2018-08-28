@@ -1,8 +1,7 @@
-package com.marvel.mapper.master;
+package com.marvel.mapper;
 
 import com.marvel.entity.AuthUser;
-import com.marvel.mapper.BaseMapper;
-import org.springframework.stereotype.Component;
+
 
 /**
  * @author : Jarvis

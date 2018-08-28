@@ -1,6 +1,6 @@
-package com.marvel.entity.enums;
+package com.softmax.tutorial.entity.enums;
 
-import com.framework.common.BaseEnum;
+import com.softmax.framework.common.BaseEnum;
 
 /**
  * 存储的文件格式

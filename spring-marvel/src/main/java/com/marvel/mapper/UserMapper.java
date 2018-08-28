@@ -1,7 +1,6 @@
-package com.marvel.mapper.master;
+package com.marvel.mapper;
 
 import com.marvel.entity.UserInfo;
-import com.marvel.mapper.BaseMapper;
 
 import java.util.List;
 
