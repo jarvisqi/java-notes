@@ -1,5 +1,6 @@
 package com.framework.utils;
 
+
 import com.framework.common.BaseEnum;
 
 /**
