@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 import java.util.Set;
 
 /**
- * Master DB 主数据库
+ * master 据库
  *
  * @author Jarvis
  * @date 2018/8/24

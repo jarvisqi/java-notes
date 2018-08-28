@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 import java.util.Set;
 
 /**
- * Read DB 读数据库
+ *  slave 数据库
  *
  * @author Jarvis
  * @date 2018/8/24
@@ -34,13 +34,13 @@ import java.util.Set;
 @MapperScan(basePackages = "com.softmax.tutorial.mapper.slave", sqlSessionTemplateRef = "readSqlSessionTemplate")
 public class MyBatisSlaveConfig {
 
-    @Bean(name = "readDataSource")
-    public DataSource readDataSource() {
+    @Bean(name = "slaveDataSource")
+    public DataSource slaveDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "readSqlSessionFactory")
-    public SqlSessionFactory readSqlSessionFactory(@Qualifier("readDataSource") DataSource dataSource) {
+    @Bean(name = "slaveSqlSessionFactory")
+    public SqlSessionFactory readSqlSessionFactory(@Qualifier("slaveDataSource") DataSource dataSource) {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         try {
             factoryBean.setDataSource(dataSource);
@@ -72,12 +72,12 @@ public class MyBatisSlaveConfig {
     }
 
     @Bean(name = "readTransactionManager")
-    public DataSourceTransactionManager readTransactionManager(@Qualifier("readDataSource") DataSource dataSource) {
+    public DataSourceTransactionManager slaveTransactionManager(@Qualifier("slaveDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "readSqlSessionTemplate")
-    public SqlSessionTemplate readSqlSessionTemplate(@Qualifier("readSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    public SqlSessionTemplate slaveSqlSessionTemplate(@Qualifier("slaveSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory);
         return template;
     }
