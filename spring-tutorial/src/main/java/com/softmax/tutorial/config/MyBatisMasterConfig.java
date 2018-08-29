@@ -9,7 +9,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,15 +28,15 @@ import java.util.Set;
  * @date 2018/8/24
  */
 @Configuration
-@EnableConfigurationProperties
-@ConfigurationProperties(prefix = "mysql.datasource.master")
-@MapperScan(basePackages = "com.softmax.tutorial.mapper.master", sqlSessionTemplateRef = "masterSqlSessionFactory")
+@MapperScan(basePackages = "com.softmax.tutorial.mapper.master", sqlSessionTemplateRef = "masterSqlSessionTemplate")
 public class MyBatisMasterConfig {
 
     @Primary
     @Bean(name = "masterDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.master", ignoreInvalidFields = true)
     public DataSource masterDataSource() {
-        return DataSourceBuilder.create().build();
+        DataSource dataSource = DataSourceBuilder.create().build();
+        return dataSource;
     }
 
     @Primary
@@ -53,10 +52,10 @@ public class MyBatisMasterConfig {
             Resource[] mapperResources = new PathMatchingResourcePatternResolver()
                     .getResources("classpath*:/mybatis/mapper/master/*.xml");
             factoryBean.setMapperLocations(mapperResources);
-            factoryBean.setTypeAliasesPackage("classpath*:/com/marvel/entity/*");
+            factoryBean.setTypeAliasesPackage("classpath*:/com/softmax/tutorial/entity/*");
 
             ResolverUtil<Class<?>> resolverUtil = new ResolverUtil<>();
-            resolverUtil.find(new ResolverUtil.IsA(BaseEnum.class), "com.marvel.entity");
+            resolverUtil.find(new ResolverUtil.IsA(BaseEnum.class), "com.softmax.tutorial.entity");
             Set<Class<? extends Class<?>>> handlerSet = resolverUtil.getClasses();
             for (Class<?> clazz : handlerSet) {
                 if (BaseEnum.class.isAssignableFrom(clazz) && !BaseEnum.class.equals(clazz)) {

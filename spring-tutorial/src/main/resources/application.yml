@@ -7,12 +7,14 @@ spring:
   datasource:
     master:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.10.100:3306/spring?useSSL=false
+      jdbc-url: jdbc:mysql://192.168.10.100:3306/spring?useSSL=false&useUnicode=true&characterEncoding=utf-8
       username: test
       password: 123456
-    read:
+    slave:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.10.100:3306/common?useSSL=false
+      jdbc-url: jdbc:mysql://192.168.10.100:3306/common?useSSL=false&useUnicode=true&characterEncoding=utf-8
       username: test
       password: 123456
 
+server:
+  port: 7001

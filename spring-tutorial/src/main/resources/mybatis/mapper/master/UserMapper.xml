@@ -6,13 +6,13 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="password" property="passWord" jdbcType="VARCHAR"/>
-        <result column="user_sex" property="userSex" javaType="com.marvel.entity.enums.UserSex"
-                typeHandler="com.softmax.tutorial.framework.handler.BaseEnumTypeHandler"/>
+        <result column="user_sex" property="userSex" javaType="com.softmax.tutorial.entity.enums.UserSex"
+                typeHandler="com.softmax.framework.handler.BaseEnumTypeHandler"/>
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
-        <result column="user_status" property="userStatus" javaType="com.marvel.entity.enums.UserStatus"
-                typeHandler="com.softmax.tutorial.framework.handler.BaseEnumTypeHandler"/>
-        <result column="user_level" property="userLevel" javaType="com.marvel.entity.enums.UserLevel"
-                typeHandler="com.softmax.tutorial.framework.handler.BaseEnumTypeHandler"/>
+        <result column="user_status" property="userStatus" javaType="com.softmax.tutorial.entity.enums.UserStatus"
+                typeHandler="com.softmax.framework.handler.BaseEnumTypeHandler"/>
+        <result column="user_level" property="userLevel" javaType="com.softmax.tutorial.entity.enums.UserLevel"
+                typeHandler="com.softmax.framework.handler.BaseEnumTypeHandler"/>
     </resultMap>
 
     <sql id="Base_Columns">
@@ -30,19 +30,19 @@
         VALUES (
         #{userName},
         #{passWord},
-        #{userSex,typeHandler=com.framework.handler.BaseEnumTypeHandler},
+        #{userSex,typeHandler=com.softmax.framework.handler.BaseEnumTypeHandler},
         #{nickName},
-        #{userStatus,typeHandler=com.framework.handler.BaseEnumTypeHandler}
+        #{userStatus,typeHandler=com.softmax.framework.handler.BaseEnumTypeHandler}
         )
     </insert>
 
     <update id="updateUser">
         UPDATE user_info SET
         user_name=#{userName},
-        user_sex=#{userSex,typeHandler=com.framework.handler.BaseEnumTypeHandler},
+        user_sex=#{userSex,typeHandler=com.softmax.framework.handler.BaseEnumTypeHandler},
         nick_name=#{nickName},
-        user_status=#{userStatus,typeHandler=com.framework.handler.BaseEnumTypeHandler},
-        user_level=#{userLevel,typeHandler=com.framework.handler.BaseEnumTypeHandler}
+        user_status=#{userStatus,typeHandler=com.softmax.framework.handler.BaseEnumTypeHandler},
+        user_level=#{userLevel,typeHandler=com.softmax.framework.handler.BaseEnumTypeHandler}
         WHERE id=#{id}
     </update>
 </mapper>

@@ -6,8 +6,8 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="key" property="key" jdbcType="VARCHAR"/>
         <result column="value" property="value" jdbcType="VARCHAR"/>
-        <result column="file_type" property="fileType" jdbcType="com.marvel.entity.enums.FileFormat"
-                typeHandler="com.softmax.tutorial.framework.handler.BaseEnumTypeHandler"/>
+        <result column="file_type" property="fileType" javaType="com.softmax.tutorial.entity.enums.FileType"
+                typeHandler="com.softmax.framework.handler.BaseEnumTypeHandler"/>
     </resultMap>
 
     <sql id="Base_Columns">
