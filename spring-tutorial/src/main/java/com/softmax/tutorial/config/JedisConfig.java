@@ -9,6 +9,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
+ * Redis  配置
+ *
  * @author Jarvis
  * @date 2018/8/29
  */

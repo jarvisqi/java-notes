@@ -7,15 +7,16 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 /**
+ * Redis 工具类
+ *
  * @author Jarvis
  * @date 2018/8/29
  */
 public class JedisUtil {
     private final static Logger logger = LoggerFactory.getLogger(JedisUtil.class);
-    private static volatile JedisPool jedisPool;
 
     /**
-     * 对某个键的值自增wocai
+     * 某个键的值自增
      *
      * @param key
      * @param expireDate
@@ -25,7 +26,7 @@ public class JedisUtil {
         long result = 0;
         Jedis jedis;
         try {
-            jedisPool = JedisConfig.getJedisPoolInstance();
+            JedisPool jedisPool = JedisConfig.getJedisPoolInstance();
             jedis = jedisPool.getResource();
             result = jedis.incr(key);
             if (expireDate != 0) {

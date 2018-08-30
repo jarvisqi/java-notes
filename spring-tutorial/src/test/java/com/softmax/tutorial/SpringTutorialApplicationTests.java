@@ -22,7 +22,6 @@ public class SpringTutorialApplicationTests {
             System.out.printf("第 %d 次请求\n", i);
             if (result) {
                 System.out.println("---------------------- 接口限流");
-                JedisUtil.release();
                 break;
             } else {
                 System.out.println("---------------------- 调用 sms.send api ");

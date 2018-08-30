@@ -15,12 +15,16 @@ public class LimitService {
      *
      * @param apiKey     api名字（全名）
      * @param count      次数(指定时间内的，和下面时间相关)
-     * @param expireDate 时间
+     * @param expireDate 时间(秒)
      * @return
      */
     public boolean limitApiRequest(String apiKey, int count, int expireDate) {
         String key = "limit_request_" + apiKey;
         long total = JedisUtil.setIncr(key, expireDate);
-        return total > count;
+        boolean refuse = total > count;
+        if (refuse) {
+            JedisUtil.release();
+        }
+        return refuse;
     }
 }
