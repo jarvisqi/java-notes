@@ -23,13 +23,13 @@ spring:
     jedis:
       pool:
         #最大连接数
-        max-active: 10
+        max-active: 100
         #最大阻塞等待时间(负数表示没限制)
-        max-wait: 10000
+        max-wait: 30000
         #最大空闲
-        max-idle: 8
+        max-idle: 20
         #最小空闲
-        min-idle: 0
+        min-idle: 8
     timeout: 30000
 
 server:

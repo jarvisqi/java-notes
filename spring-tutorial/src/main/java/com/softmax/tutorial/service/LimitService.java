@@ -21,9 +21,6 @@ public class LimitService {
     public boolean limitApiRequest(String apiKey, int count, int expireDate) {
         String key = "limit_request_" + apiKey;
         long total = JedisUtil.setIncr(key, expireDate);
-        if (total > count) {
-            return false;
-        }
-        return true;
+        return total > count;
     }
 }

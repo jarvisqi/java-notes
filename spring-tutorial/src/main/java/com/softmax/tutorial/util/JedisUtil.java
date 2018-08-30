@@ -11,7 +11,8 @@ import redis.clients.jedis.JedisPool;
  * @date 2018/8/29
  */
 public class JedisUtil {
-    protected final static Logger logger = LoggerFactory.getLogger(JedisUtil.class);
+    private final static Logger logger = LoggerFactory.getLogger(JedisUtil.class);
+    private static volatile JedisPool jedisPool;
 
     /**
      * 对某个键的值自增wocai
@@ -21,20 +22,29 @@ public class JedisUtil {
      * @return
      */
     public static long setIncr(String key, int expireDate) {
-        JedisPool jedisPool = JedisConfig.getJedisPoolInstance();
         long result = 0;
-        Jedis jedis = null;
+        Jedis jedis;
         try {
+            jedisPool = JedisConfig.getJedisPoolInstance();
             jedis = jedisPool.getResource();
             result = jedis.incr(key);
             if (expireDate != 0) {
                 jedis.expire(key, expireDate);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             logger.warn("set " + key + " = " + result);
-        } finally {
-            JedisConfig.release(jedisPool,jedis);
         }
+
         return result;
     }
+
+    /**
+     * 释放资源
+     */
+    public static void release() {
+        JedisConfig.release();
+    }
+
+
 }

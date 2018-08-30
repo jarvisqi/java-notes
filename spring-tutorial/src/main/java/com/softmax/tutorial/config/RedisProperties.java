@@ -12,67 +12,67 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisProperties {
 
-    private String host;
+    protected static String host;
 
     @Value("${spring.redis.host}")
     public void setHost(String host) {
-        this.host = host;
+        RedisProperties.host = host;
     }
 
-    private String port;
+    protected static String port;
 
     @Value("${spring.redis.port}")
     public void setPort(String port) {
-        this.port = port;
+        RedisProperties.port = port;
     }
 
-    private String password;
+    protected static String password;
 
     @Value("${spring.redis.password}")
     public void setPassword(String password) {
-        this.password = password;
+        RedisProperties.password = password;
     }
 
-    private String timeout;
+    protected static String timeout;
 
     @Value("${spring.redis.timeout}")
     public void setTimeout(String timeout) {
-        this.timeout = timeout;
+        RedisProperties.timeout = timeout;
     }
 
-    private String database;
+    protected static String database;
 
     @Value("${spring.redis.database}")
     public void setDatabase(String database) {
-        this.database = database;
+        RedisProperties.database = database;
     }
 
-    private String maxActive;
+    protected static String maxActive;
 
     @Value("${spring.redis.jedis.pool.max-active}")
     public void setMaxActive(String maxActive) {
-        this.maxActive = maxActive;
+        RedisProperties.maxActive = maxActive;
     }
 
-    private String MaxWait;
+    protected static String maxWait;
 
     @Value("${spring.redis.jedis.pool.max-wait}")
     public void setMaxWait(String maxWait) {
-        MaxWait = maxWait;
+        RedisProperties.maxWait = maxWait;
     }
 
-    private String maxIdle;
+    protected static String maxIdle;
 
     @Value("${spring.redis.jedis.pool.max-idle}")
     public void setMaxIdle(String maxIdle) {
-        this.maxIdle = maxIdle;
+        RedisProperties.maxIdle = maxIdle;
     }
 
-    private String minIdle;
+    protected static String minIdle;
 
     @Value("${spring.redis.jedis.pool.min-idle}")
     public void setMinIdle(String minIdle) {
-        this.minIdle = minIdle;
+        RedisProperties.minIdle = minIdle;
     }
 
     public String getHost() {
@@ -100,7 +100,7 @@ public class RedisProperties {
     }
 
     public String getMaxWait() {
-        return MaxWait;
+        return maxWait;
     }
 
     public String getMaxIdle() {
