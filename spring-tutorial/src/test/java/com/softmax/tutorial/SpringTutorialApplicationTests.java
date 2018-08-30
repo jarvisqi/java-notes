@@ -15,7 +15,7 @@ public class SpringTutorialApplicationTests {
     @Test
     public void limitRequest() throws InterruptedException {
         LimitService service = new LimitService();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 1; i <= 30; i++) {
             boolean result = service.limitApiRequest("sms.send", 10, 60);
             Thread.sleep(500);
 
@@ -24,6 +24,8 @@ public class SpringTutorialApplicationTests {
                 System.out.println("---------------------- 接口限流");
                 JedisUtil.release();
                 break;
+            } else {
+                System.out.println("---------------------- 调用 sms.send api ");
             }
 
         }
