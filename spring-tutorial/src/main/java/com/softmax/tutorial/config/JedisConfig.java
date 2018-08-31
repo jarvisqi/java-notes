@@ -1,5 +1,6 @@
 package com.softmax.tutorial.config;
 
+import com.softmax.tutorial.properties.RedisProperties;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;

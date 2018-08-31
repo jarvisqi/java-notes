@@ -32,19 +32,6 @@ spring:
         min-idle: 8
     timeout: 30000
 
-softmax:
-  security:
-    oauth2:
-      storeType: redis  #或者jwt
-      jwtSigningKey: softmax
-      clients[0]:
-        clientId: softmax
-        clientSecret: softmax
-      clients[1]:
-        clientId: softmax1
-        clientSecret: softmax1
-
-
 logging:
   level:
     org.springframework: info
