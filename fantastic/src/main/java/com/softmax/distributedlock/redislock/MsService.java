@@ -1,4 +1,4 @@
-package com.example.distributedlock.redislock;
+package com.softmax.distributedlock.redislock;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

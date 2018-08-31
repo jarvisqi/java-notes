@@ -1,8 +1,7 @@
-package com.example.distributedlock;
+package com.softmax.distributedlock;
 
-import com.example.distributedlock.redislock.Info;
-import com.example.distributedlock.redislock.MsService;
-import com.example.distributedlock.redislock.MsThread;
+import com.softmax.distributedlock.redislock.Info;
+import com.softmax.distributedlock.redislock.MsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

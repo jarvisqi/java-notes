@@ -1,4 +1,4 @@
-package com.example.distributedlock;
+package com.softmax.distributedlock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

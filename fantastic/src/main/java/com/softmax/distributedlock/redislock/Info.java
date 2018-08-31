@@ -1,4 +1,4 @@
-package com.example.distributedlock.redislock;
+package com.softmax.distributedlock.redislock;
 
 import java.io.Serializable;
 

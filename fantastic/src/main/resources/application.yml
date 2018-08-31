@@ -1,6 +1,6 @@
 spring:
   application:
-    name: distributed-lock
+    name: fantastic
   redis:
     database: 0
     host: 192.168.10.100
