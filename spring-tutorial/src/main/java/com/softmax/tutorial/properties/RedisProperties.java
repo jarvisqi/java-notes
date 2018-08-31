@@ -1,4 +1,4 @@
-package com.softmax.tutorial.config;
+package com.softmax.tutorial.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,63 +12,63 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisProperties {
 
-    protected static String host;
+    public static String host;
 
     @Value("${spring.redis.host}")
     public void setHost(String host) {
         RedisProperties.host = host;
     }
 
-    protected static String port;
+    public static String port;
 
     @Value("${spring.redis.port}")
     public void setPort(String port) {
         RedisProperties.port = port;
     }
 
-    protected static String password;
+    public static String password;
 
     @Value("${spring.redis.password}")
     public void setPassword(String password) {
         RedisProperties.password = password;
     }
 
-    protected static String timeout;
+    public static String timeout;
 
     @Value("${spring.redis.timeout}")
     public void setTimeout(String timeout) {
         RedisProperties.timeout = timeout;
     }
 
-    protected static String database;
+    public static String database;
 
     @Value("${spring.redis.database}")
     public void setDatabase(String database) {
         RedisProperties.database = database;
     }
 
-    protected static String maxActive;
+    public static String maxActive;
 
     @Value("${spring.redis.jedis.pool.max-active}")
     public void setMaxActive(String maxActive) {
         RedisProperties.maxActive = maxActive;
     }
 
-    protected static String maxWait;
+    public static String maxWait;
 
     @Value("${spring.redis.jedis.pool.max-wait}")
     public void setMaxWait(String maxWait) {
         RedisProperties.maxWait = maxWait;
     }
 
-    protected static String maxIdle;
+    public static String maxIdle;
 
     @Value("${spring.redis.jedis.pool.max-idle}")
     public void setMaxIdle(String maxIdle) {
         RedisProperties.maxIdle = maxIdle;
     }
 
-    protected static String minIdle;
+    public static String minIdle;
 
     @Value("${spring.redis.jedis.pool.min-idle}")
     public void setMinIdle(String minIdle) {
