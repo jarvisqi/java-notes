@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: auth-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.100:3306/common?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: test
+    password: 123456
