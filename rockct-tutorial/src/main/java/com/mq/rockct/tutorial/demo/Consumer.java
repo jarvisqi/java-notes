@@ -1,14 +1,12 @@
 package com.mq.rockct.tutorial.demo;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 
-import java.util.List;
 
 import static com.mq.rockct.tutorial.demo.SyncProducer.NAMESRVADDR;
 
@@ -45,7 +43,7 @@ public class Consumer {
         //设置一个Listener，主要进行消息的逻辑处理
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             MessageExt msg = msgs.get(0);
-            
+
             try {
                 String topic = msg.getTopic();
                 String msgBody = new String(msg.getBody(), "utf-8");
