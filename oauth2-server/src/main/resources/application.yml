@@ -5,6 +5,6 @@ spring:
     name: auth-server
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.100:3306/common?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.10.100:3306/oauth2db?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: test
     password: 123456

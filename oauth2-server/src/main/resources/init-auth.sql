@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS oauth2test;
-USE oauth2test;
+CREATE DATABASE IF NOT EXISTS oauth2db;
+USE oauth2db;
 
 CREATE TABLE IF NOT EXISTS oauth_client_details (
   client_id               VARCHAR(256) PRIMARY KEY,

@@ -1,5 +1,7 @@
 package com.softmax.oauth2server.security;
 
+import com.softmax.oauth2server.service.AuthUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +19,13 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 @EnableWebSecurity
 public class Oauth2SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final AuthUserService userService;
+
+    @Autowired
+    public Oauth2SecurityConfig(AuthUserService userService) {
+        this.userService = userService;
+    }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -28,8 +37,9 @@ public class Oauth2SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("admin"))
-                .roles("test")
-        ;
+                .roles("test");
+
+        auth.userDetailsService(userService);
     }
 
     /**
