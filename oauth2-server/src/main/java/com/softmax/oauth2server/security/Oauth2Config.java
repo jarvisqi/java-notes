@@ -1,32 +1,27 @@
 package com.softmax.oauth2server.security;
 
-import com.softmax.oauth2server.service.AuthUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Oauth2 配置
@@ -36,20 +31,14 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 public class Oauth2Config extends AuthorizationServerConfigurerAdapter implements ApplicationRunner {
+
+    private static final Logger log = LoggerFactory.getLogger(Oauth2Config.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private DataSource dataSource;
-
-    @Autowired
-    private AuthUserService userService;
-
-    @Autowired
-    private ClientDetailsService clientDetails;
-
-    @Qualifier("jdbcTokenStore")
-    private TokenStore tokenStore;
 
     /**
      * 配置token获取合验证时的策略
@@ -105,20 +94,7 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter implement
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         /// endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
-        endpoints.authenticationManager(authenticationManager);
-        endpoints.tokenStore(tokenStore);
-        endpoints.userDetailsService(userService);
-        endpoints.setClientDetailsService(clientDetails);
-
-        //配置TokenServices参数
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setTokenStore(endpoints.getTokenStore());
-        tokenServices.setSupportRefreshToken(true);
-        tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
-        tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
-        // 1天
-        tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(1));
-        endpoints.tokenServices(tokenServices);
+        endpoints.authenticationManager(authenticationManager).tokenStore(jdbcTokenStore());
     }
 
     /**
@@ -126,10 +102,10 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter implement
      *
      * @return
      */
-    @Bean
-    public TokenStore memoryTokenStore() {
-        return new InMemoryTokenStore();
-    }
+//    @Bean
+//    public TokenStore memoryTokenStore() {
+//        return new InMemoryTokenStore();
+//    }
 
     /**
      * 使用JdbcTokenStore把token存储到数据库中，RedisTokenStore的使用方法也类似
@@ -139,16 +115,6 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter implement
     @Bean
     public TokenStore jdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
-    }
-
-    /**
-     * 声明 ClientDetails实现
-     *
-     * @return
-     */
-    @Bean
-    public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
     }
 
 
@@ -161,8 +127,7 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter implement
     @Override
     public void run(ApplicationArguments args) throws Exception {
         JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        clientDetailsService.setPasswordEncoder(passwordEncoder);
+        clientDetailsService.setPasswordEncoder(new BCryptPasswordEncoder());
         try {
             clientDetailsService.loadClientByClientId("softmax");
         } catch (ClientRegistrationException e) {
@@ -174,5 +139,6 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter implement
             details.setAuthorizedGrantTypes(Arrays.asList("authorization_code", "refresh_token"));
             clientDetailsService.addClientDetails(details);
         }
+        log.info("add default client complete");
     }
 }

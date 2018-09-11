@@ -16,7 +16,7 @@ public class UserController {
 
     @RequestMapping("/user")
     public Authentication getUser(Authentication authentication) {
-        log.info("resource: user {}", authentication);
+        log.info("oauth2 resource - resource: user {}", authentication);
         return authentication;
     }
 }

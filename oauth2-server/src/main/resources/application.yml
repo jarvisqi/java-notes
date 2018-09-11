@@ -8,3 +8,7 @@ spring:
     url: jdbc:mysql://192.168.10.100:3306/oauth2db?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: test
     password: 123456
+
+logging:
+  level:
+    org.springframework: TRACE

@@ -1,4 +1,4 @@
-auth-server: http://localhost:8080 # 认证服务器地址
+auth-server: http://localhost:8080
 
 server:
   port: 8085
@@ -8,9 +8,9 @@ spring:
 security:
   oauth2:
     client:
-      client-id: testclient
-      client-secret: testclient
-      scope: test
+      client-id: softmax
+      client-secret: 123456
+      scope: softmax1
       access-token-uri: ${auth-server}/oauth/token
       user-authorization-uri: ${auth-server}/oauth/authorize
     resource:

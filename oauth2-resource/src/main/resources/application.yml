@@ -8,9 +8,9 @@ spring:
 security:
   oauth2:
     client:
-      client-id: testclient # 授权服务器配置的client id
-      client-secret: testclient # 授权服务器配置的client secret
-      scope: test
+      client-id: softmax # 授权服务器配置的client id
+      client-secret: softmax # 授权服务器配置的client secret
+      scope: softmax1
       access-token-uri: ${auth-server}/oauth/token # 获取access token接口
       user-authorization-uri: ${auth-server}/oauth/authorize #  获取Authorization Code接口
     resource:

@@ -5,6 +5,7 @@ import com.softmax.oauth2server.entity.AuthUserDetails;
 import com.softmax.oauth2server.service.AuthUserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,10 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthUserServiceImpl implements AuthUserService {
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AuthUser user = new AuthUser();
-        user.setUsername("admin");
-        user.setPassword("123456");
+        user.setUsername(username);
+        user.setPassword(new BCryptPasswordEncoder().encode("123456"));
         return new AuthUserDetails(user);
+
     }
 }
