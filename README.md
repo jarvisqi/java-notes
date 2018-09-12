@@ -9,5 +9,4 @@
 #### rocket-tutorial: spring boot2.0 + rocketMQ 
 #### distributed-lock: redis ,zookeeper 实现分布式锁 
 #### mvc-app: spring mvc 
-#### oauth2: spring security 2.0 + OAuth2.0 
 #### spring-marvel: Spring Boot2.0 各种操作
