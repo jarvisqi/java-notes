@@ -26,7 +26,7 @@ public class SimpleChatServer {
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new SimpleChatServerHandler())
+                .childHandler(new SimpleChatServerInitializer())
                 //是提供给NioServerSocketChannel 用来接收进来的连接。
                 .option(ChannelOption.SO_BACKLOG, 128)
                 //是提供给由父管道 ServerChannel 接收到的连接，在这个例子中也是 NioServerSocketChannel。

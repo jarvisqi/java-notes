@@ -33,6 +33,7 @@ public class SimpleChatClient {
                     .group(group)
                     .channel(NioSocketChannel.class)
                     .handler(new SimpleChatClientInitializer());
+
             Channel channel = bootstrap.connect(host, port).sync().channel();
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             while (true) {
@@ -43,7 +44,6 @@ public class SimpleChatClient {
         } finally {
             group.shutdownGracefully();
         }
-
     }
 
     public static void main(String[] args) throws Exception {

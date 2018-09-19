@@ -1,7 +1,6 @@
 package com.softmax.nettycode.simplechat;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -14,7 +13,6 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * @author Jarvis
  * @date 2018/9/19
  */
-@ChannelHandler.Sharable
 public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     private final static ChannelGroup CHANNELS = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
