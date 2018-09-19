@@ -1,9 +1,8 @@
-package com.softmax.nettycode.chat;
+package com.softmax.nettycode.websocketchat;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
-import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
@@ -16,13 +15,6 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  * @date 2018/9/18
  */
 public class ChatServerInitializer extends ChannelInitializer<Channel> {
-
-    private final ChannelGroup group;
-
-    public ChatServerInitializer(ChannelGroup group) {
-        this.group = group;
-    }
-
     /**
      * 设置所有新注册的 Channel 的ChannelPipeline
      * 安装所有需要的 ChannelHandler

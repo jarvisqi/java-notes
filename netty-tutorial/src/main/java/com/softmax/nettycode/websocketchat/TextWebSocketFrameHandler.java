@@ -1,4 +1,4 @@
-package com.softmax.nettycode.chat;
+package com.softmax.nettycode.websocketchat;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;

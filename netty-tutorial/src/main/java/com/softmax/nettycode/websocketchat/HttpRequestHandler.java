@@ -1,4 +1,4 @@
-package com.softmax.nettycode.chat;
+package com.softmax.nettycode.websocketchat;
 
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
@@ -24,12 +24,11 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     static {
         URL location = HttpRequestHandler.class.getProtectionDomain().getCodeSource().getLocation();
         try {
-            String path = location.toURI() + "index.html";
+            String path = location.toURI() + "webchat.html";
             path = !path.contains("file:") ? path : path.substring(5);
             INDEX = new File(path);
         } catch (URISyntaxException e) {
-            e.printStackTrace();
-            throw new IllegalStateException("Unable to locate index.html", e);
+            throw new IllegalStateException("Unable to locate webchat.html", e);
         }
     }
 
@@ -47,10 +46,12 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             if (HttpUtil.is100ContinueExpected(request)) {
                 send100Continue(ctx);
             }
-            //读取 index.html
+            //读取 webchat.html
             RandomAccessFile file = new RandomAccessFile(INDEX, "r");
-            HttpResponse response = new DefaultFullHttpResponse(request.protocolVersion(), HttpResponseStatus.OK);
-            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html;charset=utf-8");
+
+            HttpResponse response = new DefaultHttpResponse(request.protocolVersion(), HttpResponseStatus.OK);
+            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=utf-8");
+
             //判断 keepalive 是否在请求头里面
             boolean keepAlive = HttpUtil.isKeepAlive(request);
             if (keepAlive) {
@@ -59,6 +60,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             }
             //写 HttpResponse 到客户端
             ctx.write(response);
+
             //根据 ChannelPipeline 中是否有 SslHandler 来决定使用 DefaultFileRegion 还是 ChunkedNioFile
             if (ctx.pipeline().get(SslHandler.class) == null) {
                 ctx.write(new DefaultFileRegion(file.getChannel(), 0, file.length()));
@@ -67,7 +69,6 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             }
             //写并刷新 LastHttpContent 到客户端，标记响应完成
             ChannelFuture future = ctx.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
-
             if (!keepAlive) {
                 //请求头中不包含 keepalive，当写完成时，关闭 Channel
                 future.addListener(ChannelFutureListener.CLOSE);
