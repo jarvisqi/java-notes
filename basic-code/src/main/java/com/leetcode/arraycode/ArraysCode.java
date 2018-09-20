@@ -1,7 +1,7 @@
 package com.leetcode.arraycode;
 
 import java.util.*;
-import java.util.function.IntConsumer;
+
 
 /**
  * @author Jarvis
@@ -10,14 +10,16 @@ import java.util.function.IntConsumer;
 public class ArraysCode {
 
     public static void main(String[] args) {
-        int[] nums = {1, 1, 2};
-        removeDuplicates(nums);
+        int[] nums = {3, 2, 2, 3};
+        //  removeDuplicates(nums);
 
 //        int[] prices = {7, 1, 5, 3, 6, 4};
 //        maxProfit(prices);
 //
 //        int[] arrs = {1, 2, 3, 4, 5, 6, 7};
 //        rotate(arrs, 3);
+
+        removeElement(nums, 2);
 
     }
 
@@ -141,6 +143,20 @@ public class ArraysCode {
             list.add(nums[i]);
         }
         System.out.println(list);
+    }
+
+    public static int removeElement(int[] nums, int val) {
+        int len = 0;
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                len++;
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return len;
+
     }
 
 }
