@@ -18,3 +18,7 @@ spring:
         min-idle: 0
     #连接超时时间
     timeout: 10000
+
+redisson:
+  address: redis://10.18.75.115:6379
+  password: 123456
