@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2018/10/9
  */
 @Configuration
-@ConfigurationProperties(prefix = "spring.redis")
+@ConfigurationProperties(prefix = "redisson")
 public class RedissonProperties {
 
     private String address;
