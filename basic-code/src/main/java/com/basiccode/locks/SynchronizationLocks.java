@@ -1,4 +1,4 @@
-package com.basiccode.synccode;
+package com.basiccode.locks;
 
 import java.util.HashMap;
 import java.util.Map;
