@@ -1,6 +1,6 @@
-import com.springbase.config.BeanConfiguration;
-import com.springbase.service.AccountService;
-import com.springbase.service.UserService;
+import com.spring.example.config.BeanConfiguration;
+import com.spring.example.service.AccountService;
+import com.spring.example.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

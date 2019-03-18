@@ -1,4 +1,4 @@
-import com.basiccode.jvmcode.MyClassLoader;
+import com.basic.jvm.example.MyClassLoader;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -10,8 +10,8 @@ public class TestMyClassLoader {
 
     @Test
     public void testClassLoader() throws Exception {
-        MyClassLoader loader = new MyClassLoader("D:\\Learning\\java-learning\\java-tutorial\\base-code\\target\\classes\\com\\basiccode\\jvmcode\\Person.class");
-        Class<?> cls = Class.forName("com.basiccode.jvmcode.Person", true, loader);
+        MyClassLoader loader = new MyClassLoader("D:\\Learning\\java-learning\\java-tutorial\\base-code\\target\\classes\\com\\basic\\jvmcode\\Person.class");
+        Class<?> cls = Class.forName("com.basic.jvm.example.Person", true, loader);
         Object object = cls.getDeclaredConstructor().newInstance();
         System.out.println(object);
         System.out.println(object.getClass().getClassLoader());
