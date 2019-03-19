@@ -41,8 +41,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpReque
             ctx.write(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.CONTINUE));
         }
         boolean keepAlive = HttpUtil.isKeepAlive(req);
-        System.out.println("method" + req.method());
-        System.out.println("uri" + req.uri());
+        System.out.println("【method】" + req.method() + "【uri】" + req.uri());
         ByteBuf content = ctx.alloc().buffer();
         FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
         response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
@@ -57,7 +56,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpReque
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
     }

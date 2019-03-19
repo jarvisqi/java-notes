@@ -2,6 +2,7 @@ package com.netty.example;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -27,14 +28,20 @@ public class HttpServer {
         //bossGroup 负责获取客户端连接，接收到之后会将该连接转发到 workerGroup 进行处理
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup work = new NioEventLoopGroup();
+        try {
+            bootstrap.group(boss, work)
+                    .option(ChannelOption.SO_BACKLOG, 1024)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new HttpServerInitializer());
 
-        bootstrap.group(boss, work)
-                .handler(new LoggingHandler(LogLevel.DEBUG))
-                .channel(NioServerSocketChannel.class)
-                .childHandler(new HttpServerInitializer());
+            Channel ch = bootstrap.bind(port).sync().channel();
+            System.out.println("Netty http server listening on port " + port);
+            ch.closeFuture().sync();
+        } finally {
+            boss.shutdownGracefully();
+            work.shutdownGracefully();
+        }
 
-        Channel ch = bootstrap.bind(port).sync().channel();
-        System.out.println("Netty http server listening on port " + port);
-        ch.closeFuture().sync();
     }
 }
