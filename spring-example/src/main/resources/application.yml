@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-marvel
+    name: spring-example
   aop:
     proxy-target-class: true
     auto: true
