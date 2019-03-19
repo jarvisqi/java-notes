@@ -1,12 +1,11 @@
 # Java 实践        
-#### basic-code: Java 基础（Java8,Java10），并发编程，同步和锁，线程线程池,泛型,数据结构,算法...
+#### basic-code: Java 基础（Java8,Java11），包含并发编程，同步和锁，线程线程池,泛型,数据结构,算法...
 >designpatterns：Java 实现设计模式  
->basiccode: Java 各种实践  
+>basiccode: Java 基础代码实践  
 >leetcode：Leetcode 刷题  
->springbase：spring 各种原理及实践 
-#### rabbit-tutorial: spring boot2.0 + rabbitMQ 
-#### kafka-tutorial: spring boot2.0 + kafka 
-#### rocket-tutorial: spring boot2.0 + rocketMQ 
+>nettt：netty 库实践
+>springbase：spring 基础原理及实践 
+#### mq-example: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
 #### distributed-lock: redis ,zookeeper 实现分布式锁 
-#### mvc-app: spring mvc 
-#### spring-marvel: Spring Boot2.0 各种操作
+#### mvc-app:  spring 基于XML配置实现的 mvc 
+#### spring-marvel: Spring Boot2.0 实践代码
