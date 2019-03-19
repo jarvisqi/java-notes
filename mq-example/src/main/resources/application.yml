@@ -2,7 +2,7 @@ spring:
   profiles:
     active: usage_msg
   application:
-    name: rabbit-example
+    name: mq-example
 
   rabbitmq:
     host: 192.168.10.100
@@ -66,7 +66,6 @@ spring:
             tag: usr
           - topic: order
             tag: ord
-
 
 tutorial:
   client:

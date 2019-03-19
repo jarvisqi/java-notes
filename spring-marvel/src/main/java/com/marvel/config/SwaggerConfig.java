@@ -25,7 +25,7 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("Api Document")
-                .description("spring-demo api document")
+                .description("spring-example api document")
                 .version("1.0")
                 .build();
 
