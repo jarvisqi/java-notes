@@ -47,7 +47,7 @@ class Test {
 
         // ThreadFactoryBuilder  : com.google.common
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("demo-pool-%d").build();
+                .setNameFormat("example-pool-%d").build();
         ExecutorService executorService = new ThreadPoolExecutor(5, 10,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingDeque<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());

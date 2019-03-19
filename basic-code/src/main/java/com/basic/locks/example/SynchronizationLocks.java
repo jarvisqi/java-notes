@@ -61,12 +61,12 @@ public class SynchronizationLocks {
      */
     void reentrantLockDemo() {
         /**
-         lock.lock();
+         com.lock.com.lock();
          try {
          count++;
          } finally {
          // unlock()释放
-         lock.unlock();
+         com.lock.unlock();
          }
          */
 
@@ -190,7 +190,7 @@ public class SynchronizationLocks {
             // 乐观锁不阻止其他线程同时获取写锁
             long stamp = lock.tryOptimisticRead();
             try {
-                // lock.validate(stamp)检查标记是否有效
+                // com.lock.validate(stamp)检查标记是否有效
                 // 在第一个线程暂停一秒之后，第二个线程拿到写锁而无需等待乐观的读锁被释放
                 // 使用乐观锁时，需要每次在访问任何共享可变变量之后都要检查锁，来确保读锁仍然有效。
                 System.out.println("Optimistic Lock Valid: " + lock.validate(stamp));
@@ -227,7 +227,7 @@ public class SynchronizationLocks {
                     stamp = lock.tryConvertToWriteLock(stamp);
                     System.out.println("tryConvert : " + stamp);
                     if (stamp == 0L) {
-                        System.out.println("Could not convert to master lock");
+                        System.out.println("Could not convert to master com.lock");
                         stamp = lock.writeLock();
                     }
                     count = 23;

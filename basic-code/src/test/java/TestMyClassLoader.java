@@ -10,7 +10,7 @@ public class TestMyClassLoader {
 
     @Test
     public void testClassLoader() throws Exception {
-        MyClassLoader loader = new MyClassLoader("D:\\Learning\\java-learning\\java-tutorial\\base-code\\target\\classes\\com\\basic\\jvmcode\\Person.class");
+        MyClassLoader loader = new MyClassLoader("D:\\Learning\\java-learning\\java-example\\base-code\\target\\classes\\com\\basic\\jvmcode\\Person.class");
         Class<?> cls = Class.forName("com.basic.jvm.example.Person", true, loader);
         Object object = cls.getDeclaredConstructor().newInstance();
         System.out.println(object);

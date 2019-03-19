@@ -29,7 +29,7 @@ public class SerializeDemo {
         employee.number = 101;
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("D:\\Learning\\java-learning\\java-tutorial\\basic-code\\src\\main\\java\\com\\basic\\instrumencode\\employee.ser");
+            FileOutputStream fileOutputStream = new FileOutputStream("D:\\Learning\\java-learning\\java-example\\basic-code\\src\\main\\java\\com\\basic\\instrumencode\\employee.ser");
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(employee);
 
@@ -46,7 +46,7 @@ public class SerializeDemo {
      */
     private static void Deserialize() {
         try {
-            FileInputStream fileInputStream = new FileInputStream("D:\\Learning\\java-learning\\java-tutorial\\basic-code\\src\\main\\java\\com\\basic\\instrumencode\\employee.ser");
+            FileInputStream fileInputStream = new FileInputStream("D:\\Learning\\java-learning\\java-example\\basic-code\\src\\main\\java\\com\\basic\\instrumencode\\employee.ser");
             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
             Employee employee = (Employee) inputStream.readObject();
 
