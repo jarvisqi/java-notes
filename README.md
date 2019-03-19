@@ -3,7 +3,7 @@
 >designpatterns：Java 实现设计模式  
 >basiccode: Java 基础代码实践  
 >leetcode：Leetcode 刷题  
->nettt：netty 库实践
+>nettt：netty 库实践  
 >springbase：spring 基础原理及实践 
 #### mq-example: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
 #### distributed-lock: redis ,zookeeper 实现分布式锁 
