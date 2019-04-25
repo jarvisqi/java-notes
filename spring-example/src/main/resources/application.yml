@@ -10,11 +10,21 @@ spring:
     username: test
     password: 123456
 
+#apollo
+apollo:
+  meta: http://10.0.60.50:8080
+  bootstrap:
+    enabled: true
+app:
+  id: jwell-auth-service
+
+
 #mapper
 mapper:
   mappers: com.marvel.mapper.BaseMapper
   not-empty: false
   identity: MYSQL
+
 
 #logging
 logging:
