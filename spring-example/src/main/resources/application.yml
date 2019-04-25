@@ -9,6 +9,8 @@ spring:
     url: jdbc:mysql://192.168.10.100:3306/spring?useSSL=false
     username: test
     password: 123456
+  profiles:
+    active: dev
 
 #apollo
 apollo:

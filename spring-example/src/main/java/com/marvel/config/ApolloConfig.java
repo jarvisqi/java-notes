@@ -34,7 +34,6 @@ public class ApolloConfig {
             logger.info("changedKey:{} value:{}", changedKey, changeEvent.getChange(changedKey));
             ConfigChange configChange = changeEvent.getChange(changedKey);
             configChange.getOldValue();
-            break;
         }
         refreshScope.refreshAll();
         logger.info("after refresh");
