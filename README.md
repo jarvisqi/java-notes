@@ -5,7 +5,7 @@
 >leetcode：Leetcode 刷题  
 >nettt：netty 库实践  
 >springbase：spring 基础原理及实践 
-#### mq-example: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
+#### mq-samples: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
 #### distributed-lock: redis ,zookeeper 实现分布式锁 
 #### mvc-app:  spring 基于XML配置实现的 mvc 
-#### spring-marvel: Spring Boot2.0 实践代码
+#### spring-boot2-sample: Spring Boot2.0 实践代码
