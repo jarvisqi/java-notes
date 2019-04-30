@@ -1,4 +1,4 @@
-package com.softmax.mq.samples.rocket.transaction.example;
+package com.softmax.mq.samples.rocket.transaction;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendResult;

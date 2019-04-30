@@ -1,4 +1,4 @@
-package com.softmax.mq.samples.rocket.transaction.example;
+package com.softmax.mq.samples.rocket.transaction;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.*;
@@ -9,7 +9,7 @@ import org.apache.rocketmq.common.message.MessageExt;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static com.softmax.mq.samples.rocket.transaction.example.TransactionProducer.NAMESRVADDR;
+import static com.softmax.mq.samples.rocket.transaction.TransactionProducer.NAMESRVADDR;
 
 /**
  * 事务消费者

@@ -1,4 +1,4 @@
-package com.softmax.mq.samples.rocket.transaction.example;
+package com.softmax.mq.samples.rocket.transaction;
 
 import org.apache.rocketmq.client.producer.LocalTransactionState;
 import org.apache.rocketmq.client.producer.TransactionListener;

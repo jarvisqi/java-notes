@@ -30,7 +30,7 @@ public class MQTutorialApplication {
     public CommandLineRunner useage() {
         return args -> {
             System.out.println("This app uses Spring Profiles to control its behavior.\n");
-            System.out.println("Sample usage: java -jar target/rabbitmq-samples-0.0.1-SNAPSHOT.jar --spring.profiles.active=hello-world,sender");
+            System.out.println("Sample usage: java -jar target/rabbitmq-samples-0.0.1-SNAPSHOT.jar --springboot.profiles.active=hello-world,sender");
         };
     }
 
