@@ -1,12 +1,12 @@
 spring:
   application:
-    name: spring-samples
+    name: springboot-samples
   aop:
     proxy-target-class: true
     auto: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.100:3306/spring?useSSL=false
+    url: jdbc:mysql://192.168.10.100:3306/springboot?useSSL=false
     username: test
     password: 123456
   profiles:
@@ -30,5 +30,5 @@ mapper:
 
 #logging
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-springboot.xml
 

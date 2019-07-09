@@ -3,7 +3,7 @@ package com.marvel;
 import com.marvel.mapper.BaseMapper;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
-//MapperScan 导入  org.mybatis.spring.annotation 会报错
+//MapperScan 导入  org.mybatis.springboot.annotation 会报错
 import tk.mybatis.spring.annotation.MapperScan;
 
 
