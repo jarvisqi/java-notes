@@ -1,22 +1,21 @@
 spring:
   application:
-    name: springboot-samples
+    name: springboot-marvel
   aop:
     proxy-target-class: true
     auto: true
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.10.100:3306/springboot?useSSL=false
     username: test
     password: 123456
   profiles:
     active: dev
 
-#apollo
 apollo:
   meta: http://10.0.60.50:8080
   bootstrap:
-    enabled: true
+    enabled: false
 app:
   id: jwell-auth-service
 
@@ -30,5 +29,5 @@ mapper:
 
 #logging
 logging:
-  config: classpath:logback-springboot.xml
+  config: classpath:logback-config.xml
 

@@ -42,10 +42,10 @@ public class MyBatisConfig {
                 .getResources("classpath*:/mybatis/mapper/*.xml");
 
         sqlSessionFactoryBean.setMapperLocations(mapperResources);
-        sqlSessionFactoryBean.setTypeAliasesPackage("classpath*:/com/marvel/entity/*");
+        sqlSessionFactoryBean.setTypeAliasesPackage("classpath*:/com/softmax/marvel/entity/*");
 
         ResolverUtil<Class<?>> resolverUtil = new ResolverUtil<>();
-        resolverUtil.find(new ResolverUtil.IsA(BaseEnum.class), "com.marvel.entity");
+        resolverUtil.find(new ResolverUtil.IsA(BaseEnum.class), "com.softmax.marvel.entity");
 
         Set<Class<? extends Class<?>>> handlerSet = resolverUtil.getClasses();
         for (Class<?> clazz : handlerSet) {

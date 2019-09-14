@@ -38,11 +38,11 @@
 
     <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
     <springProfile name="test,dev">
-        <logger name="com.marvel.controller" level="info"/>
+        <logger name="com.softmax.marvel.controller" level="info"/>
     </springProfile>
     <!-- 生产环境. -->
     <springProfile name="prod">
-        <logger name="com.marvel.controller" level="ERROR"/>
+        <logger name="com.softmax.marvel.controller" level="ERROR"/>
     </springProfile>
 
 </configuration>

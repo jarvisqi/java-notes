@@ -1,4 +1,4 @@
-package com.springmarvel;
+package com.softmax.marvel;
 
 import com.softmax.marvel.MarvelApplication;
 import org.junit.Test;
