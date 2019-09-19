@@ -1,4 +1,4 @@
-package com.softmax.marvel.handler.order;
+package com.softmax.marvel.handler;
 
 import java.lang.annotation.*;
 
@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Documented
 //子类可以继承此注解
 @Inherited
-public @interface OrderHandlerType {
+public @interface HandlerType {
     /**
      * 策略类型
      *

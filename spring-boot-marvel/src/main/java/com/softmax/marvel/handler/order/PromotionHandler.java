@@ -1,6 +1,7 @@
 package com.softmax.marvel.handler.order;
 
 import com.softmax.marvel.entity.dto.OrderDTO;
+import com.softmax.marvel.handler.HandlerType;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2019/9/14
  */
 @Component
-@OrderHandlerType(3)
+@HandlerType(3)
 public class PromotionHandler extends AbstractOrderHandler {
     @Override
     public String handle(OrderDTO orderDTO) {

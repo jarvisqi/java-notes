@@ -1,6 +1,7 @@
 package com.softmax.marvel.handler.order;
 
 import com.softmax.marvel.handler.BeanTool;
+import com.softmax.marvel.handler.HandlerType;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class OrderHandlerContext {
     /**
      * 存放所有策略类Bean的map
      */
-    public static Map<Integer, Class<OrderHandlerType>> hanlderTypeBeanMap = new HashMap<>(3);
+    public static Map<Integer, Class<HandlerType>> hanlderTypeBeanMap = new HashMap<>(3);
 
     /**
      * 从容器中获取对应的策略Bean
@@ -28,7 +29,7 @@ public class OrderHandlerContext {
      * @throws IllegalAccessException
      */
     public AbstractOrderHandler getInstance(Integer orderType) throws IllegalAccessException {
-        Class<OrderHandlerType> clazz = hanlderTypeBeanMap.get(orderType);
+        Class<HandlerType> clazz = hanlderTypeBeanMap.get(orderType);
         if (clazz == null) {
             throw new IllegalAccessException("not found handler for type " + orderType);
         }

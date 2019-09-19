@@ -1,7 +1,6 @@
 package com.softmax.marvel.handler.order;
 
-import com.softmax.marvel.handler.order.OrderHandlerContext;
-import com.softmax.marvel.handler.order.OrderHandlerType;
+import com.softmax.marvel.handler.HandlerType;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -28,10 +27,10 @@ public class HandlerProcessor implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         //获取所有策略注解的Bean
-        Map<String, Object> orderHandlerMap = applicationContext.getBeansWithAnnotation(OrderHandlerType.class);
+        Map<String, Object> orderHandlerMap = applicationContext.getBeansWithAnnotation(HandlerType.class);
         orderHandlerMap.forEach((k, v) -> {
-            Class<OrderHandlerType> orderHandlerTypeClass = (Class<OrderHandlerType>) v.getClass();
-            Integer type = orderHandlerTypeClass.getAnnotation(OrderHandlerType.class).value();
+            Class<HandlerType> orderHandlerTypeClass = (Class<HandlerType>) v.getClass();
+            Integer type = orderHandlerTypeClass.getAnnotation(HandlerType.class).value();
             //将class加入map中,type作为key
             OrderHandlerContext.hanlderTypeBeanMap.put(type, orderHandlerTypeClass);
         });
