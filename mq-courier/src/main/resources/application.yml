@@ -13,7 +13,7 @@ spring:
 
   kafka:
     # 指定kafka 代理地址，可以多个
-    bootstrap-servers: 192.168.10.100:9092
+    bootstrap-servers: 10.10.10.10:9092
     producer:
       retries: 0
       # 每次批量发送消息的数量
@@ -25,7 +25,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
       # 指定默认消费者group id
-      group-id: consumer-samples
+      group-id: operation-log
       auto-commit-interval: 100
       auto-offset-reset: earliest
       enable-auto-commit: true
@@ -70,4 +70,6 @@ spring:
 tutorial:
   client:
     duration: 10000
-
+logging:
+  level:
+    root: debug

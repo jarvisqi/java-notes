@@ -1,5 +1,7 @@
 package com.softmax.mq.courier.kafka.beans;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
@@ -8,10 +10,11 @@ import java.util.Date;
  * @author Jarvis
  * @date 2018/8/3
  */
+@Component
 public class Message {
     private Long id;
 
-    private String msg;
+    private String message;
 
     private Date sendTime;
 
@@ -23,12 +26,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Date getSendTime() {

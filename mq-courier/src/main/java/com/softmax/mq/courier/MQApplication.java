@@ -1,4 +1,4 @@
-package com.softmax.mq.courier.rabbit;
+package com.softmax.mq.courier;
 
 import com.softmax.mq.courier.rabbit.example01.RabbitTutorialRunner;
 import org.springframework.boot.CommandLineRunner;
@@ -14,12 +14,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
-public class MQTutorialApplication {
+public class MQApplication {
 
     public static void main(String[] args) {
         // SpringApplication.run(RabbitApplication.class, args);
         new SpringApplicationBuilder()
-                .sources(MQTutorialApplication.class)
+                .sources(MQApplication.class)
                 // 设置成非 web 环境
                 .web(WebApplicationType.NONE)
                 .run(args);
