@@ -29,21 +29,24 @@ public class KafkaTests {
     public void kafkaSend() throws InterruptedException {
 
         BizOperationLog log = new BizOperationLog();
-        log.setAppId("jwell-oms");
-        log.setAppName("运营系统");
+        log.setAppId("jwell-omx");
+        log.setAppName("运营管理系统");
+        log.setFunction("修改订单编号");
         log.setOptTime(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-        log.setOptUser("建材总监-王文国");
+        log.setOptUser("A总监-张建国");
         //发消息
         for (int i = 0; i < 20; i++) {
-            String id = "RO" + Long.toString(RandomUtils.nextLong(10000000, 90000000));
+            String id = "SO" + Long.toString(RandomUtils.nextLong(10000000, 90000000));
             float price = RandomUtils.nextFloat(1000, 70000);
-            BizData data = new BizData(id, price, "钢卷");
+            BizData data = new BizData(id, price, "螺纹管");
             log.setBeforeModifyData(JSON.toJSONString(data));
 
+            id = "SO" + Long.toString(RandomUtils.nextLong(10000000, 90000000));
             //改价格
-            price = RandomUtils.nextFloat(1000, 7000);
-            //改品名
-            data = new BizData(id, price, "矿石");
+//            price = RandomUtils.nextFloat(1000, 7000);
+//            //改品名
+//            data = new BizData(id, price, "矿石");
+            data.setOrderId(id);
             log.setAfterModifyData(JSON.toJSONString(data));
 
             kafkaSender.send(log);

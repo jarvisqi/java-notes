@@ -16,10 +16,11 @@ public class BizOperationLog {
      * 系统名称
      */
     private String appName;
+
     /**
-     * 操作时间
+     * 修改的功能
      */
-    private String optTime;
+    private String function;
     /**
      * 修改前数据
      */
@@ -28,6 +29,10 @@ public class BizOperationLog {
      * 修改后数据
      */
     private String afterModifyData;
+    /**
+     * 操作时间
+     */
+    private String optTime;
     /**
      * 操作人
      */
@@ -47,6 +52,14 @@ public class BizOperationLog {
 
     public void setAppName(String appName) {
         this.appName = appName;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
     }
 
     public String getOptTime() {
