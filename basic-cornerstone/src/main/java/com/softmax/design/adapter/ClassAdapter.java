@@ -56,7 +56,7 @@ public class ClassAdapter {
         Human userAdapter = new UserAdapter();
 
         userAdapter.eat();
-        
+
         userAdapter.say();
         userAdapter.run();
     }

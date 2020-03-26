@@ -1,5 +1,7 @@
 package com.softmax.design.strategy;
 
+import java.math.BigDecimal;
+
 /**
  * 计算策略接口
  *
@@ -15,4 +17,13 @@ public interface CalculateStrategy {
      * @return
      */
     int calculate(int a, int b);
+
+    /**
+     * 计算
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    BigDecimal calculate(float a, float b);
 }

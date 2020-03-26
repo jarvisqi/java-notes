@@ -1,5 +1,7 @@
 package com.softmax.design.strategy;
 
+import java.math.BigDecimal;
+
 /**
  * º∆À„∆˜¿‡
  *
@@ -23,6 +25,10 @@ public class Calculator {
     }
 
     public int getResult(int a, int b) {
+        return calculateStrategy.calculate(a, b);
+    }
+
+    public BigDecimal getResult(float a, float b) {
         return calculateStrategy.calculate(a, b);
     }
 }

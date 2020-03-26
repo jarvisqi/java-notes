@@ -24,7 +24,7 @@ public class StringCode {
         if (str == null || str.length() == 0) {
             return str;
         }
-        
+
         String result = new StringBuilder(str).reverse().toString();
 
         //第二种方法
