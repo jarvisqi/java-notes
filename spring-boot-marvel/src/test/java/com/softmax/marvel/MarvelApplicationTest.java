@@ -19,9 +19,9 @@ public class MarvelApplicationTest {
         long maxMemory = Runtime.getRuntime().maxMemory();
         long freeMemory = Runtime.getRuntime().freeMemory();
         long totalMemory = Runtime.getRuntime().totalMemory();
-        System.out.println(maxMemory/1024/1024/1024);
-        System.out.println(freeMemory/1024/1024/1024);
-        System.out.println(totalMemory/1024/1024/1024);
+        System.out.println(maxMemory / 1024 / 1024 / 1024);
+        System.out.println(freeMemory / 1024 / 1024 / 1024);
+        System.out.println(totalMemory / 1024 / 1024 / 1024);
     }
 
 }

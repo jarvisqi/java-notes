@@ -35,7 +35,7 @@ public class KafkaTests {
         log.setOptTime(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
         log.setOptUser("A总监-张建国");
         //发消息
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 4; i++) {
             String id = "SO" + Long.toString(RandomUtils.nextLong(10000000, 90000000));
             float price = RandomUtils.nextFloat(1000, 70000);
             BizData data = new BizData(id, price, "螺纹管");

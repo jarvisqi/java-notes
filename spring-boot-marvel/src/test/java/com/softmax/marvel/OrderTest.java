@@ -41,7 +41,7 @@ public class OrderTest {
         order.setOrderType(1);
         order.setPrice(145500.46f);
         order.setOrderDate(DateUtil.parseDate("2019-09-09 12:12"));
-        
+
         result = orderService.handleOrder(order);
         System.out.println(order.toString());
         System.out.println(result);
