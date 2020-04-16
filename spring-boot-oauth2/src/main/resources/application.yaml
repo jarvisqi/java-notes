@@ -1,0 +1,18 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: oauth
+  datasource:
+    url: jdbc:mysql://10.130.0.251:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: "@jwell,com!03"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+debug: true
+
+mybatis:
+  type-aliases-package: com.softmax.oauth2.security.user
+  mapper-locations:  classpath:mapper/*Mapper.xml
+

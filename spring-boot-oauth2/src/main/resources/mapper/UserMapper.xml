@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softmax.oauth2.security.user.dao.LoginUserDAO">
+
+    <resultMap id="LoginUserMap" type="com.softmax.oauth2.security.user.entity.LoginUser">
+        <result property="sysno" column="sysno"></result>
+        <result property="userId" column="userId"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="mobile" column="mobile"></result>
+        <result property="email" column="email"></result>
+        <result property="status" column="status"></result>
+        <result property="lastLoginTime" column="last_login_time"></result>
+        <result property="lastChangePasswordTime" column="last_change_password_time"></result>
+    </resultMap>
+
+    <select id="getLoginUser" resultType="com.softmax.oauth2.security.user.entity.LoginUser"
+            resultMap="LoginUserMap">
+    SELECT
+        sysno,
+        userId,
+        username,
+        password,
+        mobile,
+        email,
+        last_login_time,
+        last_change_password_time,
+        create_time,
+        modify_time
+    FROM
+        oauth_user WHERE sysno=#{sysno}
+    </select>
+
+    <select id="getLoginUserByName" resultType="com.softmax.oauth2.security.user.entity.LoginUser"
+            resultMap="LoginUserMap">
+    SELECT
+        sysno,
+        userId,
+        username,
+        password,
+        mobile,
+        email,
+        last_login_time,
+        last_change_password_time,
+        create_time,
+        modify_time
+    FROM
+        oauth_user WHERE username=#{username}
+    </select>
+
+    <insert id="register" parameterType="com.softmax.oauth2.security.user.entity.RegisterUserDTO">
+    INSERT oauth_user (
+    userId,
+    username,
+    `password` )
+    VALUES
+    (#{userId},
+    #{username},
+    #{password}
+    )
+    </insert>
+
+</mapper>
