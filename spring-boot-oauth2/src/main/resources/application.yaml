@@ -5,9 +5,9 @@ spring:
   application:
     name: oauth
   datasource:
-    url: jdbc:mysql://10.130.0.251:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    url: jdbc:mysql://1.1.1.1:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
     username: root
-    password: "@jwell,com!03"
+    password: "11111@，3#￥%11"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 debug: true
