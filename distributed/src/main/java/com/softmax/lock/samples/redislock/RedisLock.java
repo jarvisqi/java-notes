@@ -6,6 +6,8 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.Objects;
+
 /**
  * redis 分布式锁
  *
@@ -57,7 +59,7 @@ public class RedisLock {
         try {
             object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
                 StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                byte[] data = redisConnection.get(redisSerializer.serialize(key));
+                byte[] data = redisConnection.get(Objects.requireNonNull(redisSerializer.serialize(key)));
 
 
                 redisConnection.close();
@@ -85,7 +87,7 @@ public class RedisLock {
         try {
             object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
                 StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                redisConnection.set(redisSerializer.serialize(key), redisSerializer.serialize(value));
+                redisConnection.set(Objects.requireNonNull(redisSerializer.serialize(key)), Objects.requireNonNull(redisSerializer.serialize(value)));
                 return redisSerializer;
             });
         } catch (Exception e) {
@@ -106,7 +108,7 @@ public class RedisLock {
         try {
             object = redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
                 StringRedisSerializer redisSerializer = new StringRedisSerializer();
-                Boolean success = redisConnection.setNX(redisSerializer.serialize(key), redisSerializer.serialize(value));
+                Boolean success = redisConnection.setNX(Objects.requireNonNull(redisSerializer.serialize(key)), Objects.requireNonNull(redisSerializer.serialize(value)));
                 redisConnection.close();
                 return success;
             });
@@ -160,7 +162,7 @@ public class RedisLock {
                     locked = true;
                     return true;
                 }
-                timeout -= DEFAULT_ACQUIRY_RESOLUTION_MILLIS;
+                timeout = timeout - DEFAULT_ACQUIRY_RESOLUTION_MILLIS;
                 /*
                  * 延迟100 毫秒, 这里使用随机时间可能会好一点,可以防止饥饿进程的出现,即,当同时到达多个进程,
                  * 只会有一个进程获得锁,其他的都用同样的频率进行尝试,后面有来了一些进行,也以同样的频率申请锁,这将可能导致前面来的锁得不到满足.
