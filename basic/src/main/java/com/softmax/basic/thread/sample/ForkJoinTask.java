@@ -7,8 +7,8 @@ public class ForkJoinTask extends RecursiveTask<Long> {
 
     private static final long MAX = 1000000000L;
     private static final long THRESHOLD = 1000L;
-    private long start;
-    private long end;
+    private final long start;
+    private final long end;
 
     public ForkJoinTask(long start, long end) {
         this.start = start;

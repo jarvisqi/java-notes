@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
  */
 public class CglibProxy implements MethodInterceptor {
 
-    private Enhancer enhancer = new Enhancer();
+    private final Enhancer enhancer = new Enhancer();
 
     public Object getProxy(Class clazz) {
         enhancer.setSuperclass(clazz);

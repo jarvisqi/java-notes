@@ -9,7 +9,7 @@ import java.util.concurrent.*;
  * @date 2018/8/22
  */
 public class ThreadPoolExecutorCode implements Runnable {
-    private int taskNum;
+    private final int taskNum;
 
     public ThreadPoolExecutorCode(int num) {
         this.taskNum = num;

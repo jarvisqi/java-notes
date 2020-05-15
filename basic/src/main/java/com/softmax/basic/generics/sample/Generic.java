@@ -19,7 +19,7 @@ class BoxClass {
 
     Parm<Integer, String> p1 = new Parm<>(1, "apple");
     Parm<Integer, String> p2 = new Parm<>(2, "pear");
-    boolean same = Util.<Integer, String>compare(p1, p2);
+    boolean same = Util.compare(p1, p2);
 
 
     //<? extends T>的用法

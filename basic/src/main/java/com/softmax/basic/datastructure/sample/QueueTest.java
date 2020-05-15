@@ -81,7 +81,7 @@ class Basket {
     /**
      * 篮子，能够容纳3个苹果
      */
-    private BlockingQueue<String> basket = new ArrayBlockingQueue<String>(3);
+    private final BlockingQueue<String> basket = new ArrayBlockingQueue<String>(3);
 
     /**
      * 生产苹果，放入篮子

@@ -140,6 +140,7 @@ public class BasicEx {
         }
 
         Person person1 = Optional.ofNullable(person).orElse(new Person("Jack", "Lee"));
+
         System.out.println(person1.lastName + "-" + person1.firstName);
 
     }

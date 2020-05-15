@@ -36,7 +36,7 @@ public class Lambda {
         }
         // Java 8之后：
         features.forEach(System.out::print);
-        System.out.println("");
+        System.out.println();
 
         //使用函数式接口Predicate
         List<String> languages = Arrays.asList("Java", "Scala", "C++", "Haskell", "Lisp");

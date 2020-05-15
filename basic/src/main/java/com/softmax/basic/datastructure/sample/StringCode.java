@@ -73,8 +73,8 @@ public class StringCode {
         //"=="在Java比较的不是两个对象的值，而是比较两个对象的引用是否相等
         System.out.println(str0 == str1);
 
-        String str2 = new String("234");
-        String str3 = new String("234");
+        String str2 = "234";
+        String str3 = "234";
         //Java虚拟机的解释器每遇到一个new关键字，都会在堆内存中开辟一块内存来存放一个String对象,不同的引用 false
         System.out.println(str2 == str3);
         //对比值相等

@@ -136,7 +136,7 @@ public class PrintMinNumber {
             System.out.println(strc);
         }
         if (strc.trim().length() < 1) {
-            System.out.println("");
+            System.out.println();
         }
         if (strc.trim().length() < k) {
             System.out.println(strc);

@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
  */
 public class UserBeanProxy implements InvocationHandler {
 
-    private Object targetObject;
+    private final Object targetObject;
 
     public UserBeanProxy(Object targetObject) {
         this.targetObject = targetObject;
