@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -122,8 +123,24 @@ public class BasicEx {
     public static void main(String[] args) {
 
         //StringDemo();
-        NumberDemo();
+//        NumberDemo();
 
+        testOptional();
+
+    }
+
+
+    private static void testOptional() {
+        Person person = new Person("Jack", "Ma");
+        if (!person.firstName.equals("test")) {
+            person = null;
+        }
+        if (!Optional.ofNullable(person).isPresent()) {
+            System.out.println("测试判断 ");
+        }
+
+        Person person1 = Optional.ofNullable(person).orElse(new Person("Jack", "Lee"));
+        System.out.println(person1.lastName + "-" + person1.firstName);
 
     }
 
