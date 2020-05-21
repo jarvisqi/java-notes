@@ -25,7 +25,7 @@ public class LoginUserService implements UserDetailsService {
     @Autowired
     private LoginUserDAO userDAO;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
