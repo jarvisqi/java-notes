@@ -32,7 +32,7 @@ public class AuthUserService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
     public AuthUserService() {
         this.jwtTokenUtil = new JwtTokenUtil();

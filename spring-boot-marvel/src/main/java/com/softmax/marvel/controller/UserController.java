@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/user")
-@Api(value = "UserController", description = "用户信息Api")
+@Api(value = "UserController", tags = "用户信息Api")
 public class UserController {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserServiceImpl userService;
 

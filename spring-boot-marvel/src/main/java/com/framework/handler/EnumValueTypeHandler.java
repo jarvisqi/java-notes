@@ -18,7 +18,7 @@ import java.sql.SQLException;
  */
 public class EnumValueTypeHandler<T extends Enum<T>> extends BaseTypeHandler<T> {
 
-    private BaseTypeHandler typeHandler;
+    private final BaseTypeHandler typeHandler;
 
     public EnumValueTypeHandler(Class<T> tClass) {
         if (tClass == null) {

@@ -45,7 +45,7 @@ public class ResultData<T> {
         this.pageNum = info.getPageNum();
         this.totalPage = info.getPages();
         this.items = info.getList();
-        this.isMore = info.getPageNum() >= info.getPages() ? false : true;
+        this.isMore = info.getPageNum() < info.getPages();
     }
 
     public Integer getPageNum() {

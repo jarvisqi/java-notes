@@ -23,8 +23,8 @@ import static java.util.Collections.emptyList;
  */
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
-    private UserDetailsService authUserService;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserDetailsService authUserService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserAuthenticationProvider(UserDetailsService authUserService) {
         this.authUserService = authUserService;

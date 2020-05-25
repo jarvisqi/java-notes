@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class ApiLogAspect {
 
-    private static Logger logger = LoggerFactory.getLogger(ApiLogAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApiLogAspect.class);
 
     /**
      * 定义一个切点（需要横切的位置）

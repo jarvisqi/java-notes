@@ -5,13 +5,12 @@ spring:
     proxy-target-class: true
     auto: true
   datasource:
+    url: jdbc:mysql://10.130.0.251:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: "@jwell,com!03"
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.10.100:3306/springboot?useSSL=false
-    username: test
-    password: 123456
   profiles:
     active: dev
-
 apollo:
   meta: http://10.0.60.50:8080
   bootstrap:
@@ -21,10 +20,10 @@ app:
 
 
 #mapper
-mapper:
-  mappers: com.softmax.marvel.mapper.BaseMapper
-  not-empty: false
-  identity: MYSQL
+#mapper:
+#  mappers: com.softmax.marvel.mapper.BaseMapper
+#  not-empty: false
+#  identity: MYSQL
 
 
 #logging

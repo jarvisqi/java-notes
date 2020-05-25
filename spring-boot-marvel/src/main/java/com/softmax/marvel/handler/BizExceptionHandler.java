@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestControllerAdvice
 public class BizExceptionHandler {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器
