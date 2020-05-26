@@ -5,14 +5,14 @@ spring:
     proxy-target-class: true
     auto: true
   datasource:
-    url: jdbc:mysql://10.130.0.251:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    url: jdbc:mysql://10.10.10.101:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
     username: root
-    password: "@jwell,com!03"
+    password: 100003
     driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     active: dev
 apollo:
-  meta: http://10.0.60.50:8080
+  meta: http://10.10.10.10:8080
   bootstrap:
     enabled: false
 app:
