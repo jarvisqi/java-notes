@@ -8,15 +8,14 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 
 @SpringBootApplication
-@MapperScan("com.softmax.oauth2.security.*")
+@MapperScan("com.softmax.oauth2.*")
 public class Oauth2Application {
 
     public static void main(String[] args) {
-        System.out.println("中文测试");
         ConfigurableApplicationContext context = SpringApplication.run(Oauth2Application.class, args);
-
-        Student bean = context.getBean(Student.class);
-        bean.setName("wangwu");
+//
+//        Student bean = context.getBean(Student.class);
+//        bean.setName("wangwu");
     }
 
 }

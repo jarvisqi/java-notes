@@ -1,18 +1,75 @@
-server:
-  port: 6001
+#server:
+#  port: 6001
+#  tomcat:
+#    uri-encoding: UTF-8
+#
+#spring:
+#  application:
+#    name: oauth
+#  datasource:
+#    url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+#    username: root
+#    password: "@jwell,com!03"
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 
-spring:
-  application:
-    name: oauth
-  datasource:
-    url: jdbc:mysql://1.1.1.1:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
-    username: root
-    password: "11111@，3#￥%11"
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-debug: true
+#debug: true
 
 mybatis:
   type-aliases-package: com.softmax.oauth2.security.user
   mapper-locations:  classpath:mapper/*Mapper.xml
+
+#分库分表
+server:
+  port: 6001
+
+# 配置ds0、ds1、ds2三个数据源
+sharding:
+  datasource:
+    names: ds0,ds1,ds2
+    ds0:
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: "123.com"
+    ds1:
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: "123.com"
+    ds2:
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: "123.com"
+  shardingRule:
+    tables:
+      t_order:
+        actualDataNodes: ds${0..2}.t_order${0..2}
+        # 分库策略 根据user_id取模分库
+        databaseStrategy:
+          inline:
+            shardingColumn: user_id
+            algorithmExpression: ds${user_id % 2}
+        # 分表策略 根据order_id 取模分表
+        tableStrategy:
+          inline:
+            shardingColumn: order_id
+            algorithmExpression: t_order${order_id % 2}
+      t_order_item:
+        actualDataNodes: ds${0..2}.t_order_item${0..2}
+        # 分库策略 根据user_id取模确定数据进哪个数据库
+        databaseStrategy:
+          inline:
+            shardingColumn: user_id
+            algorithmExpression: ds${user_id % 2}
+        # 分表策略 根据order_id 取模确定数据进哪个表
+        tableStrategy:
+          inline:
+            shardingColumn: order_id
+            algorithmExpression: t_order_item${order_id % 2}
+
+
 

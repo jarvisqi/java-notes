@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <sharding-sphere.version>4.1.0</sharding-sphere.version>
     </properties>
 
     <dependencies>
@@ -52,7 +53,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
+            <version>8.0.15</version>
         </dependency>
 
         <dependency>
@@ -87,6 +88,20 @@
             <artifactId>jjwt</artifactId>
             <version>0.7.0</version>
             <scope>compile</scope>
+        </dependency>
+
+
+        <!-- 分库分表-->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-core</artifactId>
+            <version>${sharding-sphere.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
