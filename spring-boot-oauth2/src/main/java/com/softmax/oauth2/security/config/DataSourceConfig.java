@@ -16,11 +16,11 @@ import javax.sql.DataSource;
  */
 @Configuration
 @AutoConfigureAfter(DataSource.class)
-public class ShardingDataSourceConfig {
+public class DataSourceConfig {
 
     private final DataSource shardingDataSource;
 
-    public ShardingDataSourceConfig(@Qualifier("shardingCreateDataSource") DataSource shardingDataSource) {
+    public DataSourceConfig(@Qualifier("shardingCreateDataSource") DataSource shardingDataSource) {
         this.shardingDataSource = shardingDataSource;
     }
 

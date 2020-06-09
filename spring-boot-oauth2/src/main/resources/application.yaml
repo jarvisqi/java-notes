@@ -7,7 +7,7 @@
 #  application:
 #    name: oauth
 #  datasource:
-#    url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+#    url: jdbc:mysql://10.130.0.251:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
 #    username: root
 #    password: "@jwell,com!03"
 #    driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,58 +18,98 @@ mybatis:
   type-aliases-package: com.softmax.oauth2.security.user
   mapper-locations:  classpath:mapper/*Mapper.xml
 
-#分库分表
 server:
   port: 6001
 
-# 配置ds0、ds1、ds2三个数据源
+# 数据分片+读写分离
 sharding:
   datasource:
-    names: ds0,ds1,ds2
-    ds0:
+    ds_master0:
+      name: credentials0
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      url: jdbc:mysql://10.10.60.50:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      #      url: jdbc:mysql://10.130.0.251:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "123.com"
-    ds1:
+      password: "@jwell,com!03"
+    ds_master0_slave0:
+      name: credentials0
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      url: jdbc:mysql://10.10.60.50:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "123.com"
-    ds2:
+      password: "0003"
+    ds_master0_slave1:
+      name: credentials0
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://10.10.0.10:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      url: jdbc:mysql://10.10.60.50:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "123.com"
+      password: "0003"
+    ds_master1:
+      name: credentials1
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.10.60.50:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: "0003"
+    ds_master1_slave0:
+      name: credentials1
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.10.60.50:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: "0003"
+    ds_master1_slave1:
+      name: credentials1
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.10.60.50:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: "0003"
   shardingRule:
     tables:
       t_order:
-        actualDataNodes: ds${0..2}.t_order${0..2}
+        actualDataNodes: credentials${0..1}.t_order${0..1}
         # 分库策略 根据user_id取模分库
         databaseStrategy:
           inline:
             shardingColumn: user_id
-            algorithmExpression: ds${user_id % 2}
+            algorithmExpression: credentials${user_id % 2}
         # 分表策略 根据order_id 取模分表
         tableStrategy:
           inline:
             shardingColumn: order_id
             algorithmExpression: t_order${order_id % 2}
       t_order_item:
-        actualDataNodes: ds${0..2}.t_order_item${0..2}
+        actualDataNodes: credentials${0..1}.t_order_item${0..1}
         # 分库策略 根据user_id取模确定数据进哪个数据库
         databaseStrategy:
           inline:
             shardingColumn: user_id
-            algorithmExpression: ds${user_id % 2}
+            algorithmExpression: credentials${user_id % 2}
         # 分表策略 根据order_id 取模确定数据进哪个表
         tableStrategy:
           inline:
             shardingColumn: order_id
             algorithmExpression: t_order_item${order_id % 2}
+
+    masterSlaveRules:
+      ds_ms0:
+        masterDataSourceName: ds_master0
+        slaveDataSourceNames:
+          - ds_master0_slave0
+          - ds_master0_slave1
+        loadBalanceAlgorithmType: ROUND_ROBIN
+      ds_ms1:
+        masterDataSourceName: ds_master1
+        slaveDataSourceNames:
+          - ds_master1_slave0
+          - ds_master1_slave1
+        loadBalanceAlgorithmType: ROUND_ROBIN
+
+    defaultDataSourceName: ds_master0
+
 
 
 
