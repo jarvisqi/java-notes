@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * InitializingBean:可以在Bean属性全部改完之后，再做一些定制化操作。
  * AplicationContextAware:用处很大，注入了ApplicationContext到Bean中。
  */
-@Component
+//@Component
 public class Student implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean, ApplicationContextAware {
 
     private String name;

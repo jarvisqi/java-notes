@@ -2,7 +2,6 @@ package com.softmax.oauth2.security.user.dao;
 
 import com.softmax.oauth2.security.user.entity.LoginUser;
 import com.softmax.oauth2.security.user.entity.RegisterUserDTO;
-import com.softmax.oauth2.security.user.entity.RegisterUserReq;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

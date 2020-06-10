@@ -10,6 +10,7 @@ import org.apache.shardingsphere.api.config.sharding.strategy.InlineShardingStra
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,34 +22,23 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * @author Jarvis
+ */
+@SuppressWarnings("unchecked")
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "sharding")
 public class ShardingConfig {
 
     private final Logger logger = LoggerFactory.getLogger(ShardingConfig.class);
-
     /**
-     * 数据节点
-     */
-    private final static String ACTUAL_DATANODES = "actualDataNodes";
-    /**
-     * 分库策略
-     */
-    private final static String DATABASE_STRATEGY = "databaseStrategy";
-
-    /**
-     * 分表策略
-     */
-    private final static String TABLE_STRATEGY = "tableStrategy";
-
-    /**
-     * 数据源所有配置
+     * datasource 数据源配置信息
      */
     private Map<String, Object> datasource;
 
     /**
-     * 规则
+     * sharding 规则配置信息
      */
     private Map<String, Object> shardingRule;
 
@@ -60,9 +50,20 @@ public class ShardingConfig {
         this.shardingRule = shardingRule;
     }
 
-    public Map<String, Object> getDatasource() {
-        return datasource;
-    }
+
+    /**
+     * 数据节点Key
+     */
+    private final static String ACTUAL_DATANODES = "actualDataNodes";
+    /**
+     * 分库策略Key
+     */
+    private final static String DATABASE_STRATEGY = "databaseStrategy";
+
+    /**
+     * 分表策略Key
+     */
+    private final static String TABLE_STRATEGY = "tableStrategy";
 
     /**
      * 获取数据源对象
@@ -74,6 +75,7 @@ public class ShardingConfig {
         Map<String, DataSource> dataSourceMap = getDataSourceMap();
         ShardingRuleConfiguration shardingRuleConfig = getShardingRuleConfig();
         DataSource dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingRuleConfig, new Properties());
+        logger.info("------------------- The datasource has been created ---------------------------");
         return dataSource;
     }
 
@@ -85,7 +87,7 @@ public class ShardingConfig {
     private Map<String, DataSource> getDataSourceMap() {
         Map<String, DataSource> dataSourceMap = new HashMap<>(4);
         if (datasource.isEmpty()) {
-            new ConfigurationException("数据源配置错误");
+            new ConfigurationException("Data source configuration error");
         }
 
         Properties properties = new Properties();
@@ -95,11 +97,10 @@ public class ShardingConfig {
         properties.setProperty("validationQuery", "select 'x'");
 
         for (String ds : datasource.keySet()) {
-
             LinkedHashMap<String, String> dbConfigList = (LinkedHashMap<String, String>) datasource.get(ds);
             String driverClassName = dbConfigList.get("driverClassName");
-            //String type = dbConfigList.get("type");
-            String name = dbConfigList.get("name");
+
+            String name = dbConfigList.get("alias");
             String jdbcUrl = dbConfigList.get("url");
             String dbUsername = dbConfigList.get("username");
             String dbPassword = dbConfigList.get("password");
@@ -123,8 +124,8 @@ public class ShardingConfig {
             hikariConfig.setDataSourceProperties(properties);
 
             HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-
-            dataSourceMap.put(name, dataSource);
+            logger.info("-------------------Init HikariDataSource {} ---------------------------", name);
+            dataSourceMap.put(ds, dataSource);
         }
         return dataSourceMap;
     }
@@ -137,7 +138,7 @@ public class ShardingConfig {
     private ShardingRuleConfiguration getShardingRuleConfig() {
 
         if (shardingRule.isEmpty()) {
-            new ConfigurationException("规则配置错误");
+            new ConfigurationException("Sharding rule configuration error");
         }
         // 配置规则
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
@@ -158,7 +159,7 @@ public class ShardingConfig {
     private List<TableRuleConfiguration> getTableRuleConfigurations() {
         LinkedHashMap<String, Object> ruleConfigList = (LinkedHashMap<String, Object>) shardingRule.get("tables");
         if (ruleConfigList.isEmpty()) {
-            new ConfigurationException("规则配置错误");
+            new ConfigurationException("Table rule configuration error");
         }
         Set<String> tbNames = ruleConfigList.keySet();
         List<TableRuleConfiguration> tableRuleConfigurations = new ArrayList<>(8);
@@ -168,7 +169,7 @@ public class ShardingConfig {
             //数据节点
             String actualDataNodes = strategyConfigMap.get(ACTUAL_DATANODES).toString();
             if (!StringUtils.isEmpty(actualDataNodes)) {
-                new ConfigurationException(ACTUAL_DATANODES + "数据节点配置错误");
+                new ConfigurationException(ACTUAL_DATANODES + " configuration error");
             }
 
             for (String configKey : strategyConfigMap.keySet()) {
@@ -189,12 +190,12 @@ public class ShardingConfig {
                     // 配置分库策略
                     ruleConfiguration.setDatabaseShardingStrategyConfig(
                             new InlineShardingStrategyConfiguration(shardingColumn, algorithmExpression));
-                    logger.info("分库策略,使用的列名:{},使用的算法:{}", shardingColumn, algorithmExpression);
+                    logger.info("Database Sharding Strategy Config,Column:{},Algorithm:{}", shardingColumn, algorithmExpression);
                 } else if (configKey.equals(TABLE_STRATEGY)) {
                     //配置分表策略
                     ruleConfiguration.setTableShardingStrategyConfig(
                             new InlineShardingStrategyConfiguration(shardingColumn, algorithmExpression));
-                    logger.info("分表策略,使用的列名{},使用的算法{}", shardingColumn, algorithmExpression);
+                    logger.info("Table Sharding Strategy Config,Column:{},Algorithm:{}", shardingColumn, algorithmExpression);
                 }
                 tableRuleConfigurations.add(ruleConfiguration);
             }
@@ -210,11 +211,11 @@ public class ShardingConfig {
     private List<MasterSlaveRuleConfiguration> getMasterSlaveRules() {
         LinkedHashMap<String, Object> ruleConfigList = (LinkedHashMap<String, Object>) shardingRule.get("masterSlaveRules");
         if (ruleConfigList.isEmpty()) {
-            new ConfigurationException("读写分离规则配置错误或未配置");
+            new ConfigurationException("The read-write separation rule is configured incorrectly or not configured");
         }
         Set<String> instanceNames = ruleConfigList.keySet();
         if (instanceNames.isEmpty()) {
-            new ConfigurationException("读写分离规则配置错误");
+            new ConfigurationException("Misconfiguration of read-write separation rules");
         }
         List<MasterSlaveRuleConfiguration> masterSlaveRuleConfigurations = new ArrayList<>(4);
         for (String name : instanceNames) {
@@ -226,17 +227,14 @@ public class ShardingConfig {
             //slave 节点
             LinkedHashMap<String, Object> slaveDataSourceMap = (LinkedHashMap<String, Object>) masterSlaveRule.get("slaveDataSourceNames");
             String[] slaveDataSourceNames = slaveDataSourceMap.values().toArray(new String[0]);
-            MasterSlaveRuleConfiguration masterSlaveRuleConfig = new MasterSlaveRuleConfiguration(masterDataSourceName,
+            MasterSlaveRuleConfiguration masterSlaveRuleConfig = new MasterSlaveRuleConfiguration(name,
                     masterDataSourceName,
                     Arrays.asList(slaveDataSourceNames),
                     new LoadBalanceStrategyConfiguration(loadBalanceAlgorithm));
 
             masterSlaveRuleConfigurations.add(masterSlaveRuleConfig);
         }
-
         return masterSlaveRuleConfigurations;
-
-
     }
 
 

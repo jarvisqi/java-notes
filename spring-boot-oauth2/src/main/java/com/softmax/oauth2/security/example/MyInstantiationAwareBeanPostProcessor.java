@@ -13,7 +13,7 @@ import java.beans.PropertyDescriptor;
  *
  * @author Jarvis
  */
-@Component
+//@Component
 public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter {
     public MyInstantiationAwareBeanPostProcessor() {
         super();
