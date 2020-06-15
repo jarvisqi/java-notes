@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -24,15 +27,15 @@ public class DataSourceConfig {
         this.shardingDataSource = shardingDataSource;
     }
 
-    /**
-     * 设置数据源为sharding 数据源
-     *
-     * @return
-     */
     @Bean
+    @Resource
+    @Primary
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(shardingDataSource);
+        //此处需要扫描文件路径
+        sqlSessionFactoryBean.setMapperLocations(
+                new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
 
         return sqlSessionFactoryBean.getObject();
     }
