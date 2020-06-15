@@ -1,5 +1,7 @@
 package com.softmax.oauth2.security.config;
 
+import com.softmax.oauth2.security.interceptors.CheckSQLInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,6 +40,17 @@ public class DataSourceConfig {
                 new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
 
         return sqlSessionFactoryBean.getObject();
+    }
+
+
+    /**
+     * SQL 检查
+     *
+     * @return
+     */
+    @Bean
+    public Interceptor getInterceptor() {
+        return new CheckSQLInterceptor();
     }
 
 }
