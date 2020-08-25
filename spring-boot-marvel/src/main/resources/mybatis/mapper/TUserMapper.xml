@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softmax.marvel.mapper.TUserMapper">
+    <resultMap id="BaseResultMap" type="com.softmax.marvel.entity.TUser">
+        <id column="sysno" jdbcType="INTEGER" property="sysno"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    sysno, `name`
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user0
+        where sysno = #{sysno,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user0
+    where sysno = #{sysno,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="sysno" keyProperty="sysno" parameterType="com.softmax.marvel.entity.TUser"
+            useGeneratedKeys="true">
+    insert into t_user0 (sysno,`name`)
+    values (#{sysno,jdbcType=BIGINT},#{name,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="sysno" keyProperty="sysno" parameterType="com.softmax.marvel.entity.TUser"
+            useGeneratedKeys="true">
+        insert into t_user0
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.softmax.marvel.entity.TUser">
+        update t_user0
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where sysno = #{sysno,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.softmax.marvel.entity.TUser">
+    update t_user0
+    set `name` = #{name,jdbcType=VARCHAR}
+    where sysno = #{sysno,jdbcType=INTEGER}
+  </update>
+</mapper>
