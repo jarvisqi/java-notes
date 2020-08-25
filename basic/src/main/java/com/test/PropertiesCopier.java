@@ -1,7 +1,7 @@
 package com.test;
 
 /**
- * 定义接口
+ * 瀹氫箟鎺ュ彛
  */
 public interface PropertiesCopier {
 

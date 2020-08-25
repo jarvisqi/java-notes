@@ -1,6 +1,7 @@
-package com.softmax.spring.service;
+package com.softmax.spring.service.impl;
 
 import com.softmax.spring.dao.UserDao;
+import com.softmax.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -38,4 +39,7 @@ public class UserServiceImpl implements UserService {
         System.out.println("UserServiceImpl:done()......");
         userDao.done();
     }
+
+
+
 }

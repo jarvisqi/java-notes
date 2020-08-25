@@ -4,7 +4,7 @@ import com.test.PropertiesCopier;
 import org.springframework.beans.BeanUtils;
 
 /**
- * Spring BeanUtils ÊµÏÖ
+ * Spring BeanUtils å®žçŽ°
  */
 public class SpringBeanUtilsPropertiesCopier implements PropertiesCopier {
     @Override

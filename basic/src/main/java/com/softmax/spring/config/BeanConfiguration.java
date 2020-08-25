@@ -5,9 +5,9 @@ import com.softmax.spring.dao.UserDao;
 import com.softmax.spring.dao.AccountDao;
 import com.softmax.spring.dao.UserDaoImpl;
 import com.softmax.spring.service.AccountService;
-import com.softmax.spring.service.AccountServiceImpl;
+import com.softmax.spring.service.impl.AccountServiceImpl;
 import com.softmax.spring.service.UserService;
-import com.softmax.spring.service.UserServiceImpl;
+import com.softmax.spring.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

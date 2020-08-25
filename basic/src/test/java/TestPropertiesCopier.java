@@ -14,14 +14,13 @@ import java.util.List;
 
 @RunWith(Parameterized.class)
 public class TestPropertiesCopier {
-
     @Parameterized.Parameter(0)
     public PropertiesCopier propertiesCopier;
 
-    private static List<Integer> testTimes = Arrays.asList(100, 1000, 10_000, 1_00_000, 1_000_000);
+    private static final List<Integer> testTimes = Arrays.asList(100, 1000, 10_000, 1_00_000, 1_000_000);
 
-    // ²âÊÔ½á¹ûÒÔ markdown ±í¸ñµÄÐÎÊ½Êä³ö
-    private static StringBuilder resultBuilder = new StringBuilder("|ÊµÏÖ|100|1,000|10,000|100,000|1,000,000|\n")
+    // ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ markdown ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½
+    private static final StringBuilder resultBuilder = new StringBuilder("|Êµï¿½ï¿½|100|1,000|10,000|100,000|1,000,000|\n")
             .append("|----|----|----|----|----|----|\n");
 
     @Parameterized.Parameters
@@ -47,7 +46,7 @@ public class TestPropertiesCopier {
         Account source = new Account(1, "test1", 30D);
         Account target = new Account();
 
-        // Ô¤ÈÈÒ»´Î
+        // Ô¤ï¿½ï¿½Ò»ï¿½ï¿½
         propertiesCopier.copyProperties(source, target);
         for (Integer testTime : testTimes) {
             long start = System.nanoTime();
@@ -61,7 +60,7 @@ public class TestPropertiesCopier {
 
     @AfterClass
     public static void tearDown() {
-        System.out.println("²âÊÔ½á¹û");
+        System.out.println("ï¿½ï¿½ï¿½Ô½ï¿½ï¿½");
         System.out.println(resultBuilder);
     }
 }

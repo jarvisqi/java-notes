@@ -5,11 +5,11 @@ import com.test.PropertiesCopier;
 import org.springframework.cglib.beans.BeanCopier;
 
 /**
- * È«¾Ö¾²Ì¬ BeanCopier£¬±ÜÃâÃ¿´Î¶¼Éú³ÉÐÂµÄ¶ÔÏó
+ * È«ï¿½Ö¾ï¿½Ì¬ BeanCopierï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½Î¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ¶ï¿½ï¿½ï¿½
  */
 public class StaticCglibBeanCopierProperties implements PropertiesCopier {
 
-    private static BeanCopier copier = BeanCopier.create(Account.class, Account.class, false);
+    private static final BeanCopier copier = BeanCopier.create(Account.class, Account.class, false);
 
     @Override
     public void copyProperties(Object source, Object target) throws Exception {

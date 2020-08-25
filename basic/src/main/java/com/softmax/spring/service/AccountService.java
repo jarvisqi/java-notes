@@ -7,4 +7,6 @@ package com.softmax.spring.service;
 public interface AccountService {
 
     void doSomething();
+
+    void saveSomething();
 }
