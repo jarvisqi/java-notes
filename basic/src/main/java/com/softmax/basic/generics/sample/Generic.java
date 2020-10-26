@@ -32,6 +32,7 @@ class BoxClass {
             IllegalAccessException, InvocationTargetException, InstantiationException {
         E lem = cls.getDeclaredConstructor().newInstance();
         list.add(lem);
+
     }
 
 }

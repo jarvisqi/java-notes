@@ -36,7 +36,7 @@ public class FoodServiceProxy implements FoodService {
     /**
      * step 1, 内部一定要有一个真实的实现类，当然也可以通过构造方法注入
      */
-    private FoodService foodService;
+    private final FoodService foodService;
 
     /**
      * 构造函数注入

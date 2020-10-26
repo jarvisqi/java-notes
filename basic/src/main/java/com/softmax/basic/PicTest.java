@@ -10,11 +10,11 @@ import java.util.Arrays;
 public class PicTest {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
-        String imgLocalUrl = "E:\\img\\51314.jpg";
+        String imgLocalUrl = "E:\\img\\914.jpg";
 
         byte[] imgBytes = getByteByPic(imgLocalUrl);
-        byte[] resultImg = compressUnderSize(imgBytes, 800 * 1024);
-        byte2image(resultImg, "E:\\img\\ys-002.jpg");
+        byte[] resultImg = compressUnderSize(imgBytes, 1920 * 1080);
+        byte2image(resultImg, "E:\\img\\ys-003.jpg");
         long timeEnd = System.currentTimeMillis();
         System.out.println("耗时：" + (timeEnd - timeStart));
     }

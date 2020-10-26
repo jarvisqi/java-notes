@@ -6,7 +6,7 @@ package com.softmax.design.common;
  * @date 2018/7/26
  */
 public class Food {
-    private String name;
+    private final String name;
     private String spicy;
     private String salt;
 

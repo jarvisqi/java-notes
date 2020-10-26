@@ -113,8 +113,8 @@ class AmdFactory implements ComputerFactory {
  * 计算机
  */
 class Computer {
-    private Cpu cpu;
-    private MainBoard mainBoard;
+    private final Cpu cpu;
+    private final MainBoard mainBoard;
 
     /**
      * 组装电脑
@@ -143,7 +143,7 @@ class Cpu {
         return name;
     }
 
-    private String name;
+    private final String name;
 }
 
 class IntelCpu extends Cpu {
@@ -170,7 +170,7 @@ class MainBoard {
         return name;
     }
 
-    private String name;
+    private final String name;
 }
 
 class IntelMainBoard extends MainBoard {

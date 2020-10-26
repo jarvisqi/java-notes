@@ -74,7 +74,7 @@ abstract class Shape {
  * 画一个圆
  */
 class Circle extends Shape {
-    private int radius;
+    private final int radius;
 
     public Circle(int radius, DrawAPI drawAPI) {
         super(drawAPI);
@@ -91,8 +91,8 @@ class Circle extends Shape {
  * 画一个长方形
  */
 class Rectangle extends Shape {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Rectangle(int x, int y, DrawAPI drawAPI) {
         super(drawAPI);

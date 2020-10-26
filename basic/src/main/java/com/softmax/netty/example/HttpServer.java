@@ -15,7 +15,7 @@ import io.netty.handler.logging.LoggingHandler;
  */
 public class HttpServer {
 
-    private Integer port;
+    private final Integer port;
 
     public HttpServer(Integer port) {
         this.port = port;

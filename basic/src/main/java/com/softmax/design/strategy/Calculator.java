@@ -3,7 +3,7 @@ package com.softmax.design.strategy;
 import java.math.BigDecimal;
 
 /**
- * 计算器类
+ * 璁＄畻鍣ㄧ被
  *
  * @author Jarvis
  * @date 2019/10/22
@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 public class Calculator {
 
     /**
-     * 拥有某种算法策略
+     * 鎷ユ湁鏌愮绠楁硶绛栫暐
      */
     private CalculateStrategy calculateStrategy;
 
     /**
-     * 接入算法策略
+     * 鎺ュ叆绠楁硶绛栫暐
      *
      * @param calculateStrategy
      */

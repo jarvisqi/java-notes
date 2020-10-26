@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ¶¨Òå¹Û²ìÕß¹ØÐÄµÄÖ÷ÌâºÍÖ÷ÌâÓÐÊý¾Ý
+ * ï¿½ï¿½ï¿½ï¿½Û²ï¿½ï¿½ß¹ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @author Jarvis
  * @date 2020/03/26
  */
 public class Subject {
 
-    private List<Observer> observers = new ArrayList<>();
+    private final List<Observer> observers = new ArrayList<>();
 
     private int state;
 
@@ -21,12 +21,12 @@ public class Subject {
 
     public void setState(int state) {
         this.state = state;
-        //Í¨Öª¹Û²ìÕß£¬±ä¸ü
+        //Í¨Öªï¿½Û²ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½
         notifyAllObservers();
     }
 
     /**
-     * ×¢²á¹Û²ìÕß
+     * ×¢ï¿½ï¿½Û²ï¿½ï¿½ï¿½
      *
      * @param observer
      */
@@ -35,11 +35,11 @@ public class Subject {
     }
 
     /**
-     * Í¨Öª¹Û²ìÕß
+     * Í¨Öªï¿½Û²ï¿½ï¿½ï¿½
      */
     public void notifyAllObservers() {
         for (Observer observer : observers) {
-            //¸üÐÂÊý¾Ý
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             observer.update();
         }
     }

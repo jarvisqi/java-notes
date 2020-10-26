@@ -19,7 +19,7 @@ public class SingletonForHunger {
     /**
      * step 2,创建私有静态实例，意味着这个类第一次使用的时候就会进行创建
      */
-    private static SingletonForHunger instance = new SingletonForHunger();
+    private static final SingletonForHunger instance = new SingletonForHunger();
 
     public static SingletonForHunger getInstance() {
         return instance;
