@@ -1,75 +1,65 @@
-#server:
-#  port: 6001
-#  tomcat:
-#    uri-encoding: UTF-8
-#
+server:
+  port: 6001
+  tomcat:
+    uri-encoding: UTF-8
+
 #spring:
 #  application:
 #    name: oauth
 #  datasource:
-#    url: jdbc:mysql://10.10.10.250:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+#    url: jdbc:mysql://10.10.10.250:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
 #    username: root
-#    password: "000003"
+#    password: "123455"
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
-#debug: true
+debug: true
 
 mybatis:
-  type-aliases-package: com.softmax.oauth2.security.user.entity
-  mapper-locations:  classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/*.xml
   config-location: classpath:mybatis-config.xml
-
-server:
-  port: 6001
 
 # 数据分片+读写分离
 sharding:
   datasource:
+    names: ds_master0,ds_master1,ds_master0_slave0,ds_master0_slave1,ds_master1_slave0,ds_master1_slave1
     # 第一个master
-    credentials0:
-      alias: ds_master0
+    ds_master0:
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://10.10.10.250:3306/credentials0?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
-      #      url: jdbc:mysql://10.10.10.250:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "000003"
-    credentials2:
-      alias: ds_master0_slave0
+      password: "123455"
+    ds_master0_slave0:
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://10.10.10.250:3306/credentials2?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "000003"
-    credentials3:
-      alias: ds_master0_slave1
+      password: "123455"
+    ds_master0_slave1:
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://10.10.10.250:3306/credentials3?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "000003"
+      password: "123455"
     # 第二个master
-    credentials1:
-      alias: ds_master1
+    ds_master1:
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://10.10.10.250:3306/credentials1?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "000003"
-    credentials4:
-      alias: ds_master1_slave0
+      password: "123455"
+    ds_master1_slave0:
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://10.10.10.250:3306/credentials4?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "000003"
-    credentials5:
-      alias: ds_master1_slave1
+      password: "123455"
+    ds_master1_slave1:
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://10.10.10.250:3306/credentials5?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
       username: root
-      password: "000003"
+      password: "123455"
   shardingRule:
     tables:
       t_order:
