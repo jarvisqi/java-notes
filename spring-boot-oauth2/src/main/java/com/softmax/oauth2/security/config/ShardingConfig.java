@@ -5,13 +5,13 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.shardingsphere.api.config.masterslave.LoadBalanceStrategyConfiguration;
 import org.apache.shardingsphere.api.config.masterslave.MasterSlaveRuleConfiguration;
+import org.apache.shardingsphere.api.config.sharding.KeyGeneratorConfiguration;
 import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;
 import org.apache.shardingsphere.api.config.sharding.TableRuleConfiguration;
-import org.apache.shardingsphere.api.config.sharding.strategy.InlineShardingStrategyConfiguration;
+import org.apache.shardingsphere.api.config.sharding.strategy.StandardShardingStrategyConfiguration;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,12 +21,12 @@ import org.springframework.util.StringUtils;
 import javax.naming.ConfigurationException;
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
 /**
  * @author Jarvis
+ * @date 2020/10/22
  */
 @Configuration
 @EnableConfigurationProperties
@@ -99,7 +99,15 @@ public class ShardingConfig {
     public DataSource shardingCreateDataSource() throws SQLException, ConfigurationException {
         Map<String, DataSource> dataSourceMap = getDataSourceMap();
         ShardingRuleConfiguration shardingRuleConfig = getShardingRuleConfig();
-        DataSource dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingRuleConfig, new Properties());
+        Properties properties = new Properties();
+        properties.put("sql.show", true);
+        // 获取数据源对象
+        DataSource dataSource = null;
+        try {
+            dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingRuleConfig, properties);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         logger.info("------------------- The datasource has been created ---------------------------");
         return dataSource;
     }
@@ -199,7 +207,7 @@ public class ShardingConfig {
     }
 
     /**
-     * 解析Sharding规则配置
+     * Sharding规则配置
      *
      * @return ShardingRuleConfiguration
      */
@@ -210,12 +218,29 @@ public class ShardingConfig {
         }
         // 配置规则
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
-        //分片（分库分表）规则
-        List<TableRuleConfiguration> tableRuleConfigurations = getTableRuleConfigurations();
-        shardingRuleConfiguration.setTableRuleConfigs(tableRuleConfigurations);
+        //分表规则
+        ShardingStrategyInfo shardingStrategyInfo = getTableRuleConfigurations();
+        for (TableRuleConfiguration tableRuleConfig : shardingStrategyInfo.getTableRuleConfigurations()) {
+            shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfig);
+        }
+
+        //绑定表规则列表
+        shardingRuleConfiguration.getBindingTableGroups().add(shardingStrategyInfo.getBindingTableGroups());
+
+        //分片规则,配置 t_order 被拆分到多个子库的策略
+        shardingRuleConfiguration.setDefaultDatabaseShardingStrategyConfig(
+                new StandardShardingStrategyConfiguration(shardingStrategyInfo.getDatabaseShardingColumn(),
+                        new PreciseModuloShardingDatabaseAlgorithm()));
+
+        //分表规则 t_order 被拆分到多个子表的策略
+        shardingRuleConfiguration.setDefaultTableShardingStrategyConfig(
+                new StandardShardingStrategyConfiguration(shardingStrategyInfo.getTableShardingColumn(),
+                        new PreciseModuloShardingTableAlgorithm()));
+
         //读写分离规则
         List<MasterSlaveRuleConfiguration> masterSlaveRuleConfigurations = getMasterSlaveRules();
         shardingRuleConfiguration.setMasterSlaveRuleConfigs(masterSlaveRuleConfigurations);
+
         return shardingRuleConfiguration;
     }
 
@@ -224,52 +249,69 @@ public class ShardingConfig {
      *
      * @return
      */
-    private List<TableRuleConfiguration> getTableRuleConfigurations() throws ConfigurationException {
+    private ShardingStrategyInfo getTableRuleConfigurations() throws ConfigurationException {
         LinkedHashMap<String, Object> ruleConfigList = (LinkedHashMap<String, Object>) shardingRule.get("tables");
         if (ruleConfigList.isEmpty()) {
             throw new ConfigurationException("Table rule configuration error");
         }
+
+        ShardingStrategyInfo shardingStrategyInfo = new ShardingStrategyInfo();
+        //分表策略
+        List<TableRuleConfiguration> tableRuleConfigurations = new ArrayList<>(4);
         Set<String> tbNames = ruleConfigList.keySet();
-        List<TableRuleConfiguration> tableRuleConfigurations = new ArrayList<>(8);
+
         for (String tbName : tbNames) {
             Object actualStrategyConfig = ruleConfigList.get(tbName);
             LinkedHashMap<String, Object> strategyConfigMap = (LinkedHashMap<String, Object>) actualStrategyConfig;
             //数据节点
             String actualDataNodes = strategyConfigMap.get(ACTUAL_DATANODES).toString();
-            if (!StringUtils.isEmpty(actualDataNodes)) {
+            if (StringUtils.isEmpty(actualDataNodes)) {
                 throw new ConfigurationException(ACTUAL_DATANODES + " configuration error");
             }
+            //分片策略
+            LinkedHashMap<String, LinkedHashMap<String, String>> databaStrategyConfig = (LinkedHashMap<String, LinkedHashMap<String, String>>) strategyConfigMap.get(DATABASE_STRATEGY);
+            //算法和列
+            LinkedHashMap<String, String> databaseAlgorithmColumn = databaStrategyConfig.get("inline");
+            //列名
+            String dbShardingColumn = databaseAlgorithmColumn.get("shardingColumn");
+            //算法
+            String dbAlgorithmExpression = databaseAlgorithmColumn.get("algorithmExpression");
 
-            for (String configKey : strategyConfigMap.keySet()) {
-                if (configKey.equals(ACTUAL_DATANODES)) {
-                    continue;
-                }
-                // 配置表规则
-                LinkedHashMap<String, Object> inlineConfigMap = (LinkedHashMap<String, Object>) strategyConfigMap.get(configKey);
-                //算法和列
-                LinkedHashMap<String, String> algorithmColumn = (LinkedHashMap<String, String>) inlineConfigMap.get("inline");
-                //列名
-                String shardingColumn = algorithmColumn.get("shardingColumn");
-                //算法
-                String algorithmExpression = algorithmColumn.get("algorithmExpression");
-                //规则配置信息
-                TableRuleConfiguration ruleConfiguration = new TableRuleConfiguration(tbName, actualDataNodes);
-                if (configKey.equals(DATABASE_STRATEGY)) {
-                    // 配置分库策略
-                    ruleConfiguration.setDatabaseShardingStrategyConfig(
-                            new InlineShardingStrategyConfiguration(shardingColumn, algorithmExpression));
-                    logger.info("Database Sharding Strategy Config,Column:{},Algorithm:{}", shardingColumn, algorithmExpression);
-                } else if (configKey.equals(TABLE_STRATEGY)) {
-                    //配置分表策略
-                    ruleConfiguration.setTableShardingStrategyConfig(
-                            new InlineShardingStrategyConfiguration(shardingColumn, algorithmExpression));
-                    logger.info("Table Sharding Strategy Config,Column:{},Algorithm:{}", shardingColumn, algorithmExpression);
-                }
-                tableRuleConfigurations.add(ruleConfiguration);
+            //分表策略
+            LinkedHashMap<String, LinkedHashMap<String, String>> tableStrategyConfig = (LinkedHashMap<String, LinkedHashMap<String, String>>) strategyConfigMap.get(TABLE_STRATEGY);
+            //算法和列
+            LinkedHashMap<String, String> tableAlgorithmColumn = tableStrategyConfig.get("inline");
+            //列名
+            String tbShardingColumn = tableAlgorithmColumn.get("shardingColumn");
+            //算法
+            String tbAlgorithmExpression = tableAlgorithmColumn.get("algorithmExpression");
+
+            //表规则配置信息
+            TableRuleConfiguration tableRuleConfiguration = new TableRuleConfiguration(tbName, actualDataNodes);
+
+            //默认自增列值生成器配置，缺省将使用SnowflakeKeyGenerator
+            tableRuleConfiguration.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", tbShardingColumn));
+
+            //设置分片的列和算法
+            if (shardingStrategyInfo.getDatabaseShardingColumn() != null &&
+                    shardingStrategyInfo.getDatabaseAlgorithmExpression() != null) {
+                shardingStrategyInfo.setDatabaseShardingColumn(dbShardingColumn);
+                shardingStrategyInfo.setDatabaseAlgorithmExpression(dbAlgorithmExpression);
             }
-        }
 
-        return tableRuleConfigurations;
+            //设置分表的列和算法
+            if (shardingStrategyInfo.getTableShardingColumn() != null && shardingStrategyInfo.getTableAlgorithmExpression() != null) {
+                shardingStrategyInfo.setTableShardingColumn(tbShardingColumn);
+                shardingStrategyInfo.setTableAlgorithmExpression(tbAlgorithmExpression);
+            }
+
+            tableRuleConfigurations.add(tableRuleConfiguration);
+        }
+        String tableGroups = org.apache.commons.lang3.StringUtils.join(tbNames, ",");
+        shardingStrategyInfo.setBindingTableGroups(tableGroups);
+        shardingStrategyInfo.setTableRuleConfigurations(tableRuleConfigurations);
+
+        return shardingStrategyInfo;
     }
 
 
@@ -304,7 +346,6 @@ public class ShardingConfig {
         }
         return masterSlaveRuleConfigurations;
     }
-
 
 }
 
