@@ -39,19 +39,20 @@ public class ShardingStrategyInfo {
      */
     private String tableAlgorithmExpression;
 
+
     /**
      * 分表策略
      */
-    private List<TableRuleConfiguration> tableRuleConfigurations;
-
+    private List<TableRuleConfiguration> tableRuleConfigurations = new ArrayList<>(4);
 
     public List<TableRuleConfiguration> getTableRuleConfigurations() {
-        return new ArrayList<>(4);
+        return tableRuleConfigurations;
     }
 
     public void setTableRuleConfigurations(List<TableRuleConfiguration> tableRuleConfigurations) {
         this.tableRuleConfigurations = tableRuleConfigurations;
     }
+
 
     public String getBindingTableGroups() {
         return bindingTableGroups;

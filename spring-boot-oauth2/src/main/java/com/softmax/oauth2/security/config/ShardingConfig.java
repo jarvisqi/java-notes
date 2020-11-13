@@ -212,29 +212,30 @@ public class ShardingConfig {
      * @return ShardingRuleConfiguration
      */
     private ShardingRuleConfiguration getShardingRuleConfig() throws ConfigurationException {
-
         if (shardingRule.isEmpty()) {
             throw new ConfigurationException("Sharding rule configuration error");
         }
         // 配置规则
         ShardingRuleConfiguration shardingRuleConfiguration = new ShardingRuleConfiguration();
         //分表规则
-        ShardingStrategyInfo shardingStrategyInfo = getTableRuleConfigurations();
-        for (TableRuleConfiguration tableRuleConfig : shardingStrategyInfo.getTableRuleConfigurations()) {
-            shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfig);
+        ShardingStrategyInfo strategyInfo = getTableRuleConfigurations();
+        if (strategyInfo.getTableRuleConfigurations().size() > 0) {
+            strategyInfo.getTableRuleConfigurations().forEach((tableRuleConfig) -> {
+                shardingRuleConfiguration.getTableRuleConfigs().add(tableRuleConfig);
+            });
         }
 
         //绑定表规则列表
-        shardingRuleConfiguration.getBindingTableGroups().add(shardingStrategyInfo.getBindingTableGroups());
+        shardingRuleConfiguration.getBindingTableGroups().add(strategyInfo.getBindingTableGroups());
 
         //分片规则,配置 t_order 被拆分到多个子库的策略
         shardingRuleConfiguration.setDefaultDatabaseShardingStrategyConfig(
-                new StandardShardingStrategyConfiguration(shardingStrategyInfo.getDatabaseShardingColumn(),
+                new StandardShardingStrategyConfiguration(strategyInfo.getDatabaseShardingColumn(),
                         new PreciseModuloShardingDatabaseAlgorithm()));
 
         //分表规则 t_order 被拆分到多个子表的策略
         shardingRuleConfiguration.setDefaultTableShardingStrategyConfig(
-                new StandardShardingStrategyConfiguration(shardingStrategyInfo.getTableShardingColumn(),
+                new StandardShardingStrategyConfiguration(strategyInfo.getTableShardingColumn(),
                         new PreciseModuloShardingTableAlgorithm()));
 
         //读写分离规则
@@ -293,18 +294,15 @@ public class ShardingConfig {
             tableRuleConfiguration.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", tbShardingColumn));
 
             //设置分片的列和算法
-            if (shardingStrategyInfo.getDatabaseShardingColumn() != null &&
-                    shardingStrategyInfo.getDatabaseAlgorithmExpression() != null) {
+            if (shardingStrategyInfo.getDatabaseShardingColumn() == null && shardingStrategyInfo.getDatabaseAlgorithmExpression() == null) {
                 shardingStrategyInfo.setDatabaseShardingColumn(dbShardingColumn);
                 shardingStrategyInfo.setDatabaseAlgorithmExpression(dbAlgorithmExpression);
             }
-
             //设置分表的列和算法
-            if (shardingStrategyInfo.getTableShardingColumn() != null && shardingStrategyInfo.getTableAlgorithmExpression() != null) {
+            if (shardingStrategyInfo.getTableShardingColumn() == null && shardingStrategyInfo.getTableAlgorithmExpression() == null) {
                 shardingStrategyInfo.setTableShardingColumn(tbShardingColumn);
                 shardingStrategyInfo.setTableAlgorithmExpression(tbAlgorithmExpression);
             }
-
             tableRuleConfigurations.add(tableRuleConfiguration);
         }
         String tableGroups = org.apache.commons.lang3.StringUtils.join(tbNames, ",");
