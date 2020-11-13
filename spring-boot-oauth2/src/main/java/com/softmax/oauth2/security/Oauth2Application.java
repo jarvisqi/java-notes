@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-@MapperScan("com.softmax.oauth2.security.*")
+@MapperScan("com.softmax.oauth2.security.**.dao")
 public class Oauth2Application {
 
     public static void main(String[] args) {

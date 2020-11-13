@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softmax.oauth2.security.order.dao.OrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.softmax.oauth2.security.order.entity.Order">
+        <id column="sysno" jdbcType="BIGINT" property="sysno"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="order_amount" jdbcType="DECIMAL" property="orderAmount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        sysno, order_id, order_amount
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order
+        where sysno = #{sysno,jdbcType=BIGINT}
+    </select>
+
+    <select id="queryOrder" resultType="ArrayList">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order
+    </select>
+
+    <insert id="insert" keyColumn="sysno" keyProperty="sysno"
+            parameterType="com.softmax.oauth2.security.order.entity.Order"
+            useGeneratedKeys="true">
+        INSERT 	INTO 	t_order (order_id, order_amount)
+        VALUES ( #{orderId,jdbcType=BIGINT}, #{orderAmount,jdbcType=DECIMAL})
+  </insert>
+
+    <insert id="insertSelective" keyColumn="sysno" keyProperty="sysno"
+            parameterType="com.softmax.oauth2.security.order.entity.Order" useGeneratedKeys="true">
+        insert into t_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="orderAmount != null">
+                order_amount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmount != null">
+                #{orderAmount,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.softmax.oauth2.security.order.entity.Order">
+        update t_order
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where sysno = #{sysno,jdbcType=BIGINT}
+    </update>
+
+</mapper>

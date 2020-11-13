@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.annotation.Resource;
@@ -34,11 +35,14 @@ public class DataSourceConfig {
     @Primary
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(shardingDataSource);
-        //此处需要扫描文件路径
-        sqlSessionFactoryBean.setMapperLocations(
-                new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
+        //加载全局mybatis的配置文件
+        sqlSessionFactoryBean.setConfigLocation(new DefaultResourceLoader()
+                .getResource("classpath:mybatis/mybatis-config.xml"));
+        // 扫描mapper配置文件
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
+                .getResources("classpath*:/mybatis/mapper/*.xml"));
 
+        sqlSessionFactoryBean.setDataSource(shardingDataSource);
         return sqlSessionFactoryBean.getObject();
     }
 
