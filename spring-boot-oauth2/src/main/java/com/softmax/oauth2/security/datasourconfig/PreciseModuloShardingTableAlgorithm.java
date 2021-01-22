@@ -1,4 +1,4 @@
-package com.softmax.oauth2.security.config;
+package com.softmax.oauth2.security.datasourconfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Range;
