@@ -1,5 +1,5 @@
 import com.softmax.netty.example.HttpServer;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * @author Jarvis
