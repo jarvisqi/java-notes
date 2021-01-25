@@ -1,5 +1,5 @@
 import com.softmax.basic.jvm.sample.MyClassLoader;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * @author Jarvis

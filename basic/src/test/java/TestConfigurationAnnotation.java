@@ -1,7 +1,7 @@
 import com.softmax.spring.config.BeanConfiguration;
 import com.softmax.spring.service.AccountService;
 import com.softmax.spring.service.UserService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
