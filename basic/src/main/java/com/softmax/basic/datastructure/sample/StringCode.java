@@ -21,7 +21,7 @@ public class StringCode {
         //true
         System.out.println(a.equals(b));
         //false
-        System.out.println(a == b);
+        System.out.println(a.equals(b));
 
         //左侧补0
         String str = String.format("%5d", 3).replace(" ", "0");

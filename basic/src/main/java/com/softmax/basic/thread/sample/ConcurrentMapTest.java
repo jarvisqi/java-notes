@@ -2,9 +2,7 @@ package com.softmax.basic.thread.sample;
 
 import com.softmax.basic.locks.sample.SynchronizationLocks;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.LongAccumulator;
 import java.util.concurrent.atomic.LongAdder;
@@ -46,9 +44,16 @@ class ConcurrentMapTest {
          System.out.println(atomicInt.get());
          */
 
-
         //并发计算0~1000所有值的和：
         AtomicInteger atomicInt = new AtomicInteger(0);
+
+        //手动创建线程池
+        ExecutorService threadPool = new ThreadPoolExecutor(5, 10, 0L,
+                TimeUnit.SECONDS, new LinkedBlockingDeque<>());
+        threadPool.execute(null);
+        threadPool.shutdown();
+
+
         ExecutorService executor = Executors.newFixedThreadPool(2);
         //accumulateAndGet()方法接受另一种类型IntBinaryOperator的lambda表达式
         IntStream.range(0, 1000).forEach(i -> {
