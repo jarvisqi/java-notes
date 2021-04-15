@@ -19,8 +19,11 @@ public class ArraysCode {
 //        int[] arrs = {1, 2, 3, 4, 5, 6, 7};
 //        rotate(arrs, 3);
 
-        removeElement(nums, 2);
+//        removeElement(nums, 2);
 
+        int[] arrs = {2, 7, 11, 15};
+        int[] ints = twoSum(arrs, 9);
+        Arrays.stream(ints).forEach(i -> System.out.println(i));
     }
 
     /**
@@ -158,6 +161,24 @@ public class ArraysCode {
         return len;
 
     }
+
+    public static int[] twoSum(int[] nums, int target) {
+        int[] indexs = new int[2];
+
+        // 建立k-v ，一一对应的哈希表
+        HashMap<Integer, Integer> hash = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (hash.containsKey(nums[i])) {
+                indexs[0] = i;
+                indexs[1] = hash.get(nums[i]);
+                return indexs;
+            }
+            // 将数据存入 key为补数 ，value为下标
+            hash.put(target - nums[i], i);
+        }
+        return indexs;
+    }
+
 
 }
 
