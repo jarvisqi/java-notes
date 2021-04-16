@@ -20,10 +20,13 @@ public class ArraysCode {
 //        rotate(arrs, 3);
 
 //        removeElement(nums, 2);
+//
+//        int[] arrs = {2, 7, 11, 15};
+//        int[] ints = twoSum(arrs, 9);
+//        Arrays.stream(ints).forEach(i -> System.out.println(i));
 
-        int[] arrs = {2, 7, 11, 15};
-        int[] ints = twoSum(arrs, 9);
-        Arrays.stream(ints).forEach(i -> System.out.println(i));
+        int anInt = reversalInt(32415);
+        System.out.println(anInt);
     }
 
     /**
@@ -177,6 +180,25 @@ public class ArraysCode {
             hash.put(target - nums[i], i);
         }
         return indexs;
+    }
+
+
+    /**
+     * 反转整数
+     *
+     * @param x
+     * @return
+     */
+    public static int reversalInt(int x) {
+        long result = 0;
+        while (x != 0) {
+            result = result * 10 + x % 10;
+            x = x / 10;
+        }
+        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+            return 0;
+        }
+        return (int) result;
     }
 
 
