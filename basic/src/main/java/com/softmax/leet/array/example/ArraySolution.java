@@ -7,26 +7,32 @@ import java.util.*;
  * @author Jarvis
  * @date 2018/7/24
  */
-public class ArraysCode {
+public class ArraySolution {
 
     public static void main(String[] args) {
+
+        ArraySolution solution = new ArraySolution();
+
         int[] nums = {3, 2, 2, 3};
-        //  removeDuplicates(nums);
+//        solution.removeDuplicates(nums);
 
 //        int[] prices = {7, 1, 5, 3, 6, 4};
-//        maxProfit(prices);
+//        solution.maxProfit(prices);
 //
 //        int[] arrs = {1, 2, 3, 4, 5, 6, 7};
-//        rotate(arrs, 3);
+//        solution.rotate(arrs, 3);
 
-//        removeElement(nums, 2);
+//        solution.removeElement(nums, 2);
 //
 //        int[] arrs = {2, 7, 11, 15};
-//        int[] ints = twoSum(arrs, 9);
+//        int[] ints = solution.twoSum(arrs, 9);
 //        Arrays.stream(ints).forEach(i -> System.out.println(i));
 
-        int anInt = reversalInt(32415);
-        System.out.println(anInt);
+//        int anInt = solution.reversalInt(32415);
+//        System.out.println(anInt);
+
+        solution.PascalTriangle(5);
+
     }
 
     /**
@@ -35,7 +41,7 @@ public class ArraysCode {
      * @param nums 数组
      * @return
      */
-    private static int removeDuplicates(int[] nums) {
+    private int removeDuplicates(int[] nums) {
         int len = nums.length;
         System.out.println("原始长度：" + len);
         if (len == 0 || len == 1) {
@@ -77,7 +83,7 @@ public class ArraysCode {
      * @param prices
      * @return
      */
-    public static int maxProfit(int[] prices) {
+    public int maxProfit(int[] prices) {
         if (0 == prices.length || null == prices) {
             return 0;
         }
@@ -99,7 +105,7 @@ public class ArraysCode {
      * @param nums
      * @param k
      */
-    public static void rotate(int[] nums, int k) {
+    public void rotate(int[] nums, int k) {
 
         int length = nums.length;
         if (length <= 0) {
@@ -151,7 +157,7 @@ public class ArraysCode {
         System.out.println(list);
     }
 
-    public static int removeElement(int[] nums, int val) {
+    public int removeElement(int[] nums, int val) {
         int len = 0;
         int j = 0;
         for (int i = 0; i < nums.length; i++) {
@@ -165,7 +171,7 @@ public class ArraysCode {
 
     }
 
-    public static int[] twoSum(int[] nums, int target) {
+    public int[] twoSum(int[] nums, int target) {
         int[] indexs = new int[2];
 
         // 建立k-v ，一一对应的哈希表
@@ -189,7 +195,7 @@ public class ArraysCode {
      * @param x
      * @return
      */
-    public static int reversalInt(int x) {
+    public int reversalInt(int x) {
         long result = 0;
         while (x != 0) {
             result = result * 10 + x % 10;
@@ -199,6 +205,34 @@ public class ArraysCode {
             return 0;
         }
         return (int) result;
+    }
+
+    /**
+     * 杨辉三角
+     * 给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+     * 每个数是它左上方和右上方的数的和
+     *
+     * @param numRows
+     */
+    public void PascalTriangle(int numRows) {
+        if (numRows == 0) {
+            throw new IllegalArgumentException("参数错误");
+        }
+
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> sub = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    sub.add(1);
+                } else {
+                    List<Integer> upSub = res.get(i - 1);
+                    // 左上方和右上方的数的和
+                    sub.add(upSub.get(j - 1) + upSub.get(j));
+                }
+            }
+            res.add(sub);
+        }
     }
 
 
