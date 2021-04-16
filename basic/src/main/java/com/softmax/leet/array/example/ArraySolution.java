@@ -226,6 +226,7 @@ public class ArraySolution {
                 if (j == 0 || j == i) {
                     sub.add(1);
                 } else {
+                    //上一行的数据
                     List<Integer> upSub = res.get(i - 1);
                     // 左上方和右上方的数的和
                     sub.add(upSub.get(j - 1) + upSub.get(j));
