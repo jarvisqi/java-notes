@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.softmax.oauth2.security</groupId>
-    <artifactId>spring-boot-oauth2</artifactId>
+    <artifactId>oauth2-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-oauth2</name>
+    <name>oauth2-app</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
