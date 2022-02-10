@@ -1,6 +1,5 @@
 package com.framework.filters;
 
-import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
 import com.ctrip.framework.apollo.core.utils.StringUtils;
 import com.framework.common.IOUtil;

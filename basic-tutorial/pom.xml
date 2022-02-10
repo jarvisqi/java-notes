@@ -5,8 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.softmax.basic</groupId>
-    <artifactId>basic</artifactId>
+    <artifactId>basic-tutorial</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <dependencies>
         <!-- hutool -->
         <dependency>

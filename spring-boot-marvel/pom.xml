@@ -6,7 +6,7 @@
     <groupId>com.softmax.marvel</groupId>
     <artifactId>spring-boot-marvel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>spring-boot-marvel</name>
     <description>Demo project for Spring Boot</description>

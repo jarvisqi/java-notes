@@ -8,11 +8,12 @@
         <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.softmax.oauth2.security</groupId>
-    <artifactId>oauth2-security</artifactId>
+    <groupId>com.softmax.oauth2</groupId>
+    <artifactId>spring-boot-oauth2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>oauth2-app</name>
+    <name>spring-boot-oauth2</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>11</java.version>
@@ -109,6 +110,10 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,7 +123,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
-                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
                 </configuration>
             </plugin>
         </plugins>
