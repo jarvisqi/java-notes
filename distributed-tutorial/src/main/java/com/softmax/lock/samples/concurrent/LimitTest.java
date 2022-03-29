@@ -2,6 +2,9 @@ package com.softmax.lock.samples.concurrent;
 
 import java.util.Random;
 
+/**
+ * @author Jarvis
+ */
 public class LimitTest {
 
     public static void main(String[] args) throws InterruptedException {
