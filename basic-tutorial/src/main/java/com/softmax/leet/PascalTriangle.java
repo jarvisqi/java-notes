@@ -38,7 +38,7 @@ public class PascalTriangle {
      *
      * @param n
      */
-    public static void pringInvertedTriangle(int n) {
+    public static void printInvertedTriangle(int n) {
         //最上面一层
         int last = 2 * n - 1;
         //控制打印多少层
@@ -100,17 +100,29 @@ public class PascalTriangle {
     /**
      * 打印三角形数字
      */
-    public static void pringInvertedTriangleOfNum() {
-
+    public static void printInvertedTriangleOfNum() {
+        int rows = 10;
+        for (int i = 0; i < rows; i++) {
+            int number = 1;
+            // 打印空格字符串
+            System.out.format("%" + (rows - i) * 2 + "s", "");
+            for (int j = 0; j <= i; j++) {
+                System.out.format("%4d", number);
+                number = number * (i - j) / (j + 1);
+            }
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
         printForwardTriangle(5);
         System.out.println("\n ================================================");
-        pringInvertedTriangle(5);
+        printInvertedTriangle(5);
         System.out.println("\n ================================================");
         printMultiplicationTable();
         System.out.println("\n ================================================");
         printForwardTriangleOfNum(8);
+        System.out.println("\n ================================================");
+        printInvertedTriangleOfNum();
     }
 }
