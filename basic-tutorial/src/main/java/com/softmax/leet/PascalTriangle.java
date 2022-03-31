@@ -114,6 +114,31 @@ public class PascalTriangle {
         }
     }
 
+    public static void printNum(int n) {
+        //申请二维数组存放杨辉三角数值
+        int[][] a = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            // 格式化输出（第一个数前面）,如"%20s"代表空20个空格
+            System.out.format("%" + (n - i) * 2 + "s", "");
+            //i代表纵坐标，j代表横坐标
+            for (int j = 0; j <= i; j++) {
+                // ||或者，即满足任意一个
+                if (j == 0 || j == i) {
+                    //每一行第一个数和最后一个数都为1
+                    a[i][j] = 1;
+                } else {
+                    //杨辉三角的值等于其上一层两个值之和；a[i][j]代表数组坐标的位置，i代表纵坐标，j代表横坐标
+                    //a[i - 1][j - 1]代表上一层两个值中的前一个；a[i - 1][j]代表上一层两个值中的后一个，注：索引都是从0开始
+                    a[i][j] = a[i - 1][j - 1] + a[i - 1][j];
+                }
+                //分别输出i和j的值，i的值输出按原样输出，对于j就是按3位的固定位宽输出（不足4位，在前面补空格；超过4位，按实际位数输出）,
+                //即输出宽度为4，不够的用空格填充，比如你的数本来宽2，就加2个空格；本来宽3，就加1个空格。
+                System.out.format("%4d", a[i][j]);
+            }
+            System.out.println();//换行
+        }
+    }
+
     public static void main(String[] args) {
         printForwardTriangle(5);
         System.out.println("\n ================================================");
@@ -124,5 +149,8 @@ public class PascalTriangle {
         printForwardTriangleOfNum(8);
         System.out.println("\n ================================================");
         printInvertedTriangleOfNum();
+        System.out.println("\n ================================================");
+        printNum(20);
+
     }
 }
