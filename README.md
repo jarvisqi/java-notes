@@ -13,3 +13,6 @@
 >oauth2.0 协议实践  
 >sharding 分库（片）分表读写分离 
 
+<img src="https://www.jetbrains.com/favicon.ico?r=1234">  
+
+https://www.jetbrains.com/
