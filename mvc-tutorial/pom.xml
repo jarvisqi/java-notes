@@ -14,8 +14,8 @@
         <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring.version>5.2.4.RELEASE</spring.version>
-        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+        <spring.version>5.3.18</spring.version>
+        <thymeleaf.version>3.0.13.RELEASE</thymeleaf.version>
         <servlet.version>4.0.1</servlet.version>
     </properties>
 
@@ -59,7 +59,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.10.7</version>
+            <version>2.12.6.1</version>
         </dependency>
     </dependencies>
     <build>
