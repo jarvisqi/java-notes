@@ -1,7 +1,7 @@
 package com.softmax.basic.datastructure.sample;
 
 /**
- * 数的阶乘
+ * ,
  * n! = n*(n-1)*(n-2)*......1
  *
  * @author Jarvis
