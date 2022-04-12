@@ -71,6 +71,16 @@ public class Stack {
         }
     }
 
+    /**
+     * 清空栈
+     * @param stack
+     */
+    public static void clearStack(Stack stack) {
+
+        stack.stackTop = null;
+        stack.stackBottom = stack.stackTop;
+    }
+
     public static void main(String[] args) {
         //初始化栈(无元素)
         Stack stack = new Stack(new Node(), new Node());
