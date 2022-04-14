@@ -186,16 +186,16 @@ public class LRUCache {
     public static void main(String[] args) {
         LRUCache lru = new LRUCache(5);
         //设置数据
-        lru.put("key1", "1号技师");
-        lru.put("key2", "2号技师");
-        lru.put("key3", "3号技师");
-        lru.put("key4", "4号技师");
-        lru.put("key5", "5号技师");
+        lru.put("key1", "AAA");
+        lru.put("key2", "BBB");
+        lru.put("key3", "CCC");
+        lru.put("key4", "DDD");
+        lru.put("key5", "EEE");
         System.out.println("原始链表：" + lru.toString());
 
         System.out.println("获取key为4的元素之后的链表:" + lru.toString());
 
-        lru.put("key6", "6号技师");
+        lru.put("key6", "FFF");
         System.out.println("新添加一个key为6之后的链表:" + lru.toString());
 
         lru.remove("key3");
