@@ -1,5 +1,8 @@
 package com.softmax.leet;
 
+/**
+ * @author Jarvis
+ */
 public class Elem {
     public int value;
 

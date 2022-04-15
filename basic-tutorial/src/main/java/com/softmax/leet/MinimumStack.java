@@ -1,5 +1,8 @@
 package com.softmax.leet;
 
+/**
+ * @author Jarvis
+ */
 public class MinimumStack {
 
     public Elem top;
@@ -40,6 +43,20 @@ public class MinimumStack {
             return -1;
         }
         return top.min;
+
+    }
+
+    public static void main(String[] args) {
+        MinimumStack stack = new MinimumStack();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        System.out.println("最小堆：" + stack.getMin());
+        stack.pop();
+        stack.pop();
+        stack.pop();
+        System.out.println(stack.top);
+        System.out.println("最小堆：" + stack.getMin());
 
     }
 }
