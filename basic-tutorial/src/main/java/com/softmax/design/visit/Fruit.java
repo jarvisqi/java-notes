@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 /**
  * 酒类
+ * @author Jarvis
  */
 public class Fruit extends Product {
 

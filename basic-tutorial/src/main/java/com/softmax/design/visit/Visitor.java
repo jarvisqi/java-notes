@@ -1,5 +1,8 @@
 package com.softmax.design.visit;
 
+/**
+ * @author Jarvis
+ */
 public interface Visitor {
 
     public void visit(Candy candy);

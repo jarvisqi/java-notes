@@ -2,6 +2,9 @@ package com.softmax.design.visit;
 
 import java.time.LocalDate;
 
+/**
+ * @author Jarvis
+ */
 public class Product {
 
     /**

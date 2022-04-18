@@ -3,6 +3,9 @@ package com.softmax.design.visit;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 
+/**
+ * @author Jarvis
+ */
 public class DiscountVisitor implements Visitor {
 
     private LocalDate billDate;
