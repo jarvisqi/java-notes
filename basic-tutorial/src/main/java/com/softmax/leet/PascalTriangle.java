@@ -107,7 +107,8 @@ public class PascalTriangle {
             // 打印空格字符串
             System.out.format("%" + (rows - i) * 2 + "s", "");
             for (int j = 0; j <= i; j++) {
-                System.out.format("%4d", number);
+                System.out.format("%4s", number);
+//                System.out.format("%4d", number);
                 number = number * (i - j) / (j + 1);
             }
             System.out.println();
@@ -140,6 +141,7 @@ public class PascalTriangle {
     }
 
     public static void main(String[] args) {
+
         printForwardTriangle(5);
         System.out.println("\n ================================================");
         printInvertedTriangle(5);
