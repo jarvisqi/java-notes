@@ -13,8 +13,8 @@ public class ArraySolution {
 
         ArraySolution solution = new ArraySolution();
 
-        int[] nums = {3, 2, 2, 3};
-//        solution.removeDuplicates(nums);
+        int[] nums = {0, 0, 1, 1, 2, 2, 3, 3};
+        solution.removeDuplicates(nums);
 
 //        int[] prices = {7, 1, 5, 3, 6, 4};
 //        solution.maxProfit(prices);
@@ -48,20 +48,20 @@ public class ArraySolution {
             return len;
         }
 
-//        ArrayList<Integer> list = new ArrayList<>();
-//        for (int item : nums) {
-//            if (!list.contains(item)) {
-//                list.add(item);
-//            }
-//        }
-//        int size = list.size();
-//        for (int i = 0; i < size; i++) {
-//            nums[i] = list.get(i);
-//        }
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int item : nums) {
+            if (!list.contains(item)) {
+                list.add(item);
+            }
+        }
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            nums[i] = list.get(i);
+        }
 
         //去重
-//        nums = Arrays.stream(nums).distinct().toArray();
-//        int size = nums.length;
+        nums = Arrays.stream(nums).distinct().toArray();
+        size = nums.length;
 
         int i = 0;
         for (int j = 1; j < nums.length; j++) {
@@ -70,8 +70,7 @@ public class ArraySolution {
                 nums[i] = nums[j];
             }
         }
-        int size = i + 1;
-
+        size = i + 1;
 
         System.out.println("新的长度：" + size);
         return size;

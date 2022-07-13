@@ -149,7 +149,6 @@ public class SingleLinkedList {
     }
 
 
-
     public static void main(String[] args) {
         SingleLinkedList singleList = new SingleLinkedList();
         singleList.addHead("A");
