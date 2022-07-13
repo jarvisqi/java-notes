@@ -1,6 +1,11 @@
 package com.softmax.design.decorator;
 
-public class ClientTest {
+/**
+ * 装饰模式：
+ * 每个组件或者各司其职，不做和自己不相关的事，然后把部件层层叠加，并根据需求组装成型，以达最终的装饰目的。
+ * new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
+ */
+public class Client {
 
     public static void main(String[] args) {
         // step1，我们需要一个基础饮料，红茶、绿茶或咖啡
