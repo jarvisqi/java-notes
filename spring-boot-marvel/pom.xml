@@ -6,7 +6,7 @@
     <groupId>com.softmax.marvel</groupId>
     <artifactId>spring-boot-marvel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>spring-boot-marvel</name>
     <description>Demo project for Spring Boot</description>
@@ -82,7 +82,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
         <!--JDBC-->
