@@ -20,9 +20,9 @@ import static com.softmax.mq.courier.rocket.springboot.Producer.TX_PGROUP_NAME;
 @RocketMQTransactionListener(txProducerGroup = TX_PGROUP_NAME)
 public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
 
-    private AtomicInteger transactionIndex = new AtomicInteger(0);
+    private final AtomicInteger transactionIndex = new AtomicInteger(0);
 
-    private ConcurrentHashMap<String, Integer> localTrans = new ConcurrentHashMap<>(4);
+    private final ConcurrentHashMap<String, Integer> localTrans = new ConcurrentHashMap<>(4);
 
     @Override
     public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
@@ -32,6 +32,7 @@ public class TransactionListenerImpl implements RocketMQLocalTransactionListener
         //获取增量
         int value = transactionIndex.getAndIncrement();
         int status = value % 3;
+        assert transId != null;
         localTrans.put(transId, status);
         if (status == 0) {
             System.out.printf("    # COMMIT # 模拟消息 %s 本地事务执行成功! ### %n", message.getPayload());
