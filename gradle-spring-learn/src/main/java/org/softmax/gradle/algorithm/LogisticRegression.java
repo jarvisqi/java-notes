@@ -1,4 +1,4 @@
-package org.softmax.gradle.ml;
+package org.softmax.gradle.algorithm;
 
 import org.ujmp.core.DenseMatrix;
 import org.ujmp.core.Matrix;
