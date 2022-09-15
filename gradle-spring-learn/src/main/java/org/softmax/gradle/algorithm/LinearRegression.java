@@ -1,7 +1,16 @@
 package org.softmax.gradle.algorithm;
 
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Jarvis
+ */
+@Component
 public class LinearRegression {
 
     /**
@@ -19,7 +28,6 @@ public class LinearRegression {
 
         return regression.estimateRegressionParameters();
     }
-
 
     /**
      * 干热风线性回归方程
@@ -77,5 +85,38 @@ public class LinearRegression {
     public double lineWtr(double x1, double x2) {
 
         return -0.07705596 + x1 * 0.02364479 + x2 * 0.15185185;
+    }
+
+    /**
+     * 干旱 损失率回归函数
+     *
+     * @param x
+     * @return
+     */
+    public double droughtFun(double x) {
+
+        return 0.00009046 + x * 0.06021913;
+    }
+
+    /**
+     * 病虫害 损失率回归函数
+     *
+     * @param x
+     * @return
+     */
+    public double pestFun(double x) {
+
+        return 0.00011161 + x * 0.06047739;
+    }
+
+    /**
+     * 暴风 损失率回归函数
+     *
+     * @param x
+     * @return
+     */
+    public double stormFUn(double x) {
+
+        return 0.00018171 + x * 0.06023479;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * @author Jarvis
@@ -20,10 +21,12 @@ public class RegressionController {
 
     private final YamlUtils yamlUtils;
     private final DataUtils dataUtils;
+    private final LinearRegression linearRegression;
 
-    public RegressionController(YamlUtils yamlUtils, DataUtils dataUtils) {
+    public RegressionController(YamlUtils yamlUtils, DataUtils dataUtils, LinearRegression linearRegression) {
         this.yamlUtils = yamlUtils;
         this.dataUtils = dataUtils;
+        this.linearRegression = linearRegression;
     }
 
     /**
@@ -52,7 +55,6 @@ public class RegressionController {
     @RequestMapping(value = "/line/dwh/fun")
     public String lineDwhFun() {
         SampleInfo sampleInfo = yamlUtils.loadDhwData();
-        LinearRegression regression = new LinearRegression();
         double[][] features = sampleInfo.features;
         double[] levels = sampleInfo.levels;
         double[] dhws = Arrays.stream(levels).filter(x -> x != 0.0d).toArray();
@@ -69,7 +71,7 @@ public class RegressionController {
             }
             j++;
         }
-        double[] train = regression.train(lineFeatures, newLevels);
+        double[] train = linearRegression.train(lineFeatures, newLevels);
         StringBuilder funText = new StringBuilder("f(x)=");
         for (int i = 0; i < train.length; i++) {
             DecimalFormat format = new DecimalFormat("#.########");
@@ -89,8 +91,6 @@ public class RegressionController {
      */
     @RequestMapping(value = "/line/dwh/predict")
     public void lineRegressionDwhApi() {
-        LinearRegression regression = new LinearRegression();
-
         double[][] data = new double[5][3];
         data[0] = new double[]{37.6, 24, 3.4};
         data[1] = new double[]{36.1, 95, 3.7};
@@ -104,7 +104,7 @@ public class RegressionController {
          */
 
         for (double[] datum : data) {
-            double level = regression.lineDwh(datum[0], datum[1], datum[2]);
+            double level = linearRegression.lineDwh(datum[0], datum[1], datum[2]);
             System.out.println(level);
         }
     }
@@ -154,8 +154,7 @@ public class RegressionController {
             }
             j++;
         }
-        LinearRegression regression = new LinearRegression();
-        double[] train = regression.train(lineFeatures, lineLevels);
+        double[] train = linearRegression.train(lineFeatures, lineLevels);
         StringBuilder funText = new StringBuilder("f(x)=");
         for (int i = 0; i < train.length; i++) {
             DecimalFormat format = new DecimalFormat("#.########");
@@ -175,8 +174,6 @@ public class RegressionController {
      */
     @RequestMapping(value = "/line/frosty/predict")
     public void lineFrostyApi() {
-        LinearRegression regression = new LinearRegression();
-
         double[][] data = new double[6][4];
         data[0] = new double[]{1, 10, -8.5, 1}; //0.9
         data[1] = new double[]{2, 6, -9, 1};  //0.8
@@ -190,7 +187,7 @@ public class RegressionController {
          *  y < 0.5 风险为：低
          */
         for (double[] datum : data) {
-            double level = regression.lineFrosty(datum[0], datum[1], datum[2], datum[3]);
+            double level = linearRegression.lineFrosty(datum[0], datum[1], datum[2], datum[3]);
             System.out.println(level);
         }
     }
@@ -241,8 +238,7 @@ public class RegressionController {
             }
             j++;
         }
-        LinearRegression regression = new LinearRegression();
-        double[] train = regression.train(lineFeatures, lineLevels);
+        double[] train = linearRegression.train(lineFeatures, lineLevels);
         StringBuilder funText = new StringBuilder("f(x)=");
         for (int i = 0; i < train.length; i++) {
             DecimalFormat format = new DecimalFormat("#.########");
@@ -262,7 +258,6 @@ public class RegressionController {
      */
     @RequestMapping(value = "/line/wd/predict")
     public void lineWdApi() {
-        LinearRegression regression = new LinearRegression();
 
         double[][] data = new double[6][1];
         data[0] = new double[]{3};
@@ -273,7 +268,7 @@ public class RegressionController {
         data[5] = new double[]{35};
 
         for (double[] datum : data) {
-            double level = regression.lineWd(datum[0]);
+            double level = linearRegression.lineWd(datum[0]);
             System.out.println(level);
         }
     }
@@ -324,9 +319,8 @@ public class RegressionController {
             }
             j++;
         }
-        LinearRegression regression = new LinearRegression();
 
-        double[] train = regression.train(lineFeatures, lineLevels);
+        double[] train = linearRegression.train(lineFeatures, lineLevels);
         StringBuilder funText = new StringBuilder("f(x)=");
         for (int i = 0; i < train.length; i++) {
             DecimalFormat format = new DecimalFormat("#.########");
@@ -346,8 +340,6 @@ public class RegressionController {
      */
     @RequestMapping(value = "/line/drt/predict")
     public void lineDrtApi() {
-        LinearRegression regression = new LinearRegression();
-
         double[][] data = new double[4][1];
         data[0] = new double[]{-3};
         data[1] = new double[]{-20};
@@ -355,7 +347,7 @@ public class RegressionController {
         data[3] = new double[]{-120};
 
         for (double[] datum : data) {
-            double level = regression.lineDrt(datum[0]);
+            double level = linearRegression.lineDrt(datum[0]);
             System.out.println(level);
         }
     }
@@ -406,8 +398,8 @@ public class RegressionController {
             }
             j++;
         }
-        LinearRegression regression = new LinearRegression();
-        double[] train = regression.train(lineFeatures, lineLevels);
+
+        double[] train = linearRegression.train(lineFeatures, lineLevels);
         StringBuilder funText = new StringBuilder("f(x)=");
         for (int i = 0; i < train.length; i++) {
             DecimalFormat format = new DecimalFormat("#.########");
@@ -427,8 +419,6 @@ public class RegressionController {
      */
     @RequestMapping(value = "/line/wtr/predict")
     public void lineWtrApi() {
-        LinearRegression regression = new LinearRegression();
-
         double[][] data = new double[4][1];
         data[0] = new double[]{1.1, 4};
         data[1] = new double[]{1.2, 6};
@@ -436,8 +426,78 @@ public class RegressionController {
         data[3] = new double[]{8, 6};
 
         for (double[] datum : data) {
-            double level = regression.lineWtr(datum[0], datum[1]);
+            double level = linearRegression.lineWtr(datum[0], datum[1]);
             System.out.println(level);
+        }
+    }
+
+
+    /**
+     * 损失率线性回归方程
+     */
+    @RequestMapping(value = "/line/loss/fun")
+    public void lineDroughtFun() {
+        String[] files = new String[]{"loss-rate/drought.yml", "loss-rate/pest.yml", "loss-rate/storm.yml"};
+        String[] nodes = new String[]{"drought", "pest", "storm"};
+
+        for (int i = 0; i < files.length; i++) {
+            String file = files[i];
+            String node = nodes[i];
+
+            SampleInfo sample = yamlUtils.loadLossRateData(file, node);
+            //训练模型
+            double[] train = linearRegression.train(sample.features, sample.targets);
+            StringBuilder funText = new StringBuilder("f(x)=");
+            for (int j = 0; j < train.length; j++) {
+                DecimalFormat format = new DecimalFormat("#.########");
+                if (j == 0) {
+                    funText.append(format.format(train[0]));
+                } else {
+                    String parameter = String.format("+ x%s*%s ", j, format.format(train[j]));
+                    funText.append(parameter);
+                }
+            }
+            System.out.println(node + "回归方程：" + funText);
+        }
+    }
+
+
+    /**
+     * 干旱 线性回归预测
+     */
+    @RequestMapping(value = "/line/loss/predict")
+    public void lineLossApi() {
+
+        DecimalFormat format = new DecimalFormat("#.####");
+
+        double[][] dataDrt = new double[3][1];
+        dataDrt[0] = new double[]{0.122426852, 2.026832442};
+        dataDrt[1] = new double[]{0.069385724, 1.148716039};
+        dataDrt[2] = new double[]{0.022935, 0.369002};
+
+        for (double[] datum : dataDrt) {
+            double level = linearRegression.droughtFun(datum[1]);
+            System.out.println("【干旱】损失率 预测值：" + format.format(level) + " 实际值：" + format.format(datum[0]));
+        }
+
+        double[][] dataPest = new double[3][1];
+        dataPest[0] = new double[]{0.1812, 2.999867};
+        dataPest[1] = new double[]{0.293842225, 4.864720056};
+        dataPest[2] = new double[]{0.063, 1.030707};
+
+        for (double[] datum : dataPest) {
+            double level = linearRegression.pestFun(datum[1]);
+            System.out.println("【病虫害】损失率 预测值：" + format.format(level) + " 实际值：" + format.format(datum[0]));
+        }
+
+        double[][] dataStorm = new double[3][1];
+        dataStorm[0] = new double[]{0.256, 4.238218};
+        dataStorm[1] = new double[]{0.074116938, 1.227043892};
+        dataStorm[2] = new double[]{0.039455, 0.657589};
+
+        for (double[] datum : dataStorm) {
+            double level = linearRegression.stormFUn(datum[1]);
+            System.out.println("【暴风】损失率 预测值：" + format.format(level) + " 实际值：" + format.format(datum[0]));
         }
     }
 

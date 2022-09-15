@@ -5,6 +5,7 @@ import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class YamlUtils {
      */
     public SampleInfo loadDhwData() {
         //加载样本
-        List<Map<String, String>> dhws = loadConfig("dhw.yml", "dhws");
+        List<Map<String, String>> dhws = loadConfig("index/dhw.yml", "dhws");
 
         double features[][] = new double[dhws.size()][];
         double targets[] = new double[dhws.size()];
@@ -48,7 +49,7 @@ public class YamlUtils {
      */
     public SampleInfo loadFrostyData() {
         //加载样本
-        List<Map<String, String>> frosty = loadConfig("frosty.yml", "frosty");
+        List<Map<String, String>> frosty = loadConfig("index/frosty.yml", "frosty");
 
         double features[][] = new double[frosty.size()][];
         double targets[] = new double[frosty.size()];
@@ -76,7 +77,7 @@ public class YamlUtils {
      */
     public SampleInfo loadWdData() {
         //加载样本
-        List<Map<String, String>> wds = loadConfig("wd.yml", "wds");
+        List<Map<String, String>> wds = loadConfig("index/wd.yml", "wds");
         double features[][] = new double[wds.size()][];
         double targets[] = new double[wds.size()];
         double level[] = new double[wds.size()];
@@ -101,7 +102,7 @@ public class YamlUtils {
      */
     public SampleInfo loadDrtData() {
         //加载样本
-        List<Map<String, String>> drts = loadConfig("drt.yml", "drts");
+        List<Map<String, String>> drts = loadConfig("index/drt.yml", "drts");
         double features[][] = new double[drts.size()][];
         double targets[] = new double[drts.size()];
         double level[] = new double[drts.size()];
@@ -126,7 +127,7 @@ public class YamlUtils {
      */
     public SampleInfo loadWtrData() {
         //加载样本
-        List<Map<String, String>> wtrs = loadConfig("wtr.yml", "wtrs");
+        List<Map<String, String>> wtrs = loadConfig("index/wtr.yml", "wtrs");
         double features[][] = new double[wtrs.size()][];
         double targets[] = new double[wtrs.size()];
         double level[] = new double[wtrs.size()];
@@ -143,6 +144,33 @@ public class YamlUtils {
         }
         return new SampleInfo(features, targets, level);
     }
+
+
+    /**
+     * 加载损失率样本
+     *
+     * @param fileName
+     * @param nodeName
+     * @return
+     */
+    public SampleInfo loadLossRateData(String fileName, String nodeName) {
+        //加载样本
+        List<Map<String, String>> dataList = loadConfig(fileName, nodeName);
+        double features[][] = new double[dataList.size()][];
+        double targets[] = new double[dataList.size()];
+        int i = 0;
+        for (Map<String, String> item : dataList) {
+            //赔付率
+            double cr = Double.parseDouble(item.get("cr"));
+            //赔付率
+            double lr = Double.parseDouble(item.get("lr"));
+            features[i] = new double[]{cr};
+            targets[i] = lr;
+            i++;
+        }
+        return new SampleInfo(features, targets);
+    }
+
 
     private List<Map<String, String>> loadConfig(String fileName, String nodeName) {
         YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();

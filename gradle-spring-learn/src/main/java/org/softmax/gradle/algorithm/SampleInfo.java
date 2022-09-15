@@ -9,6 +9,12 @@ public class SampleInfo {
     public double[] targets;
     public double[] levels;
 
+    public SampleInfo(double[][] features, double[] targets) {
+        this.features = features;
+        this.targets = targets;
+    }
+
+
     public SampleInfo(double[][] features, double[] targets, double[] level) {
         this.features = features;
         this.targets = targets;
