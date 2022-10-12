@@ -115,7 +115,7 @@ public class LinearRegression {
      * @param x
      * @return
      */
-    public double stormFUn(double x) {
+    public double stormFun(double x) {
 
         return 0.00018171 + x * 0.06023479;
     }
