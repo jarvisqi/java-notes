@@ -496,7 +496,7 @@ public class RegressionController {
         dataStorm[2] = new double[]{0.039455, 0.657589};
 
         for (double[] datum : dataStorm) {
-            double level = linearRegression.stormFUn(datum[1]);
+            double level = linearRegression.stormFun(datum[1]);
             System.out.println("【暴风】损失率 预测值：" + format.format(level) + " 实际值：" + format.format(datum[0]));
         }
     }
