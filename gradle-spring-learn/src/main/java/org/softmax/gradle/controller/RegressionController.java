@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.Map;
 
 /**
  * @author Jarvis
@@ -59,8 +58,8 @@ public class RegressionController {
         double[] levels = sampleInfo.levels;
         double[] dhws = Arrays.stream(levels).filter(x -> x != 0.0d).toArray();
         // 去掉level为0的样本
-        double lineFeatures[][] = new double[dhws.length][];
-        double newLevels[] = new double[dhws.length];
+        double[][] lineFeatures = new double[dhws.length][];
+        double[] newLevels = new double[dhws.length];
         int j = 0;
         for (int i = 0; i < levels.length; i++) {
             if (levels[i] == 0.0d) {
@@ -142,8 +141,8 @@ public class RegressionController {
         //训练模型
         double[] frosty = Arrays.stream(levels).filter(x -> x != 0.0d).toArray();
         // 去掉level为0的样本
-        double lineFeatures[][] = new double[frosty.length][];
-        double lineLevels[] = new double[frosty.length];
+        double[][] lineFeatures = new double[frosty.length][];
+        double[] lineLevels = new double[frosty.length];
         int j = 0;
         for (int i = 0; i < levels.length; i++) {
             if (levels[i] == 0.0d) {
@@ -226,8 +225,8 @@ public class RegressionController {
         //训练模型
         double[] frosty = Arrays.stream(levels).filter(x -> x != 0.0d).toArray();
         // 去掉level为0的样本
-        double lineFeatures[][] = new double[frosty.length][];
-        double lineLevels[] = new double[frosty.length];
+        double[][] lineFeatures = new double[frosty.length][];
+        double[] lineLevels = new double[frosty.length];
         int j = 0;
         for (int i = 0; i < levels.length; i++) {
             if (levels[i] == 0.0d) {
@@ -307,8 +306,8 @@ public class RegressionController {
         //训练模型
         double[] frosty = Arrays.stream(levels).filter(x -> x != 0.0d).toArray();
         // 去掉level为0的样本
-        double lineFeatures[][] = new double[frosty.length][];
-        double lineLevels[] = new double[frosty.length];
+        double[][] lineFeatures = new double[frosty.length][];
+        double[] lineLevels = new double[frosty.length];
         int j = 0;
         for (int i = 0; i < levels.length; i++) {
             if (levels[i] == 0.0d) {
@@ -386,8 +385,8 @@ public class RegressionController {
         //训练模型
         double[] frosty = Arrays.stream(levels).filter(x -> x != 0.0d).toArray();
         // 去掉level为0的样本
-        double lineFeatures[][] = new double[frosty.length][];
-        double lineLevels[] = new double[frosty.length];
+        double[][] lineFeatures = new double[frosty.length][];
+        double[] lineLevels = new double[frosty.length];
         int j = 0;
         for (int i = 0; i < levels.length; i++) {
             if (levels[i] == 0.0d) {
