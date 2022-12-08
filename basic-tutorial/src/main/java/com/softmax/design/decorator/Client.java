@@ -1,29 +1,29 @@
 package com.softmax.design.decorator;
 
 /**
- * ×°ÊÎÄ£Ê½£º
- * Ã¿¸ö×é¼ş»òÕß¸÷Ë¾ÆäÖ°£¬²»×öºÍ×Ô¼º²»Ïà¹ØµÄÊÂ£¬È»ºó°Ñ²¿¼ş²ã²ãµş¼Ó£¬²¢¸ù¾İĞèÇó×é×°³ÉĞÍ£¬ÒÔ´ï×îÖÕµÄ×°ÊÎÄ¿µÄ¡£
+ * è£…é¥°æ¨¡å¼ï¼š
+ * æ¯ä¸ªç»„ä»¶æˆ–è€…å„å¸å…¶èŒï¼Œä¸åšå’Œè‡ªå·±ä¸ç›¸å…³çš„äº‹ï¼Œç„¶åæŠŠéƒ¨ä»¶å±‚å±‚å åŠ ï¼Œå¹¶æ ¹æ®éœ€æ±‚ç»„è£…æˆå‹ï¼Œä»¥è¾¾æœ€ç»ˆçš„è£…é¥°ç›®çš„ã€‚
  * new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
  */
 public class Client {
 
     public static void main(String[] args) {
-        // step1£¬ÎÒÃÇĞèÒªÒ»¸ö»ù´¡ÒûÁÏ£¬ºì²è¡¢ÂÌ²è»ò¿§·È
+        // step1ï¼Œæˆ‘ä»¬éœ€è¦ä¸€ä¸ªåŸºç¡€é¥®æ–™ï¼Œçº¢èŒ¶ã€ç»¿èŒ¶æˆ–å’–å•¡
         Beverage beverage = new GreenTea();
 
-        //step2£¬¿ªÊ¼×°ÊÎ£¬¼´¼Óµ÷Î¶¼Á
+        //step2ï¼Œå¼€å§‹è£…é¥°ï¼Œå³åŠ è°ƒå‘³å‰‚
 
-        //¼ÓÄûÃÊ
+        //åŠ æŸ æª¬
         beverage = new Lemon(beverage);
-        //¼ÓÃ¢¹û
+        //åŠ èŠ’æœ
         beverage = new Mango(beverage);
 
-        //step3£¬Êä³ö´òÓ¡
-        System.out.println("ÒûÁÏ£º" + beverage.getDescription() + "£»\n ¼Û¸ñ£º £¤" + beverage.cost());
+        //step3ï¼Œè¾“å‡ºæ‰“å°
+        System.out.println("é¥®æ–™ï¼š" + beverage.getDescription() + "ï¼›\n ä»·æ ¼ï¼š ï¿¥" + beverage.cost());
 
-        //Ë«Ã¢¹û-Ë«·İÄûÃÊ-ºì²è£º
+        //åŒèŠ’æœ-åŒä»½æŸ æª¬-çº¢èŒ¶ï¼š
         beverage = new Mango(new Mango(new Lemon(new Lemon(new BlackTea()))));
-        System.out.println("ÒûÁÏ£º" + beverage.getDescription() + "£»\n ¼Û¸ñ£º £¤" + beverage.cost());
+        System.out.println("é¥®æ–™ï¼š" + beverage.getDescription() + "ï¼›\n ä»·æ ¼ï¼š ï¿¥" + beverage.cost());
 
     }
 }
