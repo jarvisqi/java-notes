@@ -2,6 +2,7 @@ package org.softmax.gradle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * gradle + spring boot 3
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Jarvis
  */
 @SpringBootApplication
+@EnableDiscoveryClient
 public class LearnApplication {
 
     public static void main(String[] args) {
