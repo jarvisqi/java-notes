@@ -1,10 +1,10 @@
-package org.softmax.gradle.controller;
+package org.softmax.gradle.learn.controller;
 
-import org.softmax.gradle.algorithm.LinearRegression;
-import org.softmax.gradle.algorithm.LogisticRegression;
-import org.softmax.gradle.algorithm.SampleInfo;
-import org.softmax.gradle.utils.DataUtils;
-import org.softmax.gradle.utils.YamlUtils;
+import org.softmax.gradle.learn.algorithm.LinearRegression;
+import org.softmax.gradle.learn.algorithm.LogisticRegression;
+import org.softmax.gradle.learn.algorithm.SampleInfo;
+import org.softmax.gradle.learn.utils.DataUtils;
+import org.softmax.gradle.learn.utils.YamlUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

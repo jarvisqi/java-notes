@@ -1,4 +1,4 @@
-package org.softmax.gradle.controller;
+package org.softmax.gradle.learn.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
