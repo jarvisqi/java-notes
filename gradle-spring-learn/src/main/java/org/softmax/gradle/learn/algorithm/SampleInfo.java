@@ -1,4 +1,4 @@
-package org.softmax.gradle.algorithm;
+package org.softmax.gradle.learn.algorithm;
 
 /**
  * @author Jarvis

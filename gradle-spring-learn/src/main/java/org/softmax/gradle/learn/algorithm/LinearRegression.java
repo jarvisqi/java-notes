@@ -1,4 +1,4 @@
-package org.softmax.gradle.algorithm;
+package org.softmax.gradle.learn.algorithm;
 
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 import org.apache.commons.math3.stat.regression.SimpleRegression;

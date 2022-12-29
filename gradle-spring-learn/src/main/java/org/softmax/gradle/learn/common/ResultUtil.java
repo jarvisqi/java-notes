@@ -1,4 +1,4 @@
-package org.softmax.gradle.common;
+package org.softmax.gradle.learn.common;
 
 public class ResultUtil {
 
