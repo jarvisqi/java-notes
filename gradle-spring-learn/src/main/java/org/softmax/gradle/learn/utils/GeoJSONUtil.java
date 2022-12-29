@@ -1,4 +1,4 @@
-package org.softmax.gradle.utils;
+package org.softmax.gradle.learn.utils;
 
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;

@@ -1,4 +1,4 @@
-package org.softmax.gradle.utils;
+package org.softmax.gradle.learn.utils;
 
 import org.geotools.data.FeatureSource;
 import org.geotools.data.collection.CollectionFeatureSource;

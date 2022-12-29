@@ -1,6 +1,5 @@
-package org.softmax.gradle.utils;
+package org.softmax.gradle.learn.utils;
 
-import Jama.Matrix;
 import net.sf.json.JSONObject;
 import org.geotools.data.DataUtilities;
 import org.geotools.data.FeatureSource;
@@ -18,7 +17,7 @@ import org.locationtech.jts.geom.Geometry;
 import org.opengis.feature.Feature;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
-import org.softmax.gradle.kriging.algorithm.Kriging;
+import org.softmax.gradle.learn.kriging.algorithm.Kriging;
 import wcontour.Contour;
 import wcontour.global.Border;
 import wcontour.global.PointD;
@@ -27,7 +26,6 @@ import wcontour.global.Polygon;
 import wcontour.Interpolate;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

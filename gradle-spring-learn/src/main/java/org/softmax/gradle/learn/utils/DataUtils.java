@@ -1,4 +1,4 @@
-package org.softmax.gradle.utils;
+package org.softmax.gradle.learn.utils;
 
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.springframework.stereotype.Component;

@@ -1,11 +1,10 @@
-package org.softmax.gradle.utils;
+package org.softmax.gradle.learn.utils;
 
-import org.softmax.gradle.algorithm.SampleInfo;
+import org.softmax.gradle.learn.algorithm.SampleInfo;
 import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
