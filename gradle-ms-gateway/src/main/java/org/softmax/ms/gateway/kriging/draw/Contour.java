@@ -5,7 +5,6 @@
 package org.softmax.ms.gateway.kriging.draw;
 
 
-import org.softmax.gradle.learn.kriging.draw.spatial.*;
 import org.softmax.ms.gateway.kriging.draw.spatial.*;
 
 import java.util.ArrayList;
