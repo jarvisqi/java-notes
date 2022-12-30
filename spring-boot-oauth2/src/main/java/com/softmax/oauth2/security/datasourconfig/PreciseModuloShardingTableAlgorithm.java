@@ -1,5 +1,6 @@
 package com.softmax.oauth2.security.datasourconfig;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Range;
 import lombok.SneakyThrows;
@@ -44,8 +45,12 @@ public final class PreciseModuloShardingTableAlgorithm implements PreciseShardin
     @SneakyThrows
     @Override
     public Collection<String> doSharding(Collection<String> collection, RangeShardingValue<Long> rangeShardingValue) {
-        logger.info("collection:{}", mapper.writeValueAsString(collection));
-        logger.info("rangeShardingValue:{}", mapper.writeValueAsString(rangeShardingValue));
+        try {
+            logger.info("collection:{}", mapper.writeValueAsString(collection));
+            logger.info("rangeShardingValue:{}", mapper.writeValueAsString(rangeShardingValue));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
         Collection<String> collect = new ArrayList<>();
         Range<Long> valueRange = rangeShardingValue.getValueRange();
