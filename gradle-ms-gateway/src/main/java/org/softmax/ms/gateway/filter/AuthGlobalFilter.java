@@ -1,9 +1,9 @@
-package org.softmax.gradle.filter;
+package org.softmax.ms.gateway.filter;
 
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.softmax.gradle.config.HandleException;
-import org.softmax.gradle.config.IgnoreUrlsConfig;
+import org.softmax.ms.gateway.config.HandleException;
+import org.softmax.ms.gateway.config.IgnoreUrlsConfig;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
