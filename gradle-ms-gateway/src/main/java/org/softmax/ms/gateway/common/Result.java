@@ -1,4 +1,4 @@
-package org.softmax.gradle.learn.common;
+package org.softmax.ms.gateway.common;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

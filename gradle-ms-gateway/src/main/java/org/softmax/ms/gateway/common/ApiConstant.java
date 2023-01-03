@@ -1,4 +1,4 @@
-package org.softmax.gradle.learn.common;
+package org.softmax.ms.gateway.common;
 
 /**
  * 常量
