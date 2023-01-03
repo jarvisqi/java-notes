@@ -1,10 +1,10 @@
-package org.softmax.gradle.learn.controller;
+package org.softmax.ms.gateway.controller;
 
-import org.softmax.gradle.learn.algorithm.LinearRegression;
-import org.softmax.gradle.learn.algorithm.LogisticRegression;
-import org.softmax.gradle.learn.algorithm.SampleInfo;
-import org.softmax.gradle.learn.utils.DataUtils;
-import org.softmax.gradle.learn.utils.YamlUtils;
+import org.softmax.ms.gateway.algorithm.LinearRegression;
+import org.softmax.ms.gateway.algorithm.LogisticRegression;
+import org.softmax.ms.gateway.algorithm.SampleInfo;
+import org.softmax.ms.gateway.utils.DataUtils;
+import org.softmax.ms.gateway.utils.YamlUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,4 +1,4 @@
-package org.softmax.gradle.learn.controller;
+package org.softmax.ms.gateway.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
