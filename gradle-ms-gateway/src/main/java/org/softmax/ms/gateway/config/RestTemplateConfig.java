@@ -1,4 +1,4 @@
-package org.softmax.gradle.config;
+package org.softmax.ms.gateway.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
