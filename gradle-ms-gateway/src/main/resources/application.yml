@@ -1,11 +1,11 @@
 server:
-  port: 9999
+  port: 9991
   servlet:
-    context-path: /learn-gateway
+    context-path: /gateway
 
 spring:
   application:
-    name: learn-gateway
+    name: gateway
   cloud:
     # nacos 配置
     nacos:
