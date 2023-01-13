@@ -1,4 +1,4 @@
-package com.softmax.ms.oauth2;
+package com.softmax.ms.oauth2.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
