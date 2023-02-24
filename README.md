@@ -12,6 +12,6 @@
 >oauth2.0 协议实践  
 >sharding 分库（片）分表读写分离 
 
-<img src="https://www.jetbrains.com/favicon.ico?r=1234">  
+<img src="https://img1.baidu.com/it/u=555166636,1459944664&fm=253&fmt=auto&app=138&f=JPEG?w=200&h=242">  
 
 https://www.jetbrains.com/
