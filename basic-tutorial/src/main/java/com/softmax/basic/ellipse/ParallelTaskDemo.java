@@ -1,7 +1,5 @@
 package com.softmax.basic.ellipse;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
 
 public class ParallelTaskDemo {
@@ -9,24 +7,34 @@ public class ParallelTaskDemo {
     public static void main(String[] args) {
 
         ParallelTaskDemo futureOpt = new ParallelTaskDemo();
-        Instant start = Instant.now();
-        for (int i = 0; i < 100; i++) {
-            futureOpt.useSerial();
-        }
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
-        System.out.println("串行执行耗时：" + timeElapsed / 1000 + "s");
+//        Instant start = Instant.now();
+//        for (int i = 0; i < 1000; i++) {
+//            futureOpt.useSerial();
+//        }
+//        Instant finish = Instant.now();
+//        long timeElapsed = Duration.between(start, finish).toMillis();
+//        System.out.println("串行执行耗时：" + timeElapsed / 1000 + "s");
+//
+//        Instant start1 = Instant.now();
+//        for (int i = 0; i < 1000; i++) {
+//            futureOpt.useParallel();
+//        }
+//
+//        Instant finish1 = Instant.now();
+//        long timeElapsed1 = Duration.between(start1, finish1).toMillis();
+//        System.out.println("并行执行耗时：" + timeElapsed1 / 1000 + "s");
 
-        Instant start1 = Instant.now();
-        for (int i = 0; i < 100; i++) {
-            futureOpt.useParallel();
-        }
+        futureOpt.nonResult();
 
-        Instant finish1 = Instant.now();
-        long timeElapsed1 = Duration.between(start1, finish1).toMillis();
-        System.out.println("并行执行耗时：" + timeElapsed1 / 1000 + "s");
+
     }
 
+
+    public void nonResult() {
+        CompletableFuture drt = CompletableFuture.runAsync(() -> this.calculateDis("Apple"));
+        CompletableFuture dhw = CompletableFuture.runAsync(() -> this.calculateAge("Apple"));
+        CompletableFuture.allOf(drt, dhw).join();
+    }
 
     public void useSerial() {
         Double rate = this.calculateRate("Apple");
@@ -47,7 +55,7 @@ public class ParallelTaskDemo {
     private Double calculatePrice(String product) {
         Double value = 0.0;
         try {
-            Thread.sleep(200);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -67,7 +75,7 @@ public class ParallelTaskDemo {
     private Double calculateRate(String product) {
         Double value = 0.0;
         try {
-            Thread.sleep(100);
+            Thread.sleep(60);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -83,6 +91,48 @@ public class ParallelTaskDemo {
         }
         return value;
     }
+
+
+    private void calculateDis(String product) {
+        Double value = 0.0;
+        try {
+            Thread.sleep(60);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        switch (product) {
+            case "Apple":
+                value = 0.8;
+                break;
+            case "Banana":
+                value = 0.5;
+                break;
+            default:
+                break;
+        }
+        System.out.println(value);
+    }
+
+    private void calculateAge(String product) {
+        Double value = 0.0;
+        try {
+            Thread.sleep(60);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        switch (product) {
+            case "Apple":
+                value = 0.8;
+                break;
+            case "Banana":
+                value = 0.5;
+                break;
+            default:
+                break;
+        }
+        System.out.println(value);
+    }
+
 
     static class Info {
         private Double price;
