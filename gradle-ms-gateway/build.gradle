@@ -49,8 +49,8 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway:4.0.0'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2022.0.0.0-RC1'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2022.0.0.0-RC1'
+//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2022.0.0.0-RC1'
+//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2022.0.0.0-RC1'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     implementation 'com.spring4all:swagger-spring-boot-starter:2.0.2.RELEASE'
@@ -65,6 +65,7 @@ dependencies {
     implementation 'org.geotools:gt-geojson:27.0'
     implementation 'org.geotools:gt-epsg-hsql:27.0'
     implementation 'org.locationtech.jts:jts-core:1.19.0'
+    implementation 'org.geotools:gt-render:22.2'
     implementation 'gov.nist.math:jama:1.0.3'
     implementation 'org.apache.commons:commons-csv:1.9.0'
 
