@@ -1,7 +1,12 @@
 package com.softmax.leet;
 
+import java.util.Scanner;
+import java.util.Stack;
+
 /**
  * 杨辉三角
+ *
+ * @author Jarvis
  */
 public class PascalTriangle {
 
@@ -140,6 +145,30 @@ public class PascalTriangle {
         }
     }
 
+    private static void stackTest() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("请输入杨辉三角的行数：");
+        int n = scanner.nextInt();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= i; j++) {
+                if (j == 1 || j == i) {
+                    stack.push(1);
+                    System.out.print(1 + " ");
+                } else {
+                    int a = stack.pop();
+                    int b = stack.peek();
+                    stack.push(a + b);
+                    System.out.print(a + b + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
 
         printForwardTriangle(5);
@@ -153,6 +182,6 @@ public class PascalTriangle {
         printInvertedTriangleOfNum();
         System.out.println("\n ================================================");
         printNum(20);
-
+        stackTest();
     }
 }
