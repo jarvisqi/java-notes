@@ -1,6 +1,5 @@
 package org.softmax.ms.gateway.controller;
 
-import org.softmax.ms.gateway.utils.InterpolationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -77,9 +76,9 @@ public class GeoJsonController {
 //        double[] dataInterval = new double[]{0.0001, 2, 6, 10, 20, 30, 40, 50};
         double[] dataInterval = new double[]{0.001, 0.05, 0.1, 0.5, 2, 4, 6, 10};
 
-        String geojson = InterpolationUtils.calEquiSurface(trainData, dataInterval, size, shapFile, isclip);
+//        String geojson = InterpolationUtils.calEquiSurface(trainData, dataInterval, size, shapFile, isclip);
         System.out.println("生成完成");
-        return geojson;
+        return "geojson";
     }
 
 }

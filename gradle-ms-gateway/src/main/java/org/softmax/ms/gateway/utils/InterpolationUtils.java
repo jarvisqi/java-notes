@@ -29,6 +29,8 @@ import java.io.File;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,9 +48,10 @@ public class InterpolationUtils {
      * @param isclip       是否裁剪
      * @return
      */
-    public static String calEquiSurface(double[][] trainData, double[] dataInterval, int[] size, String boundryFile,
-                                        boolean isclip) {
+    public static FeatureCollection calEquiSurface(double[][] trainData, double[] dataInterval, int[] size, String boundryFile,
+                                                   boolean isclip) {
         String geojsonpogylon = "";
+        FeatureCollection featureCollection = null;
         try {
             double _undefData = -9999.0;
             // 多边形集合
@@ -89,7 +92,11 @@ public class InterpolationUtils {
             int nc = dataInterval.length;
             // IDW插值 （训练数据（离散数据阵列）、宽（栅格X阵）、高（栅格Y阵）、默认数（最近邻居数））
 //            _gridData = Interpolate.interpolation_IDW_Neighbor(trainData, _X, _Y, 12, _undefData);
+            Instant now = Instant.now();
             _gridData = getKrigingData(trainData, fc);
+            Instant end = Instant.now();
+            long seconds = Duration.between(now, end).getSeconds();
+            System.out.println("克里金插值：" + seconds);
 
             double[] lon = {maxX};
             double[] lat = {minY};
@@ -102,16 +109,25 @@ public class InterpolationUtils {
             // 平滑
             cPolylineList = Contour.smoothLines(cPolylineList);
             cPolygonList = Contour.tracingPolygons(_gridData, cPolylineList, _borders, dataInterval);
+            Instant now1 = Instant.now();
             // 多边形Json
             geojsonpogylon = getPolygonGeoJson(cPolygonList);
+            Instant end1 = Instant.now();
+            long seconds1 = Duration.between(now1, end1).getSeconds();
+            System.out.println("getPolygonGeoJson：" + seconds1);
             if (isclip) {
+                Instant now2 = Instant.now();
                 // 读取GeoJSON字符串 返回 SimpleFeatureCollection 要素集合
                 polygonCollection = GeoJSONUtil.readGeoJsonByString(geojsonpogylon);
+
+                Instant end2 = Instant.now();
+                long seconds2 = Duration.between(now2, end2).getSeconds();
+                System.out.println("readGeoJsonByString：" + seconds2);
                 // 裁剪等值面
                 //FeatureSource dc = clipFeatureCollection(fc, polygonCollection);
 
                 SimpleFeatureCollection simpleFeatureCollection = clipPolygonFeatureCollection(fc, polygonCollection);
-                FeatureCollection featureCollection = simpleFeatureCollection;
+                featureCollection = simpleFeatureCollection;
                 FeatureJSON featureJSON = new FeatureJSON();
                 StringWriter writer = new StringWriter();
                 featureJSON.writeFeatureCollection(featureCollection, writer);
@@ -123,7 +139,8 @@ public class InterpolationUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return geojsonpogylon;
+//        return geojsonpogylon;
+        return featureCollection;
     }
 
 
