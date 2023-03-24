@@ -1,2 +1,13 @@
-rootProject.name = 'gradle-ms-user'
+//settings.gradles是模块Module配置文件，大多数setting.gradle的作用是为了配置子模块，
+//根目录下的setting.gradle脚本文件是针对module的全局配置
+//settings.gradle用于创建多Project的Gradle项目。Project在IDEA里对应Module模块。
+//例如配置module名rootProject.name = 'project-root',为指定父模块的名称
+//include 'hello' 为指定包含哪些子模块
 
+pluginManagement {
+    repositories {
+        maven { url 'https://repo.spring.io/milestone' }
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'gradle-ms-user'
