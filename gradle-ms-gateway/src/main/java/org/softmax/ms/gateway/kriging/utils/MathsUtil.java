@@ -70,11 +70,9 @@ public class MathsUtil {
             for (j = 0; j < i; j++) {
                 p[i] -= X[i * n + j] * X[i * n + j];
             }
-
             if (p[i] <= 0) {
                 return false;
             }
-
             p[i] = Math.sqrt(p[i]);
             for (j = i + 1; j < n; j++) {
                 for (k = 0; k < i; k++) {

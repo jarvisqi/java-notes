@@ -102,7 +102,6 @@ public class KrigingTest {
         levPros.put(50.9999,"#ffffff");
         levPros.put(51.00,"#ff0000");
         addShapeLayer(geojson, levPros,0.9f);
-        getMapContent(params, outPath);
     }
 
 
