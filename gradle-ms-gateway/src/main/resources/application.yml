@@ -8,15 +8,15 @@ spring:
     name: gateway
   cloud:
     # nacos 配置
-    nacos:
-      config:
-        enabled: true
-        server-addr: 10.0.0.152:8848
-        file-extension: yaml
-      discovery:
-        enabled: true
-        server-addr: 10.0.0.152:8848
-        register-enabled: true
+#    nacos:
+#      config:
+#        enabled: true
+#        server-addr: 10.0.0.152:8848
+#        file-extension: yaml
+#      discovery:
+#        enabled: true
+#        server-addr: 10.0.0.152:8848
+#        register-enabled: true
     # 网关配置
     gateway:
       discovery:
