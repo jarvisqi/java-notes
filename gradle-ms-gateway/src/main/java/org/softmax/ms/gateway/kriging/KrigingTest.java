@@ -90,18 +90,17 @@ public class KrigingTest {
         trainData[14][1] = Double.parseDouble("33.7819");
         trainData[14][2] = Double.parseDouble("0.64");
 
-        String shapFile = "C:\\Users\\Jarvis\\Desktop\\henan_geojson\\河南省(不含县区)\\410000.shp";
+        String shapFile = "E:\\henan_geojson\\河南省(不含县区)\\410000.shp";
         int[] size = new int[]{600, 600};
         boolean isclip = true;
-//        double[] dataInterval = new double[]{0.0001, 2, 6, 10, 20, 30, 40, 50};
         double[] dataInterval = new double[]{0.001, 0.05, 0.1, 0.5, 2, 4, 6, 10};
         FeatureCollection geojson = InterpolationUtils.calEquiSurface(trainData, dataInterval, size, shapFile, isclip);
 
         Map<Double, String> levPros = new HashMap<>();
-        levPros.put(0.0,"#ffffff");
-        levPros.put(50.9999,"#ffffff");
-        levPros.put(51.00,"#ff0000");
-        addShapeLayer(geojson, levPros,0.9f);
+        levPros.put(0.0, "#ffffff");
+        levPros.put(50.9999, "#ffffff");
+        levPros.put(51.00, "#ff0000");
+        addShapeLayer(geojson, levPros, 0.9f);
     }
 
 
