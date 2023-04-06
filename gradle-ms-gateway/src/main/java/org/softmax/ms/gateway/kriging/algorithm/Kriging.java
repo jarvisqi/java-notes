@@ -3,14 +3,11 @@ package org.softmax.ms.gateway.kriging.algorithm;
 
 import org.softmax.ms.gateway.kriging.utils.MathsUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Kriging
- * 
+ *
  * @author xuwei
  */
 public class Kriging {
@@ -33,7 +30,7 @@ public class Kriging {
      */
     public double sigma2 = 0;
     /**
-     * 
+     *
      */
     public double alpha = 100;
 
@@ -102,7 +99,6 @@ public class Kriging {
 
     /**
      * training sample data
-     * 
      */
     public void train(double[] targetValues, double[] xList, double[] yList) {
         this.targetValues = targetValues;
@@ -118,7 +114,7 @@ public class Kriging {
             for (j = 0; j < i; j++, k++) {
                 double distance = Math.sqrt(Math.pow(xList[i] - xList[j], 2) + Math.pow(yList[i] - yList[j], 2));
                 double detaValue = Math.abs(targetValues[i] - targetValues[j]);
-                double[] arr = { distance, detaValue };
+                double[] arr = {distance, detaValue};
                 distances.add(arr);
             }
         }
@@ -169,30 +165,31 @@ public class Kriging {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }; 
+            }
+            ;
         }
 
         // Feature transformation
         size = l;
         this.variogram_range = lag[size - 1] - lag[0];
-        double[] X = new double[size*2];
-        for(int n=0;n<size*2; n++){
+        double[] X = new double[size * 2];
+        for (int n = 0; n < size * 2; n++) {
             X[n] = 1;
         }
         double[] Y = new double[size];
         double A = this.variogram_A;
         double range = this.variogram_range;
-        for(i = 0; i < size; i++){
-            switch(model){
+        for (i = 0; i < size; i++) {
+            switch (model) {
                 case GAUSSIAN_MODEL:
                     X[i * 2 + 1] = 1.0 - Math.exp(-(1.0 / A) * Math.pow(lag[i] / range, 2));
-                break;
+                    break;
                 case EXPONENTIAL_MODEL:
                     X[i * 2 + 1] = 1.0 - Math.exp(-(1.0 / A) * lag[i] / range);
-                break;
+                    break;
                 case SPHERICAL_MODEL:
                     X[i * 2 + 1] = 1.5 * (lag[i] / range) - 0.5 * Math.pow(lag[i] / range, 3);
-                break;
+                    break;
             }
             Y[i] = semi[i];
         }
@@ -200,11 +197,11 @@ public class Kriging {
         //Least squares
         double[] Xt = MathsUtil.kriging_matrix_transpose(X, size, 2);
         double[] Z = MathsUtil.kriging_matrix_multiply(Xt, X, 2, size, 2);
-        Z = MathsUtil.kriging_matrix_add(Z, MathsUtil.kriging_matrix_diag(1/alpha, 2), 2, 2);
+        Z = MathsUtil.kriging_matrix_add(Z, MathsUtil.kriging_matrix_diag(1 / alpha, 2), 2, 2);
         double[] cloneZ = Z.clone();
-        if(MathsUtil.kriging_matrix_chol(Z, 2)){
+        if (MathsUtil.kriging_matrix_chol(Z, 2)) {
             MathsUtil.kriging_matrix_chol2inv(Z, 2);
-        }else{
+        } else {
             MathsUtil.kriging_matrix_chol2inv(cloneZ, 2);
             Z = cloneZ;
         }
@@ -214,72 +211,71 @@ public class Kriging {
         this.variogram_nugget = W[0];
         this.variogram_sill = W[1] * this.variogram_range + this.variogram_nugget;
         this.variogram_n = xList.length;
-        
+
         //Gram matrix with prior
         double[] K = null;
         size = xList.length;
-        if(GAUSSIAN_MODEL.equals(model)){
-           K = build_gassian_gram_matrix_with_prior(xList, yList);
-        }else if(EXPONENTIAL_MODEL.equals(model)){
-           K = build_exponential_gram_matrix_with_prior(xList, yList);
-        }else if(SPHERICAL_MODEL.equals(model)){
-           K = build_spherical_gram_matrix_with_prior(xList, yList);
+        if (GAUSSIAN_MODEL.equals(model)) {
+            K = build_gassian_gram_matrix_with_prior(xList, yList);
+        } else if (EXPONENTIAL_MODEL.equals(model)) {
+            K = build_exponential_gram_matrix_with_prior(xList, yList);
+        } else if (SPHERICAL_MODEL.equals(model)) {
+            K = build_spherical_gram_matrix_with_prior(xList, yList);
         }
 
         // Inverse penalized Gram matrix projected to target vector
         double[] C = MathsUtil.kriging_matrix_add(K, MathsUtil.kriging_matrix_diag(sigma2, size), size, size);
-		double[] cloneC = C.clone();
-		if (MathsUtil.kriging_matrix_chol(C, size))
+        double[] cloneC = C.clone();
+        if (MathsUtil.kriging_matrix_chol(C, size))
             MathsUtil.kriging_matrix_chol2inv(C, size);
-		else {
-			MathsUtil.kriging_matrix_solve(cloneC, size);
-			C = cloneC;
-		}
+        else {
+            MathsUtil.kriging_matrix_solve(cloneC, size);
+            C = cloneC;
+        }
 
-		// Copy unprojected inverted matrix as K
-		variogram_K = C.clone();
-		variogram_M = MathsUtil.kriging_matrix_multiply(C, targetValues, size, size, 1);
+        // Copy unprojected inverted matrix as K
+        variogram_K = C.clone();
+        variogram_M = MathsUtil.kriging_matrix_multiply(C, targetValues, size, size, 1);
     }
 
     public double predict(double x, double y) {
         double[] k = new double[variogram_n];
-        if(GAUSSIAN_MODEL.equals(model)){
-            for (int i = 0; i < variogram_n; i++){
+        if (GAUSSIAN_MODEL.equals(model)) {
+            for (int i = 0; i < variogram_n; i++) {
                 k[i] = variogram_gaussian(Math.sqrt(Math.pow(x - this.xList[i], 2) +
                         Math.pow(y - this.yList[i], 2)));
             }
-        }else if(EXPONENTIAL_MODEL.equals(model)){
-            for (int i = 0; i < variogram_n; i++){
+        } else if (EXPONENTIAL_MODEL.equals(model)) {
+            for (int i = 0; i < variogram_n; i++) {
                 k[i] = variogram_exponential(Math.sqrt(Math.pow(x - this.xList[i], 2) +
                         Math.pow(y - this.yList[i], 2)));
             }
-        }else if(SPHERICAL_MODEL.equals(model)){
-            for (int i = 0; i < variogram_n; i++){
+        } else if (SPHERICAL_MODEL.equals(model)) {
+            for (int i = 0; i < variogram_n; i++) {
                 k[i] = variogram_spherical(Math.sqrt(Math.pow(x - this.xList[i], 2) +
-                         Math.pow(y - this.yList[i], 2)));
+                        Math.pow(y - this.yList[i], 2)));
             }
         }
-        
-		return MathsUtil.kriging_matrix_multiply(k, variogram_M, 1, variogram_n, 1)[0];
+        return MathsUtil.kriging_matrix_multiplyOpt(k, variogram_M, 1, variogram_n, 1)[0];
     }
 
     public double variance(double x, double y) {
-       double result = 0;
-       switch(this.model){
-           case GAUSSIAN_MODEL:
-           result = variance_gassian(x, y);
-           break;
-           case EXPONENTIAL_MODEL:
-           result = variance_exponential(x, y);
-           break;
-           case SPHERICAL_MODEL:
-           result = variance_spherical(x, y);
-           break;           
-       }
-       return result;
+        double result = 0;
+        switch (this.model) {
+            case GAUSSIAN_MODEL:
+                result = variance_gassian(x, y);
+                break;
+            case EXPONENTIAL_MODEL:
+                result = variance_exponential(x, y);
+                break;
+            case SPHERICAL_MODEL:
+                result = variance_spherical(x, y);
+                break;
+        }
+        return result;
     }
-    
-    public static class Grid{
+
+    public static class Grid {
         public double[][] A;
         public double[] xlim;
         public double[] ylim;
@@ -288,174 +284,294 @@ public class Kriging {
         public double yWidth;
     }
 
-    public Grid grid(double[][][]polygons, double xWidth, double yWidth){
-        int i, j, k, n=polygons.length;
-        if(n==0) return null;
+    public Grid grid(double[][][] polygons, double xWidth, double yWidth) {
+        int i, j, k, n = polygons.length;
+        if (n == 0) return null;
 
-       	// Boundaries of polygons space
-		double[] xlim = {polygons[0][0][0], polygons[0][0][0]};
-		double[] ylim = {polygons[0][0][1], polygons[0][0][1]};
-		for (i = 0; i < n; i++) // Polygons
-			for (j = 0; j < polygons[i].length; j++) { // Vertices
-				if (polygons[i][j][0] < xlim[0])
-					xlim[0] = polygons[i][j][0];
-				if (polygons[i][j][0] > xlim[1])
-					xlim[1] = polygons[i][j][0];
-				if (polygons[i][j][1] < ylim[0])
-					ylim[0] = polygons[i][j][1];
-				if (polygons[i][j][1] > ylim[1])
-					ylim[1] = polygons[i][j][1];
-			}
+        // Boundaries of polygons space
+        double[] xlim = {polygons[0][0][0], polygons[0][0][0]};
+        double[] ylim = {polygons[0][0][1], polygons[0][0][1]};
+        for (i = 0; i < n; i++) // Polygons
+            for (j = 0; j < polygons[i].length; j++) { // Vertices
+                if (polygons[i][j][0] < xlim[0])
+                    xlim[0] = polygons[i][j][0];
+                if (polygons[i][j][0] > xlim[1])
+                    xlim[1] = polygons[i][j][0];
+                if (polygons[i][j][1] < ylim[0])
+                    ylim[0] = polygons[i][j][1];
+                if (polygons[i][j][1] > ylim[1])
+                    ylim[1] = polygons[i][j][1];
+            }
 
-		// Alloc for O(n^2) space
-		double xtarget, ytarget;
-		int[] a = new int[2];
-		int[] b = new int[2];
-		double[] lxlim = new double[2]; // Local dimensions
-		double[] lylim = new double[2]; // Local dimensions
-		int x = (int)Math.ceil((xlim[1] - xlim[0]) / xWidth);
-		int y = (int)Math.ceil((ylim[1] - ylim[0]) / yWidth);
+        // Alloc for O(n^2) space
 
-		double[][] A = new double[x + 1][];
-		for (i = 0; i <= x; i++) A[i] = new double[y + 1];
-		for (i = 0; i < n; i++) {
-			// Range for polygons[i]
-			lxlim[0] = polygons[i][0][0];
-			lxlim[1] = lxlim[0];
-			lylim[0] = polygons[i][0][1];
-			lylim[1] = lylim[0];
-			for (j = 1; j < polygons[i].length; j++) { // Vertices
-				if (polygons[i][j][0] < lxlim[0])
-					lxlim[0] = polygons[i][j][0];
-				if (polygons[i][j][0] > lxlim[1])
-					lxlim[1] = polygons[i][j][0];
-				if (polygons[i][j][1] < lylim[0])
-					lylim[0] = polygons[i][j][1];
-				if (polygons[i][j][1] > lylim[1])
-					lylim[1] = polygons[i][j][1];
-			}
+        int[] a = new int[2];
+        int[] b = new int[2];
+        double[] lxlim = new double[2]; // Local dimensions
+        double[] lylim = new double[2]; // Local dimensions
+        int x = (int) Math.ceil((xlim[1] - xlim[0]) / xWidth);
+        int y = (int) Math.ceil((ylim[1] - ylim[0]) / yWidth);
 
-			// Loop through polygon subspace
-			a[0] = (int)Math.floor(((lxlim[0] - ((lxlim[0] - xlim[0]) % xWidth)) - xlim[0]) / xWidth);
-			a[1] = (int)Math.ceil(((lxlim[1] - ((lxlim[1] - xlim[1]) % xWidth)) - xlim[0]) / xWidth);
-			b[0] = (int)Math.floor(((lylim[0] - ((lylim[0] - ylim[0]) % yWidth)) - ylim[0]) / yWidth);
-			b[1] = (int)Math.ceil(((lylim[1] - ((lylim[1] - ylim[1]) % yWidth)) - ylim[0]) / yWidth);
-			for (j = a[0]; j <= a[1]; j++)
-				for (k = b[0]; k <= b[1]; k++) {
-					xtarget = xlim[0] + j * xWidth;
-					ytarget = ylim[0] + k * yWidth;
-					if (pip(polygons[i], xtarget, ytarget)) {
-                        A[j][k] = predict(xtarget, ytarget);
-                    }
-				}
+        double[][] A = new double[x + 1][];
+        for (i = 0; i <= x; i++) A[i] = new double[y + 1];
+        for (i = 0; i < n; i++) {
+            // Range for polygons[i]
+            lxlim[0] = polygons[i][0][0];
+            lxlim[1] = lxlim[0];
+            lylim[0] = polygons[i][0][1];
+            lylim[1] = lylim[0];
+            for (j = 1; j < polygons[i].length; j++) { // Vertices
+                if (polygons[i][j][0] < lxlim[0])
+                    lxlim[0] = polygons[i][j][0];
+                if (polygons[i][j][0] > lxlim[1])
+                    lxlim[1] = polygons[i][j][0];
+                if (polygons[i][j][1] < lylim[0])
+                    lylim[0] = polygons[i][j][1];
+                if (polygons[i][j][1] > lylim[1])
+                    lylim[1] = polygons[i][j][1];
+            }
+
+            // Loop through polygon subspace
+            a[0] = (int) Math.floor(((lxlim[0] - ((lxlim[0] - xlim[0]) % xWidth)) - xlim[0]) / xWidth);
+            a[1] = (int) Math.ceil(((lxlim[1] - ((lxlim[1] - xlim[1]) % xWidth)) - xlim[0]) / xWidth);
+            b[0] = (int) Math.floor(((lylim[0] - ((lylim[0] - ylim[0]) % yWidth)) - ylim[0]) / yWidth);
+            b[1] = (int) Math.ceil(((lylim[1] - ((lylim[1] - ylim[1]) % yWidth)) - ylim[0]) / yWidth);
+
+            double[][] xtarget = new double[a[1] + 1][b[1] + 1];
+            double[][] ytarget = new double[a[1] + 1][b[1] + 1];
+            for (j = a[0]; j <= a[1]; j++) {
+                for (k = b[0]; k <= b[1]; k++) {
+                    xtarget[j][k] = xlim[0] + j * xWidth;
+                    ytarget[j][k] = ylim[0] + k * yWidth;
+//                    if (pip(polygons[i], xtarget, ytarget)) {
+//                        A[j][k] = predict(xtarget, ytarget);
+//                    }
+                }
+            }
+            System.out.println(xtarget.length);
+
         }
 
         double maxValue = targetValues[0], minValue = targetValues[0];
         int len = targetValues.length;
-        for(i=0; i < len; i++){
-            if(targetValues[i] > maxValue) maxValue = targetValues[i];
-            if(targetValues[i] < minValue) minValue = targetValues[i];
+        for (i = 0; i < len; i++) {
+            if (targetValues[i] > maxValue) maxValue = targetValues[i];
+            if (targetValues[i] < minValue) minValue = targetValues[i];
 
         }
 
         Grid grid = new Grid();
         grid.A = A;
-		grid.xlim = xlim;
-		grid.ylim = ylim;
-		grid.zlim = new double[]{minValue, maxValue};
-		grid.xWidth = xWidth;
+        grid.xlim = xlim;
+        grid.ylim = ylim;
+        grid.zlim = new double[]{minValue, maxValue};
+        grid.xWidth = xWidth;
         grid.yWidth = yWidth;
 
-		return grid;
+        return grid;
     }
-    
+
+    public Grid gridOpt(double[][][] polygons, double xWidth, double yWidth) {
+        int i, j, k, n = polygons.length;
+        if (n == 0) return null;
+
+        // Boundaries of polygons space
+        double[] xlim = {polygons[0][0][0], polygons[0][0][0]};
+        double[] ylim = {polygons[0][0][1], polygons[0][0][1]};
+        // Polygons
+        for (i = 0; i < n; i++) {
+            // Vertices
+            for (j = 0; j < polygons[i].length; j++) {
+                if (polygons[i][j][0] < xlim[0])
+                    xlim[0] = polygons[i][j][0];
+                if (polygons[i][j][0] > xlim[1])
+                    xlim[1] = polygons[i][j][0];
+                if (polygons[i][j][1] < ylim[0])
+                    ylim[0] = polygons[i][j][1];
+                if (polygons[i][j][1] > ylim[1])
+                    ylim[1] = polygons[i][j][1];
+            }
+        }
+
+        // Compute grid dimensions
+        int x = (int) Math.ceil((xlim[1] - xlim[0]) / xWidth);
+        int y = (int) Math.ceil((ylim[1] - ylim[0]) / yWidth);
+
+        // Allocate grid array
+        double[][] A = new double[x + 1][y + 1];
+
+        // Build spatial index
+        List<List<Integer>> index = new ArrayList<>(Collections.nCopies((x + 1) * (y + 1), new ArrayList<>()));
+        for (i = 0; i < n; i++) {
+            double[] bbox = {polygons[i][0][0], polygons[i][0][1], polygons[i][0][0], polygons[i][0][1]};
+            for (j = 1; j < polygons[i].length; j++) {
+                if (polygons[i][j][0] < bbox[0]) bbox[0] = polygons[i][j][0];
+                if (polygons[i][j][1] < bbox[1]) bbox[1] = polygons[i][j][1];
+                if (polygons[i][j][0] > bbox[2]) bbox[2] = polygons[i][j][0];
+                if (polygons[i][j][1] > bbox[3]) bbox[3] = polygons[i][j][1];
+            }
+            int[] cells = {
+                    (int) Math.floor((bbox[0] - xlim[0]) / xWidth),
+                    (int) Math.floor((bbox[1] - ylim[0]) / yWidth),
+                    (int) Math.ceil((bbox[2] - xlim[0]) / xWidth),
+                    (int) Math.ceil((bbox[3] - ylim[0]) / yWidth)
+            };
+            for (j = cells[0]; j < cells[2]; j++) {
+                for (k = cells[1]; k < cells[3]; k++) {
+                    if (j >= 0 && j <= x && k >= 0 && k <= y) {
+                        if (pip(polygons[i], xlim[0] + j * xWidth, ylim[0] + k * yWidth)) {
+                            if (index.size() <= j * (y + 1) + k) {
+                                index.add(new ArrayList<>());
+                            }
+                            index.get(j * (y + 1) + k).add(i);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Loop through grid cells
+        for (j = 0; j <= x; j++) {
+            for (k = 0; k <= y; k++) {
+                double xtarget = xlim[0] + j * xWidth;
+                double ytarget = ylim[0] + k * yWidth;
+                List<Integer> candidates = new ArrayList<>();
+                if (index.size() > j * (y + 1) + k) {
+                    candidates = index.get(j * (y + 1) + k);
+                }
+                for (i = 0; i < candidates.size(); i++) {
+                    if (pip(polygons[candidates.get(i)], xtarget, ytarget)) {
+                        A[j][k] = predict(xtarget, ytarget);
+                    }
+                }
+            }
+        }
+
+        // Compute grid limits
+        double maxValue = A[0][0], minValue = A[0][0];
+        for (i = 0; i <= x; i++) {
+            for (j = 0; j <= y; j++) {
+                if (A[i][j] > maxValue) maxValue = A[i][j];
+                if (A[i][j] < minValue) minValue = A[i][j];
+            }
+        }
+
+        // Create grid object
+        Grid grid = new Grid();
+        grid.A = A;
+        grid.xlim = xlim;
+        grid.ylim = ylim;
+        grid.zlim = new double[]{minValue, maxValue};
+        grid.xWidth = xWidth;
+        grid.yWidth = yWidth;
+
+        return grid;
+    }
+
+
     public double variance_gassian(double x, double y) {
         double[] k = new double[variogram_n];
-        for (int i = 0; i < variogram_n; i++){
+        for (int i = 0; i < variogram_n; i++) {
             k[i] = variogram_gaussian(Math.sqrt(Math.pow(x - this.xList[i], 2) +
                     Math.pow(y - this.yList[i], 2)));
         }
-        
-		return variogram_gaussian(0) +
-			MathsUtil.kriging_matrix_multiply(MathsUtil.kriging_matrix_multiply(k, variogram_K,
-					1, variogram_n, variogram_n),
-				k, 1, variogram_n, 1)[0];
+
+        return variogram_gaussian(0) +
+                MathsUtil.kriging_matrix_multiply(MathsUtil.kriging_matrix_multiply(k, variogram_K,
+                                1, variogram_n, variogram_n),
+                        k, 1, variogram_n, 1)[0];
     }
-    
+
     public double variance_exponential(double x, double y) {
         double[] k = new double[variogram_n];
-        for (int i = 0; i < variogram_n; i++){
+        for (int i = 0; i < variogram_n; i++) {
             k[i] = variogram_exponential(Math.sqrt(Math.pow(x - this.xList[i], 2) +
                     Math.pow(y - this.yList[i], 2)));
         }
-        
-		return variogram_exponential(0) +
-			MathsUtil.kriging_matrix_multiply(MathsUtil.kriging_matrix_multiply(k, variogram_K,
-					1, variogram_n, variogram_n),
-				k, 1, variogram_n, 1)[0];
-	}
+
+        return variogram_exponential(0) +
+                MathsUtil.kriging_matrix_multiply(MathsUtil.kriging_matrix_multiply(k, variogram_K,
+                                1, variogram_n, variogram_n),
+                        k, 1, variogram_n, 1)[0];
+    }
 
     public double variance_spherical(double x, double y) {
         double[] k = new double[variogram_n];
-        for (int i = 0; i < variogram_n; i++){
+        for (int i = 0; i < variogram_n; i++) {
             k[i] = variogram_spherical(Math.sqrt(Math.pow(x - this.xList[i], 2) +
                     Math.pow(y - this.yList[i], 2)));
         }
-        
-		return variogram_spherical(0) +
-			MathsUtil.kriging_matrix_multiply(MathsUtil.kriging_matrix_multiply(k, variogram_K,
-					1, variogram_n, variogram_n),
-				k, 1, variogram_n, 1)[0];
-	}
 
-    private double[] build_gassian_gram_matrix_with_prior(double[] xList, double[] yList){
+        return variogram_spherical(0) +
+                MathsUtil.kriging_matrix_multiply(MathsUtil.kriging_matrix_multiply(k, variogram_K,
+                                1, variogram_n, variogram_n),
+                        k, 1, variogram_n, 1)[0];
+    }
+
+    private double[] build_gassian_gram_matrix_with_prior(double[] xList, double[] yList) {
         int n = xList.length;
         double[] K = new double[n * n];
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
-				K[i * n + j] = variogram_gaussian(Math.sqrt(Math.pow(xList[i] - xList[j], 2) +
-						Math.pow(yList[i] - yList[j], 2)));
-				K[j * n + i] = K[i * n + j];
-			}
-			K[i * n + i] = variogram_gaussian(0);
+                K[i * n + j] = variogram_gaussian(Math.sqrt(Math.pow(xList[i] - xList[j], 2) +
+                        Math.pow(yList[i] - yList[j], 2)));
+                K[j * n + i] = K[i * n + j];
+            }
+            K[i * n + i] = variogram_gaussian(0);
         }
         return K;
     }
 
-    private double[] build_exponential_gram_matrix_with_prior(double[] xList, double[] yList){
+    private double[] build_exponential_gram_matrix_with_prior(double[] xList, double[] yList) {
         int n = xList.length;
         double[] K = new double[n * n];
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
-				K[i * n + j] = variogram_exponential(Math.sqrt(Math.pow(xList[i] - xList[j], 2) +
-						Math.pow(yList[i] - yList[j], 2)));
-				K[j * n + i] = K[i * n + j];
-			}
-			K[i * n + i] = variogram_exponential(0);
+                K[i * n + j] = variogram_exponential(Math.sqrt(Math.pow(xList[i] - xList[j], 2) +
+                        Math.pow(yList[i] - yList[j], 2)));
+                K[j * n + i] = K[i * n + j];
+            }
+            K[i * n + i] = variogram_exponential(0);
         }
         return K;
     }
 
-    private double[] build_spherical_gram_matrix_with_prior(double[] xList, double[] yList){
+    public double[] build_spherical_gram_matrix_with_prior(double[] xList, double[] yList) {
         int n = xList.length;
         double[] K = new double[n * n];
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
-				K[i * n + j] = variogram_spherical(Math.sqrt(Math.pow(xList[i] - xList[j], 2) +
-						Math.pow(yList[i] - yList[j], 2)));
-				K[j * n + i] = K[i * n + j];
-			}
-			K[i * n + i] = variogram_spherical(0);
+                K[i * n + j] = variogram_spherical(Math.sqrt(Math.pow(xList[i] - xList[j], 2) +
+                        Math.pow(yList[i] - yList[j], 2)));
+                K[j * n + i] = K[i * n + j];
+            }
+            K[i * n + i] = variogram_spherical(0);
         }
         return K;
     }
+
+    public double[] build_spherical_gram_matrix_with_priorOpt(double[] xList, double[] yList) {
+        int n = xList.length;
+        double[][] result = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                double distance = Math.hypot(xList[i] - xList[j], yList[i] - yList[j]);
+                double variogram = variogram_spherical(distance);
+                result[i][j] = variogram;
+                result[j][i] = variogram;
+            }
+            result[i][i] = variogram_spherical(0);
+        }
+        return Arrays.stream(result).flatMapToDouble(Arrays::stream).toArray();
+    }
+
 
     private boolean pip(double[][] polygons, double x, double y) {
         int i, j;
         boolean c = false;
         for (i = 0, j = polygons.length - 1; i < polygons.length; j = i++) {
             if (((polygons[i][1] > y) != (polygons[j][1] > y)) &&
-                (x < (polygons[j][0] - polygons[i][0]) * (y - polygons[i][1]) / (polygons[j][1] - polygons[i][1]) + polygons[i][0])) {
+                    (x < (polygons[j][0] - polygons[i][0]) * (y - polygons[i][1]) / (polygons[j][1] - polygons[i][1]) + polygons[i][0])) {
                 c = !c;
             }
         }
