@@ -256,6 +256,7 @@ public class Kriging {
                         Math.pow(y - this.yList[i], 2)));
             }
         }
+
         return MathsUtil.kriging_matrix_multiplyOpt(k, variogram_M, 1, variogram_n, 1)[0];
     }
 
