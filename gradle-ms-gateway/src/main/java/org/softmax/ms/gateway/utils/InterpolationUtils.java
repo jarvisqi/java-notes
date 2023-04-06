@@ -19,18 +19,16 @@ import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.softmax.ms.gateway.kriging.algorithm.Kriging;
 import wcontour.Contour;
+import wcontour.Interpolate;
 import wcontour.global.Border;
 import wcontour.global.PointD;
 import wcontour.global.PolyLine;
 import wcontour.global.Polygon;
-import wcontour.Interpolate;
 
 import java.io.File;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,50 +89,28 @@ public class InterpolationUtils {
             // 数据间隔长度
             int nc = dataInterval.length;
             // IDW插值 （训练数据（离散数据阵列）、宽（栅格X阵）、高（栅格Y阵）、默认数（最近邻居数））
-//            _gridData = Interpolate.interpolation_IDW_Neighbor(trainData, _X, _Y, 12, _undefData);
-            Instant now = Instant.now();
             _gridData = getKrigingData(trainData, fc);
-            Instant end = Instant.now();
-            long seconds = Duration.between(now, end).getSeconds();
-            System.out.println("克里金插值：" + seconds);
-
-            double[] lon = {maxX};
-            double[] lat = {minY};
-
             int[][] S1 = new int[_gridData.length][_gridData[0].length];
             // 边界
             List<Border> _borders = Contour.tracingBorders(_gridData, _X, _Y, S1, _undefData);
             // 生成等值线（IDW插值、宽、高、数据间隔长度、数据间隔、默认值、边界、IDW长度）
             cPolylineList = Contour.tracingContourLines(_gridData, _X, _Y, nc, dataInterval, _undefData, _borders, S1);
+
             // 平滑
             cPolylineList = Contour.smoothLines(cPolylineList);
             cPolygonList = Contour.tracingPolygons(_gridData, cPolylineList, _borders, dataInterval);
-            Instant now1 = Instant.now();
             // 多边形Json
             geojsonpogylon = getPolygonGeoJson(cPolygonList);
-            Instant end1 = Instant.now();
-            long seconds1 = Duration.between(now1, end1).getSeconds();
-            System.out.println("getPolygonGeoJson：" + seconds1);
+
             if (isclip) {
-                Instant now2 = Instant.now();
                 // 读取GeoJSON字符串 返回 SimpleFeatureCollection 要素集合
                 polygonCollection = GeoJSONUtil.readGeoJsonByString(geojsonpogylon);
-
-                Instant end2 = Instant.now();
-                long seconds2 = Duration.between(now2, end2).getSeconds();
-                System.out.println("readGeoJsonByString：" + seconds2);
                 // 裁剪等值面
-                //FeatureSource dc = clipFeatureCollection(fc, polygonCollection);
-
                 SimpleFeatureCollection simpleFeatureCollection = clipPolygonFeatureCollection(fc, polygonCollection);
                 featureCollection = simpleFeatureCollection;
                 FeatureJSON featureJSON = new FeatureJSON();
                 StringWriter writer = new StringWriter();
                 featureJSON.writeFeatureCollection(featureCollection, writer);
-                geojsonpogylon = writer.toString();
-
-                // 得到多边形GeoJson
-                //geojsonpogylon = getPolygonGeoJson(dc.getFeatures());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -201,96 +177,6 @@ public class InterpolationUtils {
         dataFeatureIterator.close();
         simpleFeatureCollection = new ListFeatureCollection(typePolygons, list);
         return simpleFeatureCollection;
-    }
-
-
-    /**
-     * 生成等值线
-     *
-     * @param trainData    训练数据
-     * @param dataInterval 数据间隔
-     * @param size         大小，宽，高
-     * @param boundryFile  四至
-     * @param isclip       是否裁剪
-     * @return
-     */
-    public static String calEquiSurfaceLine(double[][] trainData, double[] dataInterval, int[] size, String boundryFile,
-                                            boolean isclip) {
-        String geojsonline = "";
-        try {
-            double _undefData = -9999.0;
-            SimpleFeatureCollection polylineCollection = null;
-            List<PolyLine> cPolylineList = new ArrayList<PolyLine>();
-            List<Polygon> cPolygonList = new ArrayList<Polygon>();
-
-            int width = size[0],
-                    height = size[1];
-            double[] _X = new double[width];
-            double[] _Y = new double[height];
-
-            File file = new File(boundryFile);
-            ShapefileDataStore shpDataStore = null;
-
-            shpDataStore = new ShapefileDataStore(file.toURL());
-            //设置编码
-            Charset charset = Charset.forName("GBK");
-            shpDataStore.setCharset(charset);
-            String typeName = shpDataStore.getTypeNames()[0];
-            SimpleFeatureSource featureSource = null;
-            featureSource = shpDataStore.getFeatureSource(typeName);
-            SimpleFeatureCollection fc = featureSource.getFeatures();
-
-            double minX = fc.getBounds().getMinX();
-            double minY = fc.getBounds().getMinY();
-            double maxX = fc.getBounds().getMaxX();
-            double maxY = fc.getBounds().getMaxY();
-
-            Interpolate.createGridXY_Num(minX, minY, maxX, maxY, _X, _Y);
-            double[][] _gridData = new double[width][height];
-
-            int nc = dataInterval.length;
-
-            // IDW插值
-            _gridData = Interpolate.interpolation_IDW_Neighbor(trainData, _X, _Y, 12, _undefData);
-
-            int[][] S1 = new int[_gridData.length][_gridData[0].length];
-            /**
-             * double[][] S0,
-             * double[] X,
-             * double[] Y,
-             * int[][] S1,
-             * double undefData
-             */
-            List<Border> _borders = Contour.tracingBorders(_gridData, _X, _Y, S1, _undefData);
-
-            /**
-             * double[][] S0,
-             * double[] X,
-             * double[] Y,
-             * int nc,
-             * double[] contour,
-             * double undefData,
-             * List<Border> borders,
-             * int[][] S1
-             */
-
-            // 生成等值线
-            cPolylineList = Contour.tracingContourLines(_gridData, _X, _Y, nc, dataInterval, _undefData, _borders, S1);
-
-            // 平滑
-            cPolylineList = Contour.smoothLines(cPolylineList);
-            geojsonline = getPolylineGeoJson(cPolylineList);
-
-            if (isclip) {
-                polylineCollection = GeoJSONUtil.readGeoJsonByString(geojsonline);
-                FeatureSource dc = clipFeatureLineCollection(fc, polylineCollection);
-                geojsonline = getPolylineGeoJson(dc.getFeatures());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return geojsonline;
     }
 
     // 等值面
@@ -550,7 +436,7 @@ public class InterpolationUtils {
             yList[i] = trainData[i][1];
             targetValues[i] = trainData[i][2];
         }
-        Kriging kriging = new Kriging(Kriging.GAUSSIAN_MODEL, 0, 100);
+        Kriging kriging = new Kriging(Kriging.SPHERICAL_MODEL, 0, 100);
         kriging.train(targetValues, xList, yList);
 
 
