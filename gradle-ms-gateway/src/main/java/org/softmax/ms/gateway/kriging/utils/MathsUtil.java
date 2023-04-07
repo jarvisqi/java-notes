@@ -241,9 +241,14 @@ public class MathsUtil {
             }
         }
         RealMatrix matrix = MatrixUtils.createRealMatrix(coefficients);
+        if (new LUDecomposition(matrix).getDeterminant() == 0) {
+            System.out.println("the matrix Singular");
+        }
         LUDecomposition cholesky = new LUDecomposition(matrix);
+
         RealMatrix inverse = cholesky.getSolver().getInverse();
         RealMatrix pseudoInverse = new SingularValueDecomposition(matrix).getSolver().getInverse();
+
         double[][] result = inverse.getData();
         return Arrays.stream(result).flatMapToDouble(Arrays::stream).toArray();
     }
@@ -330,95 +335,9 @@ public class MathsUtil {
         return true;
     }
 
+    public static boolean kriging_matrix_solveOpt(double[] X, int n) {
 
-    public static double[] kriging_matrix_solveTask(double[] X, int n) {
-        int m = n;
-        double[] b = new double[n * n];
-        int[] indxc = new int[n];
-        int[] indxr = new int[n];
-        double[] ipiv = new double[n];
-        int i = 0, icol = 0, irow = 0, j = 0, k = 0, l = 0, ll = 0;
-        double big, dum, pivinv, temp;
 
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < n; j++) {
-                if (i == j) {
-                    b[i * n + j] = 1;
-                } else {
-                    b[i * n + j] = 0;
-                }
-            }
-        }
-        for (j = 0; j < n; j++) {
-            ipiv[j] = 0;
-        }
-        for (i = 0; i < n; i++) {
-            big = 0;
-            for (j = 0; j < n; j++) {
-                if (ipiv[j] != 1) {
-                    for (k = 0; k < n; k++) {
-                        if (ipiv[k] == 0) {
-                            if (Math.abs(X[j * n + k]) >= big) {
-                                big = Math.abs(X[j * n + k]);
-                                irow = j;
-                                icol = k;
-                            }
-                        }
-                    }
-                }
-            }
-            ++(ipiv[icol]);
-
-            if (irow != icol) {
-                for (l = 0; l < n; l++) {
-                    temp = X[irow * n + l];
-                    X[irow * n + l] = X[icol * n + l];
-                    X[icol * n + l] = temp;
-                }
-                for (l = 0; l < m; l++) {
-                    temp = b[irow * n + l];
-                    b[irow * n + l] = b[icol * n + l];
-                    b[icol * n + l] = temp;
-                }
-            }
-            indxr[i] = irow;
-            indxc[i] = icol;
-
-            if (X[icol * n + icol] == 0) {
-                return X; // Singular
-            }
-
-            pivinv = 1 / X[icol * n + icol];
-            X[icol * n + icol] = 1;
-            for (l = 0; l < n; l++) {
-                X[icol * n + l] *= pivinv;
-            }
-            for (l = 0; l < m; l++) {
-                b[icol * n + l] *= pivinv;
-            }
-
-            for (ll = 0; ll < n; ll++) {
-                if (ll != icol) {
-                    dum = X[ll * n + icol];
-                    X[ll * n + icol] = 0;
-                    for (l = 0; l < n; l++) {
-                        X[ll * n + l] -= X[icol * n + l] * dum;
-                    }
-                    for (l = 0; l < m; l++) {
-                        b[ll * n + l] -= b[icol * n + l] * dum;
-                    }
-                }
-            }
-        }
-        for (l = (n - 1); l >= 0; l--) {
-            if (indxr[l] != indxc[l]) {
-                for (k = 0; k < n; k++) {
-                    temp = X[k * n + indxr[l]];
-                    X[k * n + indxr[l]] = X[k * n + indxc[l]];
-                    X[k * n + indxc[l]] = temp;
-                }
-            }
-        }
-        return X;
+        return true;
     }
 }
