@@ -8,6 +8,8 @@ import org.meteoinfo.data.StationData;
 import org.meteoinfo.geo.analysis.InterpolationMethods;
 import org.meteoinfo.geo.analysis.InterpolationSetting;
 import org.meteoinfo.geo.layer.VectorLayer;
+import org.meteoinfo.geo.layout.LayoutLegend;
+import org.meteoinfo.geo.layout.LegendStyles;
 import org.meteoinfo.geo.layout.MapLayout;
 import org.meteoinfo.geo.legend.LegendManage;
 import org.meteoinfo.geo.mapdata.MapDataManage;
@@ -29,7 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 
-public class GridTest {
+public class MeteoSample {
 
     public static void main(String[] args) throws Exception {
         StationData stationData = readJsonData();
@@ -74,7 +76,7 @@ public class GridTest {
         MapView view = new MapView();
         PolygonBreak pb = (PolygonBreak) altMap.getLegendScheme().getLegendBreak(0);
         pb.setDrawFill(false);
-        pb.setOutlineColor(Color.ORANGE);
+        pb.setOutlineColor(Color.GRAY);
 
         layer = layer.clip(altMap);
 
@@ -88,6 +90,11 @@ public class GridTest {
         MapLayout layout = new MapLayout();
         //去除图形边框
         layout.getActiveMapFrame().setDrawNeatLine(false);
+        //抗锯齿
+        layout.getActiveMapFrame().setMapView(view);
+        view.setAntiAlias(true);
+        layout.setAntiAlias(true);
+
         //区域边界
         Extent extent = view.getExtent();
         //设置矩形的宽和高
@@ -97,11 +104,19 @@ public class GridTest {
         //设置页面边框
         layout.getActiveMapFrame().setLayoutBounds(new Rectangle(0, 0, bounds.width, bounds.height));
         layout.getActiveMapFrame().setMapView(view);
+        //设置网格间隔值
+        layout.getActiveMapFrame().setGridXDelt(0.5);
+        layout.getActiveMapFrame().setGridYDelt(0.5);
+        //设置图例
+        LayoutLegend legend = layout.addLegend(bounds.x + bounds.width + 15, 0);
+        legend.setLegendStyle(LegendStyles.NORMAL);
+        legend.setTop(bounds.y + (bounds.height - legend.getHeight()) / 2);
+        legend.setLegendLayer(layer);
+
         String imgPath = "D:\\1.png";
         layout.exportToPicture(imgPath);
 
-        transparent(imgPath);
-
+//        transparent(imgPath);
 
     }
 
