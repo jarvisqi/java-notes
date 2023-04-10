@@ -18,11 +18,26 @@ repositories {
     mavenCentral()
 
     maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.osgeo.org/repository/release' }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'org.meteothink:meteoinfo-common:3.5'
+    implementation 'org.meteothink:meteoinfo-math:3.5'
+//    implementation 'org.meteothink:meteoinfo-map:3.5'
+//    implementation 'org.meteothink:meteoinfo-chart:3.5'
+    implementation 'org.meteothink:meteoinfo-data:3.5'
+    implementation 'org.meteothink:meteoinfo-geo:3.5'
+    implementation 'org.meteothink:meteoinfo-geometry:3.5'
+    implementation 'org.meteothink:meteoinfo-projection:3.5'
+    implementation 'org.meteothink:meteoinfo-ndarray:3.5'
+    implementation 'org.meteothink:meteoinfo-image:3.5'
+    implementation 'org.meteothink:meteoinfo-dataframe:3.5'
+    implementation 'org.meteothink:meteoinfo-table:3.5'
+    implementation 'com.github.haifengl:smile-mkl:2.6.0'
 }
 
 test {
