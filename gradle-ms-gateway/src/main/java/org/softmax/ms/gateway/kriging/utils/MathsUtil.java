@@ -244,7 +244,43 @@ public class MathsUtil {
         if (new LUDecomposition(matrix).getDeterminant() == 0) {
             System.out.println("the matrix Singular");
         }
-        LUDecomposition cholesky = new LUDecomposition(matrix);
+
+        int blockSize = 10000;
+        int n = coefficients.length;
+        int numBlocks = (n + blockSize - 1) / blockSize;
+        // 分块
+        double[][][] blocks = new double[numBlocks][blockSize][blockSize];
+        for (int i = 0; i < n; i++) {
+            int blockRow = i / blockSize;
+            int rowInBlock = i % blockSize;
+            for (int j = 0; j < n; j++) {
+                int blockCol = j / blockSize;
+                int colInBlock = j % blockSize;
+                blocks[blockRow][rowInBlock][colInBlock] = coefficients[i][j];
+            }
+        }
+        // 对每个小矩阵进行分解
+        LUDecomposition[] blockDecompositions = new LUDecomposition[numBlocks * numBlocks];
+        int k = 0;
+        for (int i = 0; i < numBlocks; i++) {
+            for (int j = 0; j < numBlocks; j++) {
+                double[] block = blocks[i][j];
+                blockDecompositions[k++] = new LUDecomposition(new Array2DRowRealMatrix(block));
+            }
+        }
+        // 合并结果
+        RealMatrix mergeMatrix = new Array2DRowRealMatrix(n, n);
+        for (int i = 0; i < n; i++) {
+            int blockRow = i / blockSize;
+            int rowInBlock = i % blockSize;
+            for (int j = 0; j < n; j++) {
+                int blockCol = j / blockSize;
+                int colInBlock = j % blockSize;
+                mergeMatrix.setEntry(i, j, blockDecompositions[blockRow * numBlocks + blockCol].getL().getEntry(rowInBlock, colInBlock));
+            }
+        }
+
+        LUDecomposition cholesky = new LUDecomposition(mergeMatrix);
 
         RealMatrix inverse = cholesky.getSolver().getInverse();
         RealMatrix pseudoInverse = new SingularValueDecomposition(matrix).getSolver().getInverse();
