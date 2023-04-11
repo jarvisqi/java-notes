@@ -177,12 +177,4 @@ public class MeteoSample {
         g.dispose();
         ImageIO.write(img, "png", new File(imgPath));
     }
-
-    class DataBean {
-        String sid;
-        String lat;
-        String lon;
-        String val;
-    }
-
 }
