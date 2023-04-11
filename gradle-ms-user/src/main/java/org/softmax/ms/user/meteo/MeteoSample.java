@@ -48,8 +48,8 @@ public class MeteoSample {
         //设定数据区域
         gridDataSetting.dataExtent = altMap.getExtent();
         //设定格点数
-        gridDataSetting.xNum = 300;
-        gridDataSetting.yNum = 300;
+        gridDataSetting.xNum = 200;
+        gridDataSetting.yNum = 200;
         //创建插值设置
         InterpolationSetting interpolationSetting = new InterpolationSetting();
         //设定格点配置
@@ -113,7 +113,7 @@ public class MeteoSample {
         legend.setTop(bounds.y + (bounds.height - legend.getHeight()) / 2);
         legend.setLegendLayer(layer);
 
-        String imgPath = "D:\\1.png";
+        String imgPath = "D:\\out.png";
         layout.exportToPicture(imgPath);
 
 //        transparent(imgPath);
@@ -121,7 +121,7 @@ public class MeteoSample {
     }
 
     public static StationData readJsonData() throws IOException {
-        String filePath = "C:\\Users\\Jarvis\\Desktop\\data.json";
+        String filePath = "C:\\Users\\Jarvis\\Desktop\\result.json";
         Reader reader = new InputStreamReader(new FileInputStream(filePath));
         int ch = 0;
         StringBuffer strBuff = new StringBuffer();
@@ -134,7 +134,7 @@ public class MeteoSample {
         List<LinkedHashMap> dataBeans = mapper.readValue(jsonStr, List.class);
         StationData stationData = new StationData();
         for (LinkedHashMap map : dataBeans) {
-            stationData.addData(map.get("sid").toString(), Double.parseDouble(map.get("lon").toString()),
+            stationData.addData(map.get("stid").toString(), Double.parseDouble(map.get("lon").toString()),
                     Double.parseDouble(map.get("lat").toString()), Double.parseDouble(map.get("val").toString()));
         }
         return stationData;
