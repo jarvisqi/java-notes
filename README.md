@@ -11,6 +11,7 @@
 #### spring-boot-oauth2: Spring Boot 2.2.X 
 >oauth2.0 协议实践  
 >sharding 分库（片）分表读写分离 
+#### gradle-ms-meteo：使用meteoInfo 实现插值算法（克里金插值）
 
 <img src="https://img1.baidu.com/it/u=555166636,1459944664&fm=253&fmt=auto&app=138&f=JPEG?w=200&h=242">  
 
