@@ -5,7 +5,7 @@
 >leet：Leetcode 刷题  
 >nettt：netty 库实践  
 >spring：spring 基础原理及实践 
-#### mq-courier: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
+#### mq-tutorial: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
 #### distributed-lock: redis ,zookeeper 实现分布式锁 
 #### spring-boot2-marvel: Spring Boot 2.0.X 实践代码
 #### spring-boot-oauth2: Spring Boot 2.2.X 
