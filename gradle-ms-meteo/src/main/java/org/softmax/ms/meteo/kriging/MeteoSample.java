@@ -1,4 +1,4 @@
-package org.softmax.ms.user.meteo;
+package org.softmax.ms.meteo.kriging;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.meteoinfo.common.Extent;
