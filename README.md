@@ -1,8 +1,7 @@
 # Java 实践        
-#### basic-cornerstone: Java 基础（Java8,Java11），包含并发编程，同步和锁，线程线程池,泛型,数据结构,算法...
+#### basic-tutorial: Java 基础（Java8,Java11），包含并发编程，同步和锁，线程线程池,泛型,数据结构,算法...
 >design：Java 实现设计模式  
->basic: Java 基础代码实践  
->leet：Leetcode 刷题  
+>basic: Java 基础代码实践   
 >nettt：netty 库实践  
 >spring：spring 基础原理及实践 
 #### mq-tutorial: spring boot2.0 + rabbitMQ/kafka/rocket 常见的MQ实践
