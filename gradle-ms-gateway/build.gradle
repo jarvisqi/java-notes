@@ -1,12 +1,14 @@
 buildscript {
     //编译工具才会用这个仓库
     repositories {
-        mavenCentral()
+        mavenCentral().content {
+            excludeModule("javax.media", "jai_core")
+        }
         maven { url 'https://repo.spring.io/milestone' }
     }
 
     ext {
-        springbootversion = '3.0.0-M3'
+        springbootversion = '3.0.1'
     }
 
     dependencies {
@@ -15,9 +17,10 @@ buildscript {
     }
 }
 
+
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0-M3'
+    id 'org.springframework.boot' version '3.0.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
@@ -35,22 +38,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-repositories {
-    mavenCentral().content {
-        excludeModule("javax.media", "jai_core")
-    }
-    maven { url 'https://repo.spring.io/milestone' }
-    maven { url 'https://repo.osgeo.org/repository/release' }
-
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway:4.0.0'
-//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2022.0.0.0-RC1'
-//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2022.0.0.0-RC1'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     implementation 'com.spring4all:swagger-spring-boot-starter:2.0.2.RELEASE'
@@ -71,6 +62,16 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+
+repositories {
+    mavenCentral().content {
+        excludeModule("javax.media", "jai_core")
+    }
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.osgeo.org/repository/release' }
+}
+
 
 tasks.named('test') {
     useJUnitPlatform()

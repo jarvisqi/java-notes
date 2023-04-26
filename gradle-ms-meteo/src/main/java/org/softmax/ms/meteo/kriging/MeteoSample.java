@@ -134,8 +134,8 @@ public class MeteoSample {
         List<LinkedHashMap> dataBeans = mapper.readValue(jsonStr, List.class);
         StationData stationData = new StationData();
         for (LinkedHashMap map : dataBeans) {
-            stationData.addData(map.get("stid").toString(), Double.parseDouble(map.get("lon").toString()),
-                    Double.parseDouble(map.get("lat").toString()), Double.parseDouble(map.get("val").toString()));
+            stationData.addData(map.get("stationCode").toString(), Double.parseDouble(map.get("longitude").toString()),
+                    Double.parseDouble(map.get("latitude").toString()), Double.parseDouble(map.get("value").toString()));
         }
         return stationData;
     }
