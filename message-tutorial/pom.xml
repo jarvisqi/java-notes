@@ -3,12 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.softmax.mq.courier</groupId>
-    <artifactId>mq-tutorial</artifactId>
+    <groupId>com.softmax.message.tutorial</groupId>
+    <artifactId>message-tutorial</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-    <name>mq-courier</name>
+    <name>message-tutorial</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
