@@ -1,4 +1,4 @@
-# Java 笔记    
+# Java 实践笔记    
 #### basic-tutorial: 
 Java 基础（Java8,Java11），包含并发编程，同步和锁，线程线程池,泛型,数据结构,算法等
 >design：Java 实现设计模式  
