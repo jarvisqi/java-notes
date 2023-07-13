@@ -6,10 +6,9 @@
     <groupId>com.softmax.distributed</groupId>
     <artifactId>distributed-tutorial</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-    <name>distributed</name>
-    <description>Demo project for Spring Boot</description>
+    <name>distributed-tutorial</name>
+    <description>Demo project for distributed application</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
