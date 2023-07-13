@@ -4,11 +4,11 @@ import com.test.PropertiesCopier;
 import org.springframework.cglib.beans.BeanCopier;
 
 /**
- * 实现copy接口
+ * ???copy???
  */
 public class CglibBeanCopierProperties implements PropertiesCopier {
     /**
-     * Cglib实现
+     * Cglib???
      *
      * @param source
      * @param target
