@@ -1,7 +1,7 @@
 package com.test;
 
 /**
- * ʵ��
+ * 账户信息
  */
 public class Account {
     private int id;

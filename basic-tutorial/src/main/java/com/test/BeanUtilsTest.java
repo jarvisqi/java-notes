@@ -1,7 +1,7 @@
 package com.test;
 
 /**
- * Apache BeanUtils ĞÔÄÜ²âÊÔ
+ * Apache BeanUtils
  *
  * @author Jarvis
  * @date 2019/07/09
