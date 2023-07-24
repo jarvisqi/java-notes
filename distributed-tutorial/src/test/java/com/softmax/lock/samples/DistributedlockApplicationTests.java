@@ -1,6 +1,6 @@
 package com.softmax.lock.samples;
 
-import com.softmax.lock.samples.redislock.Info;
+import com.softmax.lock.samples.redislock.UsrInfo;
 import com.softmax.lock.samples.redislock.MsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,8 +49,8 @@ public class DistributedlockApplicationTests {
     @Test
     public void hash() throws InterruptedException {
         HashOperations hashOperations = redisTemplate.opsForHash();
-        Info info1 = new Info(1001, "Hong");
-        Info info2 = new Info(1002, "Kong");
+        UsrInfo info1 = new UsrInfo(1001, "Hong");
+        UsrInfo info2 = new UsrInfo(1002, "Kong");
         //is exist
         if (hashOperations.getOperations().hasKey("info_1001")) {
             //delete
@@ -62,7 +62,7 @@ public class DistributedlockApplicationTests {
         hashOperations.put("info_1001", "1001", info1);
         hashOperations.put("info_1002", "1002", info2);
         //get
-        Info info = (Info) hashOperations.get("info_1001", "1001");
+        UsrInfo info = (UsrInfo) hashOperations.get("info_1001", "1001");
 
         System.out.println();
         System.out.println(info);
