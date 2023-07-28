@@ -1,20 +1,20 @@
 package com.softmax.design.decorator;
 
 /**
- * 定义抽象饮料类
+ * 瀹氫箟楗枡鎶借薄鍩虹被
  *
  * @author Jarvis
  * @date 2020/03/26
  */
-public abstract class Beverage {
+public abstract class Bevarage {
 
     /**
-     * 返回描述信息
+     * 杩斿洖鎻忚堪
      */
     public abstract String getDescription();
 
     /**
-     * 返回价格
+     * 杩斿洖浠锋牸
      */
     public abstract double cost();
 

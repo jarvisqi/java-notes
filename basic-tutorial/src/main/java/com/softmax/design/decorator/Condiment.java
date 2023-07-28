@@ -1,11 +1,11 @@
 package com.softmax.design.decorator;
 
 /**
- * 定义调味类，即装饰者的基类，此类必须继承自 Beverage：
+ * 瀹氫箟璋冩枡锛屼篃灏辨槸瑁呴グ鑰呯殑鍩虹被
  *
  * @author Jarvis
  * @date 2020/03/26
  */
-public abstract class Condiment extends Beverage {
+public abstract class Condiment extends Bevarage {
 
 }
