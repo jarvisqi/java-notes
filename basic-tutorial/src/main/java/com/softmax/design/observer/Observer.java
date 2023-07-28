@@ -1,7 +1,7 @@
 package com.softmax.design.observer;
 
 /**
- * ¶¨Òå¹Û²ìÕß½Ó¿Ú
+ * è§‚å¯Ÿè€…æ¨¡å¼
  *
  * @author Jarvis
  * @date 2020/03/26
