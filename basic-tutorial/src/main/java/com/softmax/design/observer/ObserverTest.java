@@ -1,16 +1,16 @@
 package com.softmax.design.observer;
 
-public class ClientTest {
+public class ObserverTest {
 
     public static void main(String[] args) {
-        // ÏÈ¶¨ÒåÒ»¸öÖ÷Ìâ
+        // å…ˆå®šä¹‰ä¸€ä¸ªä¸»é¢˜
         Subject subject1 = new Subject();
 
-        //¶¨Òå¹Û²ìÕß
+        // å®šä¹‰è§‚å¯Ÿè€…
         new BinaryObserver(subject1);
         new HexaObserver(subject1);
 
-        // Ä£ÄâÊı¾İ±ä¸ü£¬Õâ¸öÊ±ºò£¬¹Û²ìÕßÃÇµÄ update ·½·¨½«»á±»µ÷ÓÃ
+        // æ¨¡æ‹Ÿæ•°æ®å˜æ›´ï¼Œè¿™ä¸ªæ—¶å€™ï¼Œè§‚å¯Ÿè€…ä»¬çš„ update æ–¹æ³•å°†ä¼šè¢«è°ƒç”¨
         subject1.setState(10);
     }
 }
