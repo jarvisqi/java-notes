@@ -1,30 +1,30 @@
 package com.softmax.design.decorator;
 
 /**
- * �������ĵ�ζ��
+ * 定义柠檬、芒果等具体的调料，它们属于装饰者
  */
 public class Lemon extends Condiment {
 
-    private final Beverage bevarage;
+    private final Bevarage bevarage;
 
     /**
-     * ��Ҫ�����������ϣ�����Ҫ����û�б�װ�εĺ����̲裬
-     * Ҳ���Դ����Ѿ�װ�κõ�â���̲裬����������â�������̲�
+     * // 这里很关键，需要传入具体的饮料，如需要传入没有被装饰的红茶或绿茶，
+     * // 当然也可以传入已经装饰好的芒果绿茶，这样可以做芒果柠檬绿茶
      *
      * @param bevarage
      */
-    public Lemon(Beverage bevarage) {
+    public Lemon(Bevarage bevarage) {
         this.bevarage = bevarage;
     }
 
     /**
-     * װ��
+     * // 装饰
      *
      * @return
      */
     @Override
     public String getDescription() {
-        return bevarage.getDescription() + ",�ӡ����ʡ�";
+        return bevarage.getDescription() + ", 加柠檬";
     }
 
     /**
@@ -34,29 +34,26 @@ public class Lemon extends Condiment {
      */
     @Override
     public double cost() {
-        // ��������Ҫ 2 Ԫ
-        return bevarage.cost() + 2;
+        // 装饰
+        return bevarage.cost() + 2; // 加柠檬需要 2 元
     }
 }
 
 
 class Mango extends Condiment {
 
-    private final Beverage beverage;
+    private final Bevarage bevarage;
 
-    public Mango(Beverage beverage) {
-        this.beverage = beverage;
+    public Mango(Bevarage bevarage) {
+        this.bevarage = bevarage;
     }
 
     @Override
     public String getDescription() {
-        return beverage.getDescription() + ",�ӡ�â����";
+        return bevarage.getDescription() + ", 加芒果";
     }
 
-
-    @Override
     public double cost() {
-        //��â����Ҫ��1.5Ԫ
-        return beverage.cost() + 1.5;
+        return bevarage.cost() + 3; // 加芒果需要 3 元
     }
 }

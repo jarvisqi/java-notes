@@ -1,15 +1,15 @@
 package com.softmax.design.decorator;
 
 /**
- * 红茶 实现饮料基类
+ * 瀹氫箟涓変釜鍩虹楗枡瀹炵幇绫伙紝绾㈣尪銆佺豢鑼跺拰鍜栧暋
  *
  * @author Jarvis
  * @date 2020/06/26
  */
-class BlackTea extends Beverage {
+class BlackTea extends Bevarage {
     @Override
     public String getDescription() {
-        return "红茶";
+        return "绾㈣尪";
     }
 
     @Override
@@ -20,15 +20,15 @@ class BlackTea extends Beverage {
 
 
 /**
- * 绿茶 实现饮料基类
+ * 缁胯尪
  *
  * @author Jarvis
  * @date 2020/06/26
  */
-class GreenTea extends Beverage {
+class GreenTea extends Bevarage {
     @Override
     public String getDescription() {
-        return "绿茶";
+        return "缁胯尪";
     }
 
     @Override
@@ -39,15 +39,15 @@ class GreenTea extends Beverage {
 
 
 /**
- * 咖啡 实现饮料基类
+ * 鍜栧暋
  *
  * @author Jarvis
  * @date 2020/06/26
  */
-class Coffee extends Beverage {
+class Coffee extends Bevarage {
     @Override
     public String getDescription() {
-        return "咖啡";
+        return "鍜栧暋";
     }
 
     @Override
