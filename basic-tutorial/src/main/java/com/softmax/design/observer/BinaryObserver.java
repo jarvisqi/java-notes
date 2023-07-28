@@ -1,25 +1,28 @@
 package com.softmax.design.observer;
 
 /**
- * ¶¨Òå¾ßÌå¹Û²ìÕß
+ * å®šä¹‰å…·ä½“çš„è§‚å¯Ÿè€…ç±»
  */
 public class BinaryObserver extends Observer {
 
     /**
-     * // ÔÚ¹¹Ôì·½·¨ÖĞ½øĞĞ¶©ÔÄÖ÷Ìâ
+     * åœ¨æ„é€ æ–¹æ³•ä¸­è¿›è¡Œè®¢é˜…ä¸»é¢˜
      *
      * @param subject
      */
     public BinaryObserver(Subject subject) {
         this.subject = subject;
-        // Í¨³£ÔÚ¹¹Ôì·½·¨ÖĞ½« this ·¢²¼³öÈ¥µÄ²Ù×÷Ò»¶¨ÒªĞ¡ĞÄ
+        //é€šå¸¸åœ¨æ„é€ æ–¹æ³•ä¸­å°† this å‘å¸ƒå‡ºå»çš„æ“ä½œä¸€å®šè¦å°å¿ƒ
         this.subject.attach(this);
     }
 
+    /**
+     * è¯¥æ–¹æ³•ç”±ä¸»é¢˜ç±»åœ¨æ•°æ®å˜æ›´çš„æ—¶å€™è¿›è¡Œè°ƒç”¨
+     */
     @Override
     public void update() {
         String result = Integer.toBinaryString(subject.getState());
-        System.out.println("¶©ÔÄµÄÊı¾İ·¢Éú±ä»¯£¬ĞÂµÄÊı¾İ´¦ÀíÎª¶ş½øÖÆÖµÎª£º" + result);
+        System.out.println("è®¢é˜…çš„æ•°æ®å‘ç”Ÿå˜åŒ–ï¼Œæ–°çš„æ•°æ®å¤„ç†ä¸ºäºŒè¿›åˆ¶å€¼ä¸ºï¼š" + result);
     }
 }
 
@@ -32,6 +35,6 @@ class HexaObserver extends Observer {
     @Override
     public void update() {
         String result = Integer.toHexString(subject.getState()).toUpperCase();
-        System.out.println("¶©ÔÄµÄÊı¾İ·¢Éú±ä»¯£¬ĞÂµÄÊı¾İ´¦ÀíÎªÊ®Áù½øÖÆÖµÎª£º" + result);
+        System.out.println("è®¢é˜…çš„æ•°æ®å‘ç”Ÿå˜åŒ–ï¼Œæ–°çš„æ•°æ®å¤„ç†ä¸ºåå…­è¿›åˆ¶å€¼ä¸ºï¼š" + result);
     }
 }
