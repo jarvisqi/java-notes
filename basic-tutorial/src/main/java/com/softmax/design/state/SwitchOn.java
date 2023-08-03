@@ -1,28 +1,24 @@
 package com.softmax.design.state;
 
 /**
- * ¿ª×´Ì¬ÊµÏÖÀà
- *
  * @author Jarvis
  * @date 2019/10/22
  */
 public class SwitchOn implements SwitchState {
     @Override
     public void on(Switcher switcher) {
-        System.out.println("WARN!!!Í¨µç×´Ì¬ÎÞÐèÔÙ¿ª");
+        System.out.println("WARN!!!Í¨å¼€ä¸ªå·²æ‰“å¼€");
     }
 
     @Override
     public void off(Switcher switcher) {
         switcher.setSwitchState(new SwitchOff());
-        System.out.println("OK...µÆÃð");
+        System.out.println("OK...å¼€ä¸ªå·²å…³é—­");
     }
 }
 
 
 /**
- * ¹Ø×´Ì¬µÄÊµÏÖÀà
- *
  * @author Jarvis
  * @date 2019/10/22
  */
@@ -30,12 +26,12 @@ class SwitchOff implements SwitchState {
     @Override
     public void on(Switcher switcher) {
         switcher.setSwitchState(new SwitchOn());
-        System.out.println("OK...µÆÁÁ");
+        System.out.println("OK...å¼€å…³æ‰“å¼€");
     }
 
     @Override
     public void off(Switcher switcher) {
-        System.out.println("WARN!!!¶Ïµç×´Ì¬ÎÞÐèÔÙ¹Ø");
+        System.out.println("WARN!!!å¼€å…³å·²å…³é—­");
     }
 }
 

@@ -4,20 +4,20 @@ package com.softmax.design.state;
  * @author Jarvis
  * @date 2019/10/22
  */
-public class StateClient {
+public class StateTest {
     public static void main(String[] args) {
 
-        ProductContext context = new ProductContext("ÉñÖÛÕ½Éñ");
+        ProductContext context = new ProductContext("ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½");
 
-        //¼õ¿â´æ²Ù×÷
+        //
         DeductState deductState = new DeductState();
         deductState.doAction(context);
 
-        //Ôö´æ²Ù×÷
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         RevertState revertState = new RevertState();
         revertState.doAction(context);
 
-        //»ñÈ¡µ±Ç°×´Ì¬
+        //ï¿½ï¿½È¡ï¿½ï¿½Ç°×´Ì¬
         String state = context.getState().toString();
         System.out.println(state);
 
@@ -26,21 +26,21 @@ public class StateClient {
         Switcher switcher = new Switcher();
 
         switcher.setSwitchState(new SwitchOff());
-        System.out.println("´ËÊ±µÆµÄ×´Ì¬ÎªOff");
-        //¹ØµÆ
+        System.out.println("ï¿½ï¿½Ê±ï¿½Æµï¿½×´Ì¬ÎªOff");
+        //ï¿½Øµï¿½
         switcher.switchOff();
-        //¿ªµÆ
+        //ï¿½ï¿½ï¿½ï¿½
         switcher.switchOn();
-        //¹ØµÆ
+        //ï¿½Øµï¿½
         switcher.switchOff();
 
         switcher.setSwitchState(new SwitchOn());
-        System.out.println("´ËÊ±µÆµÄ×´Ì¬On");
-        //¿ªµÆ
+        System.out.println("ï¿½ï¿½Ê±ï¿½Æµï¿½×´Ì¬On");
+        //ï¿½ï¿½ï¿½ï¿½
         switcher.switchOn();
-        //¹ØµÆ
+        //ï¿½Øµï¿½
         switcher.switchOff();
-        //¿ªµÆ
+        //ï¿½ï¿½ï¿½ï¿½
         switcher.switchOn();
     }
 }
