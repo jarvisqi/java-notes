@@ -1,7 +1,7 @@
 package com.softmax.design.state;
 
 /**
- * ¿ª¹ØÀà
+ * å¼€å…³ç±»
  *
  * @author Jarvis
  * @date 2019/10/22
@@ -10,7 +10,7 @@ package com.softmax.design.state;
 public class Switcher {
 
     /**
-     * ¿ª¹ØµÄ³õÊ¼×´Ì¬ÉèÖÃÎª¡°¹Ø¡±
+     * å¼€å…³çŠ¶æ€
      */
     private SwitchState switchState = new SwitchOff();
 
@@ -23,14 +23,14 @@ public class Switcher {
     }
 
     /**
-     * ÓÃµÄÊÇµ±Ç°×´Ì¬µÄ¿ª·½·¨
+     * æ‰“å¼€
      */
     public void switchOn() {
         switchState.on(this);
     }
 
     /**
-     * ÓÃµÄÊÇµ±Ç°×´Ì¬µÄ¹Ø·½·¨
+     * å…³é—­
      */
     public void switchOff() {
         switchState.off(this);

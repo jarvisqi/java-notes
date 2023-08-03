@@ -1,22 +1,18 @@
 package com.softmax.design.state;
 
 /**
- * ¶¨ÒåÒ»¸ö×´Ì¬State½Ó¿Ú.Á½¸ö·½·¨¿ªÓë¹Ø
+ * å¼€å…³çŠ¶æ€æ¥å£
  *
  * @author Jarvis
  * @date 2019/10/22
  */
 public interface SwitchState {
     /**
-     * ¿ª
-     *
      * @param switcher
      */
     void on(Switcher switcher);
 
     /**
-     * ¹Ø
-     *
      * @param switcher
      */
     void off(Switcher switcher);
