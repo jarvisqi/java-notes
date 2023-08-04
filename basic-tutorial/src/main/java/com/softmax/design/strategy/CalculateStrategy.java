@@ -3,7 +3,7 @@ package com.softmax.design.strategy;
 import java.math.BigDecimal;
 
 /**
- * 计算策略接口
+ * 定义策略接口
  *
  * @author Jarvis
  * @date 2019/10/22
