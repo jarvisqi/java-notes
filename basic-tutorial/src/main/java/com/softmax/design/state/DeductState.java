@@ -21,7 +21,7 @@ class DeductState implements ProductState {
 }
 
 /**
- * ���ӿ��״̬��
+ *
  */
 class RevertState implements ProductState {
     @Override
