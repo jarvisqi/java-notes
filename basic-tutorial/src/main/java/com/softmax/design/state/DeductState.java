@@ -1,7 +1,7 @@
 package com.softmax.design.state;
 
 /**
- * ¼õ¿â´æ×´Ì¬
+ * å®šä¹‰å‡åº“å­˜çš„çŠ¶æ€
  *
  * @author Jarvis
  * @date 2019/10/22
@@ -9,7 +9,7 @@ package com.softmax.design.state;
 class DeductState implements ProductState {
     @Override
     public void doAction(ProductContext context) {
-        System.out.printf("ÉÌÆ·%sÂô³ö,¸ø´ËÉÌÆ·¿Û¼õ¿â´æ", context.getName());
+        System.out.printf("å•†å“å–å‡ºï¼Œå‡†å¤‡å‡åº“å­˜", context.getName());
         System.out.println();
         context.setState(this);
     }
@@ -21,12 +21,12 @@ class DeductState implements ProductState {
 }
 
 /**
- * Ôö¼Ó¿â´æ×´Ì¬£º
+ * ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½×´Ì¬ï¿½ï¿½
  */
 class RevertState implements ProductState {
     @Override
     public void doAction(ProductContext context) {
-        System.out.printf("¸øÉÌÆ·%s²¹¿â´æ", context.getName());
+        System.out.printf("ç»™æ­¤å•†å“è¡¥åº“å­˜", context.getName());
         System.out.println();
         context.setState(this);
     }
