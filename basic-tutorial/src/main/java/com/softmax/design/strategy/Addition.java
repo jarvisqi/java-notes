@@ -3,7 +3,7 @@ package com.softmax.design.strategy;
 import java.math.BigDecimal;
 
 /**
- * 实现算法接口 （加法）
+ * 瀹炵幇鍔犳硶绛栫暐
  *
  * @author Jarvis
  * @date 2019/10/22
@@ -22,7 +22,7 @@ class Addition implements CalculateStrategy {
 }
 
 /**
- * 实现算法接口  （减法）
+ * 瀹炵幇鍑忔硶绛栫暐
  */
 class Substanction implements CalculateStrategy {
 
@@ -39,7 +39,7 @@ class Substanction implements CalculateStrategy {
 
 
 /**
- * 实现算法接口 （乘法）
+ * 瀹炵幇涔樻硶绛栫暐
  *
  * @author Jarvis
  * @date 2019/10/22
