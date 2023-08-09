@@ -3,7 +3,7 @@ package com.softmax.design.proxy;
 /**
  * 客户端调用，注意，我们要用代理来实例化接口：
  */
-class ProxyApp {
+class ProxyTest {
     public static void main(String[] args) {
         //创建代理对象
         FoodService serviceProxy = new FoodServiceProxy(new FoodServiceImpl());
