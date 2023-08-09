@@ -3,7 +3,7 @@ package com.softmax.design.responsibility;
 /**
  * @author Jarvis
  */
-public class Client {
+public class ResponsibilityTest {
 
     public static void main(String[] args) {
         //出差花费10000元
