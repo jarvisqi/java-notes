@@ -37,6 +37,9 @@ dependencies {
     implementation 'org.meteothink:meteoinfo-geometry:3.5'
     implementation 'org.meteothink:meteoinfo-dataframe:3.5'
     implementation 'com.github.haifengl:smile-mkl:2.6.0'
+
+    implementation 'org.influxdb:influxdb-java:2.23'
+    compileOnly 'org.projectlombok:lombok:1.18.28'
 }
 
 test {
