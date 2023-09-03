@@ -1,14 +1,15 @@
 package org.softmax.ms.meteo.influx;
 
+import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SpringUtils implements ApplicationContextAware {
+    @Getter
     private static ApplicationContext applicationContext = null;
 
     public SpringUtils() {
@@ -19,10 +20,6 @@ public class SpringUtils implements ApplicationContextAware {
             applicationContext = arg0;
         }
 
-    }
-
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
     }
 
     public static void setAppCtx(ApplicationContext webAppCtx) {
@@ -48,7 +45,7 @@ public class SpringUtils implements ApplicationContextAware {
 
     public static final Object getBean(String beanName, String className) throws ClassNotFoundException {
         Class clz = Class.forName(className);
-        return getApplicationContext().getBean(beanName, clz.getClass());
+        return getApplicationContext().getBean(beanName, clz);
     }
 
     public static boolean containsBean(String name) {
