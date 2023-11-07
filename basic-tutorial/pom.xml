@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180813</version>
+            <version>20230227</version>
         </dependency>
         <!--   spring-->
         <dependency>
@@ -59,7 +59,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>30.0-jre</version>
+            <version>32.0.0-jre</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
