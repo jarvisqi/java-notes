@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0-M3'
+    id 'org.springframework.boot' version '3.0.11'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
@@ -15,11 +15,13 @@ apply plugin: 'io.spring.dependency-management'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
-
-    maven { url 'https://repo.spring.io/milestone' }
-    maven { url 'https://repo.osgeo.org/repository/release' }
+    maven { url 'https://repo.osgeo.org/repository/release/' }
     maven { url 'https://java.freehep.org/maven2/' }
+
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/spring/' }
+
+    mavenCentral()
 }
 
 
@@ -27,17 +29,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    implementation 'org.meteothink:meteoinfo-projection:3.5'
     implementation 'org.meteothink:meteoinfo-common:3.5'
-    implementation 'org.meteothink:meteoinfo-math:3.5'
     implementation('org.meteothink:meteoinfo-data:3.5') {
         exclude group: 'edu.ucar', module: 'netcdfAll'
     }
-    implementation 'edu.ucar:netcdfAll:5.5.2'
     implementation 'org.meteothink:meteoinfo-geo:3.5'
     implementation 'org.meteothink:meteoinfo-geometry:3.5'
-    implementation 'org.meteothink:meteoinfo-dataframe:3.5'
-    implementation 'com.github.haifengl:smile-mkl:2.6.0'
 
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
+    implementation 'edu.ucar:netcdfAll:5.5.2'
     implementation 'org.influxdb:influxdb-java:2.23'
     compileOnly 'org.projectlombok:lombok:1.18.28'
 }
