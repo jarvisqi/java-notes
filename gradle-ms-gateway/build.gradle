@@ -50,6 +50,8 @@ dependencies {
     implementation 'org.locationtech.jts:jts-core:1.19.0'
     implementation 'org.geotools:gt-render:22.2'
     implementation 'org.ujmp:ujmp-core:0.3.0'
+    implementation 'cn.hutool:hutool-all:5.8.22'
+    implementation 'org.apache.poi:poi-ooxml:5.2.4'
 
     implementation 'org.apache.commons:commons-csv:1.9.0'
 
