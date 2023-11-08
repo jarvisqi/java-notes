@@ -2,34 +2,22 @@ package org.softmax.ms.gateway.algorithm;
 
 public class HistoryFun {
 
-
     /**
      * 冻害风险值
      * <p>
-     * "生长期值")
-     * "08-08时降水量")
-     * "日照时数（直接辐射计算值
-     * "过程最低气温（℃）
-     * "过程平均日最低气温（℃
-     * "过程平均日照时数（小时
-     * "过程降水量（毫米）
-     * "冻害低温持续时间（日
-     * "日最低气温（℃）
+     * * "生长期值")
+     * * "08-08时降水量")
+     * * "日照时数（直接辐射计算值
+     * * "日最低气温（℃）
      *
      * @param x1
      * @param x2
      * @param x3
      * @param x4
-     * @param x5
-     * @param x6
-     * @param x7
-     * @param x8
-     * @param x9
      * @return
      */
-    public static double freezeRisk(double x1, double x2, double x3, double x4, double x5, double x6, double x7, double x8, double x9) {
-        double result = 0.35039163 + x1 * -0.0166164 + x2 * 0.00355372 + x3 * -0.00100981 + x4 * -0.00620832 +
-                x5 * -0.01477011 + x6 * 0.01900672 + x7 * -0.00289628 + x8 * 0.01153698 + x9 * 0.00144749;
+    public static double freezeRisk(double x1, double x2, double x3, double x4) {
+        double result = 0.42455205 + x1 * -0.01321685 + x2 * 0.00320702 + x3 * 0.00901156 + x4 * -0.01975046;
         return result < 0 ? 0 : result;
     }
 
@@ -38,27 +26,16 @@ public class HistoryFun {
      * * "生长期值")
      * * "08-08时降水量")
      * * "日照时数（直接辐射计算值
-     * * "过程最低气温（℃）
-     * * "过程平均日最低气温（℃
-     * * "过程平均日照时数（小时
-     * * "过程降水量（毫米）")
-     * * "冻害低温持续时间（日
      * * "日最低气温（℃）
      *
      * @param x1
      * @param x2
      * @param x3
      * @param x4
-     * @param x5
-     * @param x6
-     * @param x7
-     * @param x8
-     * @param x9
      * @return
      */
-    public static double freezeCompensate(double x1, double x2, double x3, double x4, double x5, double x6, double x7, double x8, double x9) {
-        double result = -29.23383148 + x1 * 6.15078877 + x2 * 0.05381411 + x3 * 1.01263648 + x4 * -0.04338191 +
-                x5 * 0.74668236 + x6 * -1.27411449 + x7 * 0.50724165 + x8 * -0.7322796 + x9 * 0.48406087;
+    public static double freezeCompensate(double x1, double x2, double x3, double x4) {
+        double result = -33.92998109 + x1 * 6.04176074 + x2 * 0.35478996 + x3 * 0.31841719 + x4 * 1.28819394;
         return result < 0 ? 0 : result;
     }
 
@@ -67,75 +44,58 @@ public class HistoryFun {
      * * "生长期值")
      * * "08-08时降水量")
      * * "日照时数（直接辐射计算值
-     * * "过程最低气温（℃）
-     * * "过程平均日最低气温（℃
-     * * "过程平均日照时数（小时
-     * * "过程降水量（毫米）")
-     * * "冻害低温持续时间（日
      * * "日最低气温（℃）
      *
      * @param x1
      * @param x2
      * @param x3
      * @param x4
-     * @param x5
-     * @param x6
-     * @param x7
-     * @param x8
-     * @param x9
      * @return
      */
-    public static double freezeLoss(double x1, double x2, double x3, double x4, double x5, double x6, double x7, double x8, double x9) {
-        double result = -1.71343631 + x1 * 0.37107656 + x2 * 0.00339368 + x3 * 0.06098527 + x4 * -0.0024397 +
-                x5 * 0.04491035 + x6 * -0.07676592 + x7 * 0.03031654 + x8 * -0.04416608 + x9 * 0.02912271;
+    public static double freezeLoss(double x1, double x2, double x3, double x4) {
+        double result = 0.42455205 + x1 * -0.01321685 + x2 * 0.00320702 + x3 * 0.00901156 + x4 * -0.01975046;
         return result < 0 ? 0 : result;
     }
 
     /**
      * 干旱风险值
-     * 生长期值").toStr
-     * 连续无降水天数（日）")
-     * 降水量距平百分率（月度）
+     * 生长期值
+     * 湿度
      *
      * @param x1
      * @param x2
-     * @param x3
      * @return
      */
-    public static double drtRisk(double x1, double x2, double x3) {
-        double result = 16.14807018 + x1 * -0.28105177 + x2 * -0.12352405 + x3 * 0.05353386;
+    public static double drtRisk(double x1, double x2) {
+        double result = 15.24816156 + x1 * -0.33469871 + x2 * 0.00000115;
         return result < 0 ? 0 : result;
     }
 
     /**
      * 干旱赔付率
-     * 生长期值").toStr
-     * 连续无降水天数（日）")
-     * 降水量距平百分率（月度）
+     * 生长期值
+     * 湿度
      *
      * @param x1
      * @param x2
-     * @param x3
      * @return
      */
-    public static double drtCompensate(double x1, double x2, double x3) {
-        double result = 268.00955 + x1 * -4.66650686 + x2 * -2.0527936 + x3 * 0.88822463;
+    public static double drtCompensate(double x1, double x2) {
+        double result = 253.03379608 + x1 * -5.55749637 + x2 * 0.00001901;
         return result < 0 ? 0 : result;
     }
 
     /**
      * 干旱损失率
-     * 生长期值").toStr
-     * 连续无降水天数（日）")
-     * 降水量距平百分率（月度）
+     * 生长期值
+     * 湿度
      *
      * @param x1
      * @param x2
-     * @param x3
      * @return
      */
-    public static double drtLoss(double x1, double x2, double x3) {
-        double result = 16.14807018 + x1 * -0.28105177 + x2 * -0.12352405 + x3 * 0.05353386;
+    public static double drtLoss(double x1, double x2) {
+        double result = 15.24816156 + x1 * -0.33469871 + x2 * 0.00000115;
         return result < 0 ? 0 : result;
     }
 
@@ -145,38 +105,31 @@ public class HistoryFun {
      * ("生长期值
      * ("08-08时降水量
      * ("日照时数（直接辐射计算值）
-     * 连续降雨天数")
-     * ("过程降水量（毫米）
-     * ("总日照时数（小时）
      *
      * @param x1
      * @param x2
      * @param x3
-     * @param x4
-     * @param x5
-     * @param x6
      * @return
      */
-    public static double rainRisk(double x1, double x2, double x3, double x4, double x5, double x6) {
-        double result = 0.15592687 + x1 * 0.00041637 + x2 * 0.00038282 + x3 * 0.00650131 + x4 * 0.00462228 +
-                x5 * -0.00011448 + x6 * -0.00075859;
+    public static double rainRisk(double x1, double x2, double x3) {
+        double result = 0.17215833 + x1 * 0.00026962 + x2 * 0.00023921 + x3 * 0.00617665;
         return result < 0 ? 0 : result;
     }
 
     /**
      * 连阴雨赔付率
+     * <p>
+     * ("生长期值
+     * ("08-08时降水量
+     * ("日照时数（直接辐射计算值）
      *
      * @param x1
      * @param x2
      * @param x3
-     * @param x4
-     * @param x5
-     * @param x6
      * @return
      */
-    public static double rainCompensate(double x1, double x2, double x3, double x4, double x5, double x6) {
-        double result = 58.12242406 + x1 * 0.09324408 + x2 * -0.18362281 + x3 * 1.87435844 + x4 * -4.00596456
-                + x5 * 0.55629234 + x6 * 0.27931538;
+    public static double rainCompensate(double x1, double x2, double x3) {
+        double result = 46.62751047 + x1 * 0.1966473 + x2 * 0.26881812 + x3 * 1.29376449;
         return result < 0 ? 0 : result;
     }
 
@@ -187,22 +140,15 @@ public class HistoryFun {
      * "平均气温
      * "平均相对湿度
      * "08-08时降水量"
-     * "旬降水量（毫米
-     * "旬平均气温（℃）
-     * "旬平均相对湿度（%）
      *
      * @param x1
      * @param x2
      * @param x3
      * @param x4
-     * @param x5
-     * @param x6
-     * @param x7
      * @return
      */
-    public static double diseasesRisk(double x1, double x2, double x3, double x4, double x5, double x6, double x7) {
-        double result = 0.00899982 + x1 * 0.00855536 + x2 * -0.00000012 + x3 * 0.00000011 + x4 * 0.00302059
-                + x5 * 0.0005639 + x6 * -0.007948 + x7 * 0.00181232;
+    public static double diseasesRisk(double x1, double x2, double x3, double x4) {
+        double result = 0.14987293 + x1 * 0.00820675 + x2 * -0.00000008 + x3 * 0.00000009 + x4 * 0.00515979;
         return result < 0 ? 0 : result;
     }
 
