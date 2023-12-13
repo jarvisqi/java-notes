@@ -10,14 +10,19 @@ import java.util.stream.IntStream;
 /**
  * Java 17 新接口 RandomGenerator
  */
-public class RandomTest {
+public class RandomNumberTest {
 
     public static void main(String[] args) {
 
+        // Random 缺陷，高并发情况下，可能使用同一个种子数字去生成下一个随机数
+        // 可能会导致生成的数字相同
+        for (int i = 0; i < 10; i++) {
+            Random random1 = new Random(15);
+            System.out.println(random1.nextInt(100));
+        }
+
         testRandomGenerator(new Random());
-
         testRandomGenerator(new SplittableRandom());
-
         testRandomGenerator(ThreadLocalRandom.current());
 
 
