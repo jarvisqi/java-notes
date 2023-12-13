@@ -21,11 +21,9 @@ public class RandomTest {
         testRandomGenerator(ThreadLocalRandom.current());
 
 
-//        testRandomGeneratorFactory("Random");
-//
-//        testRandomGeneratorFactory("L128X128MixRandom");
-//
-//        testRandomGeneratorFactory("Xoshiro256PlusPlus");
+        testRandomGeneratorFactory("Random");
+        testRandomGeneratorFactory("L128X128MixRandom");
+        testRandomGeneratorFactory("Xoshiro256PlusPlus");
 
     }
 
@@ -44,6 +42,21 @@ public class RandomTest {
         System.out.println("random count = " + randoms.length);
     }
 
+    /**
+     * 上述方法还支持如下LXM 系列 PRNG 算法：
+     * L32X64MixRandom
+     * L32X64StarStarRandom
+     * L64X128MixRandom
+     * L64X128StarStarRandom
+     * L64X256MixRandom
+     * L64X1024MixRandom
+     * L128X128MixRandom
+     * L128X256MixRandom
+     * L128X1024MixRandom
+     * 以及广泛使用的 PRNG 算法：Xoshiro256PlusPlus Xoroshiro128PlusPlus
+     *
+     * @param randomGeneratorName
+     */
 
     static void testRandomGeneratorFactory(String randomGeneratorName) {
         RandomGeneratorFactory<RandomGenerator> factory = RandomGeneratorFactory.of(randomGeneratorName);
