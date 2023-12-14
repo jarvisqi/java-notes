@@ -2,10 +2,8 @@ package com.softmax.features;
 
 import java.util.Objects;
 
-/**
- * 新特性 record
- */
-public class RecordCustom {
+
+public class RecordCustomer {
 
     final int type;
     final String typeName;
@@ -18,7 +16,7 @@ public class RecordCustom {
         return typeName;
     }
 
-    public RecordCustom(int type, String typeName) {
+    public RecordCustomer(int type, String typeName) {
         this.type = type;
         this.typeName = typeName;
     }
@@ -29,12 +27,27 @@ public class RecordCustom {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        RecordCustom that = (RecordCustom) o;
+        RecordCustomer that = (RecordCustomer) o;
         return type == that.type && Objects.equals(typeName, that.typeName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(type, typeName);
+    }
+}
+
+/**
+ * 新特性 record
+ */
+record RecordDemo(int type, String typeName) {
+    private void test() {
+        System.err.println(type + " | " + typeName);
+    }
+
+    public static void main(String[] args) {
+        // 这里new的时候带的参数其实就是类的属性，等于声明属性+访问构造方法二合一。
+        RecordDemo recordDemo = new RecordDemo(100, "葡萄牙");
+        recordDemo.test();
     }
 }
