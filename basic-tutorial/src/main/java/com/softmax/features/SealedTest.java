@@ -7,6 +7,9 @@ package com.softmax.features;
 public class SealedTest {
 
 
+    /**
+     * 用sealed声明一个类，设置permits授权哪几个子类可以继承它。
+     */
     public sealed class Demo
             permits Child, NoSealedChild {
     }
