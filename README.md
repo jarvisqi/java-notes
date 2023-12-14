@@ -1,13 +1,13 @@
 # Java 实践笔记    
-#### basic-tutorial: 
-Java 基础（Java8,Java11），包含并发编程，同步和锁，线程线程池,泛型,数据结构,算法等
+#### basic-code: 
+Java 基础（Java8,Java11,Java17），包含并发编程、同步和锁、线程、线程池、泛型、数据结构、算法等
 >design：Java 实现设计模式  
 >basic: Java 基础代码实践   
 >nettt：netty 库实践  
 >spring：spring 基础原理及实践 
-#### mq-tutorial: 
-spring boot2.0 + rabbitMQ/kafka/rocket 常见的
-#### distributed-lock: 
+#### message-queue: 
+spring boot2.0 + rabbitMQ/kafka/rocket 常见的消息队列集成和使用
+#### distributed: 
 redis ,zookeeper 分布式相关 
 #### spring-boot2-marvel: 
 >oauth2.0 协议实践  
