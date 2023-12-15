@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2018/08/01
  */
 @SpringBootApplication
-public class DistributedlockApplication {
+public class DistributedlockApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(DistributedlockApplication.class, args);
+        SpringApplication.run(DistributedlockApp.class, args);
     }
 }
