@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.softmax.distributed</groupId>
-    <artifactId>distributed-tutorial</artifactId>
+    <artifactId>distributed</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>distributed-tutorial</name>
+    <name>distributed</name>
     <description>Demo project for distributed application</description>
 
     <parent>
