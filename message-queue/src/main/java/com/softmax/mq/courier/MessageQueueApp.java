@@ -14,12 +14,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
-public class MQApplication {
+public class MessageQueueApp {
 
     public static void main(String[] args) {
         // SpringApplication.run(RabbitApplication.class, args);
         new SpringApplicationBuilder()
-                .sources(MQApplication.class)
+                .sources(MessageQueueApp.class)
                 // 设置成非 web 环境
                 .web(WebApplicationType.NONE)
                 .run(args);

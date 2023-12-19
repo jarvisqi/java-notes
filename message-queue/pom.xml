@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.softmax.message.tutorial</groupId>
-    <artifactId>message-tutorial</artifactId>
+    <artifactId>message-queue</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>message-tutorial</name>
+    <name>message-queue</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
