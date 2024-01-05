@@ -49,21 +49,54 @@ public class OptionalFuture {
 
     }
 
-    static class User {
-        public User(String name) {
-            this.name = name;
+
+    /**
+     * 以前写法
+     */
+    public User getUser(User user) throws Exception {
+        if (user != null) {
+            String name = user.getName();
+            if ("zhangsan".equals(name)) {
+                return user;
+            }
+        } else {
+            user = new User();
+            user.setName("zhangsan");
+            return user;
         }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        private String name;
-
+        return user;
     }
+
+
+    public User getUserOptional(User user) {
+        return Optional.ofNullable(user)
+                .filter(u -> "zhangsan".equals(u.getName()))
+                .orElseGet(() -> {
+                    User user1 = new User();
+                    user1.setName("zhangsan");
+                    return user1;
+                });
+    }
+
+
+}
+
+class User {
+    public User(String name) {
+        this.name = name;
+    }
+
+    public User() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
 
 }
