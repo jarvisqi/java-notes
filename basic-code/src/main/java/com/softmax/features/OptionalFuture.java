@@ -47,13 +47,22 @@ public class OptionalFuture {
         System.out.println("nameList03.size() = " + nameList03.size());
         nameList03.stream().forEach(System.err::println);
 
+        User usrOpt = new User("zhangsan11");
+
+        OptionalFuture optionalFuture = new OptionalFuture();
+
+        User usr = optionalFuture.getUser(usrOpt);
+        System.out.println(usr.getName());
+        User userOptional = optionalFuture.getUserOptional(usrOpt);
+        System.out.println(userOptional.getName());
+
     }
 
 
     /**
      * 以前写法
      */
-    public User getUser(User user) throws Exception {
+    public User getUser(User user) {
         if (user != null) {
             String name = user.getName();
             if ("zhangsan".equals(name)) {
