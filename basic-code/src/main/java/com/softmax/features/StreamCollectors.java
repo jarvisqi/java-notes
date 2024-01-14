@@ -4,26 +4,32 @@ import com.google.common.collect.Lists;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StreamCollectors {
-
-
     static StreamCollectors streamCollectors = new StreamCollectors();
+    final List<Student> students = Lists.newArrayList();
+
+    public StreamCollectors() {
+
+        students.add(new Student("1", "张三", LocalDate.of(2021, Month.APRIL, 1), 12, 12.123));
+        students.add(new Student("2", "李四", LocalDate.of(2021, Month.MAY, 1), 11, 22.123));
+        students.add(new Student("3", "王五", LocalDate.of(2022, Month.JULY, 1), 10, 32.233));
+        students.add(new Student("4", "赵六", LocalDate.of(2023, Month.JUNE, 1), 13, 39.231));
+        students.add(new Student("4", "文七", LocalDate.of(2024, Month.AUGUST, 1), 14, 28.234));
+    }
 
     public static void main(String[] args) {
 
-        streamCollectors.collectPrint();
+//        streamCollectors.collectPrint();
 
+        streamCollectors.collectMaxOrMin();
     }
 
     private void collectPrint() {
-        final List<Student> students = Lists.newArrayList();
-        students.add(new Student("1", "张三", LocalDate.of(2021, Month.APRIL, 1), 12, 12.123));
-        students.add(new Student("2", "李四", LocalDate.of(2021, Month.MAY, 1), 11, 22.123));
-        students.add(new Student("3", "王五", LocalDate.of(2021, Month.JULY, 1), 10, 32.123));
-
 
         //统计
         students.stream().collect(Collectors.counting());
@@ -41,6 +47,17 @@ public class StreamCollectors {
 
     }
 
+    /**
+     * 最大值/最小值元素：maxBy、minBy
+     */
+    private void collectMaxOrMin() {
+
+        Optional<Student> minStudent = students.stream().collect(Collectors.minBy(Comparator.comparing(Student::getAge)));
+        minStudent.ifPresent(s -> System.out.println(s.name + "—" + s.getAge()));
+
+        Optional<Student> collectSorce = students.stream().collect(Collectors.maxBy(Comparator.comparing(Student::getScore)));
+        collectSorce.ifPresent(s -> System.out.println(s.name + "—" + s.getScore()));
+    }
 
     class Student {
         private String id;
