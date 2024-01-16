@@ -88,6 +88,13 @@ public class StreamMapFeature {
 
     }
 
+    /**
+     * 根据属性过滤
+     *
+     * @param keyExtractor
+     * @param <T>
+     * @return
+     */
     private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
