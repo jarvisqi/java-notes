@@ -32,7 +32,7 @@ public class StreamCollectors {
     private void collectPrint() {
 
         //统计
-        students.stream().collect(Collectors.counting());
+        long count = students.stream().count();
 
         //平均值：averagingDouble、averagingInt、averagingLong
 
@@ -52,10 +52,10 @@ public class StreamCollectors {
      */
     private void collectMaxOrMin() {
 
-        Optional<Student> minStudent = students.stream().collect(Collectors.minBy(Comparator.comparing(Student::getAge)));
+        Optional<Student> minStudent = students.stream().min(Comparator.comparing(Student::getAge));
         minStudent.ifPresent(s -> System.out.println(s.name + "—" + s.getAge()));
 
-        Optional<Student> collectSorce = students.stream().collect(Collectors.maxBy(Comparator.comparing(Student::getScore)));
+        Optional<Student> collectSorce = students.stream().max(Comparator.comparing(Student::getScore));
         collectSorce.ifPresent(s -> System.out.println(s.name + "—" + s.getScore()));
     }
 
