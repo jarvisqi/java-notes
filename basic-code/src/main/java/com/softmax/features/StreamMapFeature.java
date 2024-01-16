@@ -3,6 +3,8 @@ package com.softmax.features;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class StreamMapFeature {
 
@@ -59,6 +61,22 @@ public class StreamMapFeature {
         List<Student> students = mapFeature.initData();
         students.stream().map(student -> student.getName()).forEach(System.out::println);
 
+        System.out.println("---------------------------");
+        //将学生姓名放到Set中，可以实现去重功能
+        Set<String> collect = students.stream().map(student -> (student.getName())).collect(Collectors.toSet());
+        collect.forEach(System.out::println);
+
+        //将姓名为“赵三”的语文成绩置为90
+
+        List<Student> studentNames = students.stream().map(student -> {
+                    if (student.getName().equals("赵三")) {
+                        student.setMathScore(99);
+                    }
+                    return student;
+                }
+        ).toList();
+        System.out.println("---------------------------");
+        studentNames.stream().map(s -> s.getMathScore()).forEach(System.out::println);
 
     }
 
