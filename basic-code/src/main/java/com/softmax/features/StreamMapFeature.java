@@ -160,7 +160,5 @@ public class StreamMapFeature {
         public void setMathScore(Integer mathScore) {
             MathScore = mathScore;
         }
-
-        //省略get、set方法
     }
 }

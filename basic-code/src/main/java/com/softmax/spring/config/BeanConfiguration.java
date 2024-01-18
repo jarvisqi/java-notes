@@ -25,9 +25,8 @@ public class BeanConfiguration {
 
     @Bean
     public AccountService accountService() {
-        AccountServiceImpl bean = new AccountServiceImpl();
-//        bean.setAccountDao(accountDao());
-        return bean;
+        //        bean.setAccountDao(accountDao());
+        return new AccountServiceImpl();
     }
 
 
@@ -42,8 +41,7 @@ public class BeanConfiguration {
 //        UserServiceImpl bean = new UserServiceImpl(userDao());
 //        //set注入
 //        bean.setUserDao(userDao());
-        UserServiceImpl bean = new UserServiceImpl();
-        return bean;
+        return new UserServiceImpl();
 
     }
 

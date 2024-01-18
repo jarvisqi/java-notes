@@ -16,9 +16,12 @@ public class StreamFeature {
     private static void streamToList() {
         Stream<String> stringStream = Stream.of("a", "b", "c");
         List<String> stringList = stringStream.toList();
+
         for (String s : stringList) {
             System.out.println(s);
         }
+
+        stringStream.forEach(System.out::println);
     }
 
     public static void main(String[] arg) {
