@@ -2,11 +2,13 @@ package com.softmax.mq.courier.rocket.example;
 
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Logger;
+
 
 @Component
 @RocketMQMessageListener(
@@ -15,7 +17,7 @@ import java.util.logging.Logger;
 )
 public class DelayConsumer implements RocketMQListener<String> {
 
-    private final Logger logger = Logger.getLogger(RocketMQListener.class.getName());
+    private final Logger logger  = LoggerFactory.getLogger(DelayConsumer.class);
 
     @Override
     public void onMessage(String message) {
