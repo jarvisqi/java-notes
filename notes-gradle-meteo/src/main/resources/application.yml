@@ -1,11 +1,16 @@
 server:
   port: 9993
   servlet:
-    context-path: /usr
+    context-path: /met
 
 spring:
   application:
     name: oauth
+  influx:
+    url: http://211.149.175.230:8086
+    user: admin
+    password: admin@Jydsoft@2022
+    database: host_cpu
 
 logging:
   pattern:

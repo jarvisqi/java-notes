@@ -1,0 +1,75 @@
+spring:
+  profiles:
+    active: usage_msg
+  application:
+    name: mq-samples
+
+  rabbitmq:
+    host: 192.168.10.100
+    port: 5672
+    username: samples
+    password: 12345
+    virtual-host: vhtutl
+
+  kafka:
+    # 指定kafka 代理地址，可以多个
+    bootstrap-servers: 10.10.10.10:9092
+    producer:
+      retries: 0
+      # 每次批量发送消息的数量
+      batch-size: 16384
+      # 缓存容量
+      buffer-memory: 33554432
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      # 指定默认消费者group id
+      group-id: operation-log
+      auto-commit-interval: 100
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      # 指定消息key和消息体的编解码方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # 指定listener 容器中的线程数，用于提高并发量
+    listener:
+      concurrency: 3
+
+    rocketmq:
+      producer:
+        # mq的name server地址
+        namesrvAddr: 192.168.10.103:9876
+        # 客户端验证，允许发送的最大消息体大小 ， 默认 1024*1024*4 (4M)
+        maxMessageSize: 131072
+        # 发送消息超时时间,默认3000
+        sendMsgTimeout: 10000
+        # 同步发送失败的话，rocketmq内部重试多少次 ，默认2
+        retryTimesWhenSendFailed: 10
+        # 异步发送失败的话，rocketmq内部重试多少次 ，默认2
+        retryTimesWhenSendAsyncFailed: 10
+      consumer:
+        namesrvAddr: 192.168.10.103:9876
+        # 一次最大消费多少数量消息
+        consumerBatchMaxSize: 1
+        # 消费线程池的core size
+        consumeThreadMin: 20
+        # 消费线程池的max size
+        consumeThreadMax: 64
+        consumerBroadcasting: false
+        # 启动的时候是否消费历史记录
+        enableHisConsumer: false
+        # 启动顺序消费
+        enableOrderConsumer: false
+        topics:
+          - topic: user
+            tag: usr
+          - topic: order
+            tag: ord
+
+tutorial:
+  client:
+    duration: 10000
+logging:
+  level:
+    root: debug

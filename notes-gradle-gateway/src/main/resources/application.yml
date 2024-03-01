@@ -1,0 +1,50 @@
+server:
+  port: 9991
+  servlet:
+    context-path: /gateway
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    # nacos 配置
+#    nacos:
+#      config:
+#        enabled: true
+#        server-addr: 10.0.0.152:8848
+#        file-extension: yaml
+#      discovery:
+#        enabled: true
+#        server-addr: 10.0.0.152:8848
+#        register-enabled: true
+    # 网关配置
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: ms-user-svc
+          uri: lb://ms-user-svc
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: ms-oauth2-svc
+          uri: lb://ms-oauth2-svc
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            -
+# 网关白名单
+gateway:
+  ignore:
+    urls: # 配置白名单路径
+      - /actuator/**
+      - /auth/oauth/**
+      - /user/signin
+
+logging:
+  pattern:
+    console: '%d{HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n'

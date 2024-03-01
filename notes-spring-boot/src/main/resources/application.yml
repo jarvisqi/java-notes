@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: springboot-marvel
+  aop:
+    proxy-target-class: true
+    auto: true
+  datasource:
+    url: jdbc:mysql://10.10.10.101:3306/credentials?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: 100003
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev
+apollo:
+  meta: http://10.10.10.10:8080
+  bootstrap:
+    enabled: false
+app:
+  id: jwell-auth-service
+
+
+#mapper
+#mapper:
+#  mappers: com.softmax.marvel.mapper.BaseMapper
+#  not-empty: false
+#  identity: MYSQL
+
+
+#logging
+logging:
+  config: classpath:logback-config.xml
+
