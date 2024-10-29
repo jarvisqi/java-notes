@@ -4,11 +4,9 @@ import org.influxdb.InfluxDB;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
-import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +26,6 @@ public class InfluxController {
 
     @RequestMapping(value = "save")
     public void insert() {
-
         influxDB.createDatabase("host_cpu");
 
         String measurement = "host_cpu_usage_total";
@@ -46,21 +43,15 @@ public class InfluxController {
         builder.fields(fields);
 
         influxDB.write(builder.build());
-
         logger.info("finished");
-
     }
 
     @RequestMapping(value = "query")
     public void query() {
-
         String command = "select * from host_cpu_usage_total";
-
         QueryResult query = influxDB.query(new Query(command));
-
         List<QueryResult.Result> results = query.getResults();
-        logger.info("results");
-
+        logger.info(String.format("results: {}", results));
     }
 
 }

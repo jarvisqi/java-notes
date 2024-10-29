@@ -10,4 +10,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'gradle-ms-meteo'
+rootProject.name = 'notes-gradle-meteo'
