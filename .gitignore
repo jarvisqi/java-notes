@@ -26,3 +26,5 @@ target
 *.iml
 
 /notes-spring-boot/logs/
+/notes-gradle-meteo/.gradle/
+/notes-gradle-gateway/.gradle/
