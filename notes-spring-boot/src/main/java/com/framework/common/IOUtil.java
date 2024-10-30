@@ -54,7 +54,7 @@ public class IOUtil {
         Map<K, V> map = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            map = mapper.readValue(strJson, new TypeReference<HashMap<String, String>>() {
+            map = (Map<K, V>) mapper.readValue(strJson, new TypeReference<HashMap<String, String>>() {
             });
             if (trim) {
                 map = mapTrim(map);
