@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softmax.marvel.mapper.TOrderMapper">
+    <resultMap id="BaseResultMap" type="com.softmax.marvel.entity.TOrder">
+        <id column="sysno" jdbcType="INTEGER" property="sysno"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    sysno, order_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order0
+        where sysno = #{sysno,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order0
+    where sysno = #{sysno,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="sysno" keyProperty="sysno" parameterType="com.softmax.marvel.entity.TOrder"
+            useGeneratedKeys="true">
+    insert into t_order0 (sysno,order_id)
+    values (#{sysno,jdbcType=BIGINT},#{orderId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" keyColumn="sysno" keyProperty="sysno" parameterType="com.softmax.marvel.entity.TOrder"
+            useGeneratedKeys="true">
+        insert into t_order0
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.softmax.marvel.entity.TOrder">
+        update t_order0
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where sysno = #{sysno,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.softmax.marvel.entity.TOrder">
+    update t_order0
+    set order_id = #{orderId,jdbcType=BIGINT}
+    where sysno = #{sysno,jdbcType=INTEGER}
+  </update>
+</mapper>
