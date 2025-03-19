@@ -23,7 +23,8 @@ public class MaxAreaOfIsland {
         int col = arr[0].length;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (arr[i][j] == 1) { // 只对值为 1 的单元格进行 DFS
+                // 只对值为 1 的单元格进行 DFS
+                if (arr[i][j] == 1) {
                     maxArea = Math.max(maxArea, dfs(arr, i, j, row, col));
                 }
             }
@@ -39,6 +40,9 @@ public class MaxAreaOfIsland {
         // 将当前单元格标记为已访问
         arr[i][j] = 0;
         // 向四个方向递归搜索，并累加面积
-        return 1 + dfs(arr, i - 1, j, row, col) + dfs(arr, i + 1, j, row, col) + dfs(arr, i, j - 1, row, col) + dfs(arr, i, j + 1, row, col);
+        return 1 + dfs(arr, i - 1, j, row, col)
+                + dfs(arr, i + 1, j, row, col)
+                + dfs(arr, i, j - 1, row, col)
+                + dfs(arr, i, j + 1, row, col);
     }
 }
