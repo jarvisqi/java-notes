@@ -3,7 +3,7 @@ package com.softmax.leet;
 /**
  * 转置矩阵
  */
-public class RotateMatrix {
+public class MatrixRotate {
 
 
     public static void main(String[] args) {
@@ -16,7 +16,9 @@ public class RotateMatrix {
         };
 
         printMatrix(matrix); // 打印原始矩阵
+
         rotate(matrix); // 旋转矩阵
+
         printMatrix(matrix); // 打印旋转后的矩阵
     }
 
