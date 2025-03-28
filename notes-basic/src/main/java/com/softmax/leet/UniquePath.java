@@ -1,0 +1,33 @@
+package com.softmax.leet;
+
+/**
+ * 矩阵的路径数
+ */
+public class UniquePath {
+
+    public static void main(String[] args) {
+        System.out.println(solution(3, 3));
+        System.out.println(solution(2, 2));
+        System.out.println(solution(1, 1));
+    }
+
+    private static int solution(int row, int col) {
+        if (row <= 0 || col <= 0) return 0;
+        int[][] dp = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (i == 0 && j == 0) {
+                    dp[i][j] = 1;
+                } else if (i == 0 && j != 0) {
+                    dp[i][j] = dp[i][j - 1];
+                } else if (j == 0 && i != 0) {
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                }
+            }
+        }
+        return dp[row - 1][col - 1];
+    }
+
+}
