@@ -12,6 +12,12 @@ public class Rob {
         System.out.println(solution(arr2));
     }
 
+    /**
+     * 实现的是一个动态规划算法，目的是求解在不能取相邻元素的情况下，数组中元素可以组成的最大值。
+     *
+     * @param arr
+     * @return
+     */
     private static int solution(int[] arr) {
         if (arr == null || arr.length == 0) return 0;
         if (arr.length == 1) return arr[0];
