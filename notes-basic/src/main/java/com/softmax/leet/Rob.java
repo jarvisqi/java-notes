@@ -8,8 +8,11 @@ public class Rob {
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, 1};
         int[] arr2 = {2, 7, 9, 3, 1};
+
         System.out.println(solution(arr1));
+
         System.out.println(solution(arr2));
+
     }
 
     /**
