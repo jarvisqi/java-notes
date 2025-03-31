@@ -30,10 +30,12 @@ public class UniquePath {
                 } else if (j == 0 && i != 0) {   //如果在第一列，只能从上边到达，因此路径数量与上边相同
                     dp[i][j] = dp[i - 1][j];
                 } else {
+                    //对于其他位置，路径数量等于从上方和左方到达的数量之和
                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
                 }
             }
         }
+
         return dp[row - 1][col - 1];
     }
 
