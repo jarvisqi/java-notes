@@ -1,19 +1,19 @@
 package com.softmax.leet;
 
-public class TreeNodeDim {
+public class TreeNodeDia {
 
     int val;
-    TreeNodeDim left;
-    TreeNodeDim right;
+    TreeNodeDia left;
+    TreeNodeDia right;
 
-    TreeNodeDim() {
+    TreeNodeDia() {
     }
 
-    TreeNodeDim(int val) {
+    TreeNodeDia(int val) {
         this.val = val;
     }
 
-    TreeNodeDim(int val, TreeNodeDim left, TreeNodeDim right) {
+    TreeNodeDia(int val, TreeNodeDia left, TreeNodeDia right) {
         this.val = val;
         this.left = left;
         this.right = right;
@@ -21,7 +21,7 @@ public class TreeNodeDim {
 
     int max = 0;
 
-    public int diameterOfBinaryTree(TreeNodeDim root) {
+    public int diameterOfBinaryTree(TreeNodeDia root) {
         if (root == null) {
             return 0;
         }
@@ -29,7 +29,7 @@ public class TreeNodeDim {
         return max;
     }
 
-    private int dfs(TreeNodeDim root) {
+    private int dfs(TreeNodeDia root) {
         if (root.left == null && root.right == null) {
             return 0;
         }
