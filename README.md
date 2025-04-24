@@ -1,16 +1,11 @@
-# Java 实践笔记    
-#### notes-basic: 
-Java 基础（Java8,Java11,Java17），包含并发编程、同步和锁、线程、线程池、泛型、数据结构、算法等
->design：Java 实现设计模式  
->basic: Java 基础代码实践   
->nettt：netty 库实践  
->spring：spring 基础原理及实践 
+# Java     
+
 #### notes-message: 
-spring boot2.0 + rabbitMQ/kafka/rocket 常见的消息队列集成和使用
+spring boot2.0 + rabbitMQ/kafka/rocket 消息队列
 #### notes-distributed: 
-redis ,zookeeper 分布式相关 
+redis ,zookeeper 分布式调度框架 
 #### notes-spring-boot: 
->oauth2.0 协议实践  
+>oauth2.0 实现权限管理
 >sharding 分库（片）分表读写分离 
 #### notes-gradle-gateway：gateway 
 以及克里金插值算法代码 
