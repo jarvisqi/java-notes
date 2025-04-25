@@ -1,13 +1,13 @@
-package com.softmax.spring.config;
+package com.softmax.mvcframe.config;
 
-import com.softmax.spring.dao.AccountDaoImpl;
-import com.softmax.spring.dao.UserDao;
-import com.softmax.spring.dao.AccountDao;
-import com.softmax.spring.dao.UserDaoImpl;
-import com.softmax.spring.service.AccountService;
-import com.softmax.spring.service.impl.AccountServiceImpl;
-import com.softmax.spring.service.UserService;
-import com.softmax.spring.service.impl.UserServiceImpl;
+import com.softmax.mvcframe.dao.AccountDaoImpl;
+import com.softmax.mvcframe.dao.UserDao;
+import com.softmax.mvcframe.dao.AccountDao;
+import com.softmax.mvcframe.dao.UserDaoImpl;
+import com.softmax.mvcframe.service.AccountService;
+import com.softmax.mvcframe.service.impl.AccountServiceImpl;
+import com.softmax.mvcframe.service.UserService;
+import com.softmax.mvcframe.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
