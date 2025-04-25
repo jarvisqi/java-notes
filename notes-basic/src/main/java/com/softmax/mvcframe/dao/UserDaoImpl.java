@@ -1,4 +1,4 @@
-package com.softmax.spring.dao;
+package com.softmax.mvcframe.dao;
 
 /**
  * @author Jarvis
