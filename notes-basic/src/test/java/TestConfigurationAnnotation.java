@@ -1,6 +1,6 @@
-import com.softmax.spring.config.BeanConfiguration;
-import com.softmax.spring.service.AccountService;
-import com.softmax.spring.service.UserService;
+import com.softmax.mvcframe.config.BeanConfiguration;
+import com.softmax.mvcframe.service.AccountService;
+import com.softmax.mvcframe.service.UserService;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -1,5 +1,5 @@
-import com.softmax.spring.service.AccountService;
-import com.softmax.spring.service.impl.AccountServiceImpl;
+import com.softmax.mvcframe.service.AccountService;
+import com.softmax.mvcframe.service.impl.AccountServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
