@@ -26,7 +26,7 @@ import static java.util.Collections.emptyList;
  * @date :  2018/5/12
  */
 @Service
-public class AuthUserService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private AuthMapper authMapper;
     @Autowired
@@ -34,7 +34,7 @@ public class AuthUserService implements UserDetailsService {
 
     private final JwtTokenUtil jwtTokenUtil;
 
-    public AuthUserService() {
+    public CustomUserDetailsService() {
         this.jwtTokenUtil = new JwtTokenUtil();
     }
 
